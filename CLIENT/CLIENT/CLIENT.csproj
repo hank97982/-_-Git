@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="HankLibrary">
+      <HintPath>..\..\..\..\..\我的類別庫\HankLibrary\HankLibrary\bin\Debug\HankLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
