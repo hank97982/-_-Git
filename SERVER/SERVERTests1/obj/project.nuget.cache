@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XK8Y72H1xGGpuMr0p3nVFefxsEZrKF7/imA0SsrpDlfn+MZLbAEBbS0Kl74ATIM5EpXpa9W2fYkXND2lKvEWXg==",
+  "dgSpecHash": "kr2vLUXke51w2J7EoJXHqGOXy0unOW0nu4JuPlOF7P/+9e34+9+LX0JMPtntrrPOq8AAXaQjZqPYH6HdWyl1+w==",
   "success": true,
-  "projectFilePath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\SERVERTests1\\SERVERTests1.csproj",
+  "projectFilePath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\SERVERTests1\\SERVERTests1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",

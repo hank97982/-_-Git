@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HHpypzgSPwq9QS4awWJBYjiojvDLEsEPcT5nPloCGJ79oL6u6NvQyFoX0Kr2a/OQstbDLcaOAZ/KB0wFk9DsQg==",
+  "dgSpecHash": "EH2rqErjR78M72nfQTROTT7lbk1nldhCEWRUELTxa8wDv9BYiUjSMjAP4NFsEHQw2ktj/pSjsolefpZBYCS28w==",
   "success": true,
-  "projectFilePath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\Service\\Service.csproj",
+  "projectFilePath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",

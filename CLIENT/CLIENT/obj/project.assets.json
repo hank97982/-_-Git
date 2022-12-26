@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\CLIENT\\CLIENT\\CLIENT.csproj",
+      "projectUniqueName": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\CLIENT\\CLIENT\\CLIENT.csproj",
       "projectName": "CLIENT",
-      "projectPath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\CLIENT\\CLIENT\\CLIENT.csproj",
+      "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\CLIENT\\CLIENT\\CLIENT.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\CLIENT\\CLIENT\\obj\\",
+      "outputPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\CLIENT\\CLIENT\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",

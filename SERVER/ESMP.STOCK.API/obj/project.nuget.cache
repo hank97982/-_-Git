@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RTJrV+5cgB2n3o7fs1wDn61kW39hnJEWNr7IYMneypf5F1brv0qEeLAzMe9cakxeLnPBfpFunV12dNNgIe2QCQ==",
+  "dgSpecHash": "2ip62x+Jk4elbx3LQjOJDp2pN72FsdcFu6TQJ4XfxWKbPfD1CYx62VkSV5yjTOp5Z4Oear1h9P5S5pngQpngRA==",
   "success": true,
-  "projectFilePath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
+  "projectFilePath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

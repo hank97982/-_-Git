@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Reference Include="HankLibrary">
-      <HintPath>..\..\..\..\..\我的類別庫\HankLibrary\HankLibrary\bin\Debug\HankLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\我的類別庫\HankLibrary\HankLibrary\bin\Debug\HankLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 

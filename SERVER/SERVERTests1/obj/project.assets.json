@@ -6608,11 +6608,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\SERVERTests1\\SERVERTests1.csproj",
+      "projectUniqueName": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\SERVERTests1\\SERVERTests1.csproj",
       "projectName": "SERVERTests1",
-      "projectPath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\SERVERTests1\\SERVERTests1.csproj",
+      "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\SERVERTests1\\SERVERTests1.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\SERVERTests1\\obj\\",
+      "outputPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\SERVERTests1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6629,8 +6629,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {
-              "projectPath": "E:\\Systex_edu\\test13Unit6\\WinForm\\20221216\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj"
+            "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {
+              "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj"
             }
           }
         }

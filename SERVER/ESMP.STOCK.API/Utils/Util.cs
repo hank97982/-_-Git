@@ -125,7 +125,7 @@ namespace ESMP.STOCK.API.Utils
 
             sb.Append(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " : " + str);
             sb.Append("\r\n");
-            File.AppendAllText(@"E:\Systex_edu\test10Unit3\WinForm\Service\ServiceLog\Log.txt", sb.ToString());
+            File.AppendAllText(@"Log.txt", sb.ToString());
             sb.Clear();
         }
 

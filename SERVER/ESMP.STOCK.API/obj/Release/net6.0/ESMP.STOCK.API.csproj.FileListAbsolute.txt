@@ -46,3 +46,15 @@ E:\Systex_edu\test13Unit6\WinForm\20221213\SERVER\ESMP.STOCK.API\obj\Release\net
 E:\Systex_edu\test13Unit6\WinForm\20221213\SERVER\ESMP.STOCK.API\obj\Release\net6.0\refint\ESMP.STOCK.API.dll
 E:\Systex_edu\test13Unit6\WinForm\20221213\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.pdb
 E:\Systex_edu\test13Unit6\WinForm\20221213\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ref\ESMP.STOCK.API.dll
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\bin\Release\net6.0\ESMP.STOCK.API.deps.json
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\bin\Release\net6.0\ESMP.STOCK.API.dll
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\bin\Release\net6.0\ESMP.STOCK.API.pdb
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.csproj.AssemblyReference.cache
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.GeneratedMSBuildEditorConfig.editorconfig
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.AssemblyInfoInputs.cache
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.AssemblyInfo.cs
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.csproj.CoreCompileInputs.cache
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.dll
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\refint\ESMP.STOCK.API.dll
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ESMP.STOCK.API.pdb
+E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\obj\Release\net6.0\ref\ESMP.STOCK.API.dll

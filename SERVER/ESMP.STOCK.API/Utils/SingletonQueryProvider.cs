@@ -30,7 +30,7 @@ namespace ESMP.STOCK.API.Utils
         {
             static Inner()
             {
-                
+
             }
             internal static readonly SingletonQueryProvider Instance = new SingletonQueryProvider();
         }
@@ -43,7 +43,7 @@ namespace ESMP.STOCK.API.Utils
         //針對IOFLAG的key值進行value的查詢
         public string MSYSQueryALL(string IOFLAG)
         {
-            return _query[IOFLAG].VARDESC;
+            return IOFLAG == null ? "" : _query[IOFLAG].VARDESC;
         }
     }
 }
