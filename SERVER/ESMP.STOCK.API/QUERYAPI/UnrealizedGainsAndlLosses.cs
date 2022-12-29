@@ -280,24 +280,33 @@ namespace ESMP.STOCK.API.QUERYAPI
                 return FEE;
             }
         }
-
+        //
         public List<TCNUDBean> TMHIOWriteOff(List<TCNUDBean> tCNUDs, List<TMHIOBean> tMHIOs)
         {
-            List<TCNUDBean> total = tCNUDs.ToList();//如果加toList，(294)RemoveAll不會連tCNUD也移除掉
+            List<TCNUDBean> total = new List<TCNUDBean>();
+            total.CopyTo(tCNUDs.ToArray());//因為.ToList()把List<>轉換成IEnuable<>，在隱含轉換成List<>
+            //List<TCNUDBean> total = tCNUDs.ToList();//如果加.ToList()，(294)RemoveAll不會連tCNUD也移除掉
+            //List<TCNUDBean> total = tCNUDs;
             List<HCNRHBean> hCNRHReturn = new List<HCNRHBean>();
-
-
 
             //分類針對匹配到的個別股票沖銷
             foreach (var tMHIOsDistinct in tMHIOs.Select(c => c.STOCK).Distinct())
             {
                 total.RemoveAll(c => c.STOCK == tMHIOsDistinct);
+                //取出TCNUD指定股票代碼資料並排序
                 var tCNUDLQ = tCNUDs.Where(c => c.STOCK == tMHIOsDistinct).OrderBy(c => c.TDATE).ThenBy(c => c.WTYPE).ThenBy(c => c.DNO).ToList();
+                List<(decimal, TCNUDBean)> tCNUDTU = tCNUDLQ.Select(x => (x.QTY, x)).ToList();
+
+                ////取出TMHIO指定股票代碼
                 var tMHIOLQ = tMHIOs.Where(c => c.STOCK == tMHIOsDistinct).ToList();
-                var DicTCNUD = tCNUDLQ.ToDictionary(c => c, c => c.QTY);//重複主鍵
-                var DicTMHIO = tMHIOLQ.ToDictionary(c => c, c => c.QTY);
+                List<(decimal, TMHIOBean)> tMHIOTU = tMHIOLQ.Select(x => (x.QTY, x)).ToList();
+                var DicTCNUD = tCNUDLQ.ToDictionary(c => c.TDATE + c.BHNO + c.CSEQ + c.DSEQ + c.DNO, c => new ValueTuple<decimal, TCNUDBean>(c.QTY, c));
+                var DicTMHIO = tMHIOLQ.ToDictionary(c => c.Tdate + c.BHNO + c.DSEQ + c.JRNUM, c => new ValueTuple<decimal, TMHIOBean>(c.QTY, c));
+
+
+
                 total.AddRange(isWritOff(DicTMHIO, DicTCNUD));
-                List<TCNUDBean> isWritOff(Dictionary<TMHIOBean, decimal> tMHIOs, Dictionary<TCNUDBean, decimal> tCNUDOrder)
+                List<TCNUDBean> isWritOff(Dictionary<string, (decimal lastQTY, TMHIOBean rollData)> tMHIOs, Dictionary<string, (decimal lastQTY, TCNUDBean rollData)> tCNUDOrder)
                 {
                     //decimal QTY = 0;
                     //decimal BFEE = 0;
@@ -309,119 +318,105 @@ namespace ESMP.STOCK.API.QUERYAPI
                     HCNRHBean hCNRHBean = new HCNRHBean();
                     if (tMHIOs.Count == 0)
                     {
-
-                        return tCNUDOrder.Keys.ToList();
+                        return tCNUDOrder.Values.Select(c => c.rollData).ToList();
                     }
 
-                    if (tMHIOs.Values.FirstOrDefault() - tCNUDOrder.Values.FirstOrDefault() < 0)
+
+
+                    if (tMHIOs.Values.FirstOrDefault().lastQTY - tCNUDOrder.Values.FirstOrDefault().lastQTY < 0)
                     {
-                        tCNUDOrder[tCNUDOrder.Keys.First()] = Math.Abs(tMHIOs.Values.First() - tCNUDOrder.Values.First());
 
-                        //QTY = tCNUDOrder[tCNUDOrder.Keys.First()];
-                        //BFEE = Math.Round(tMHIOs.Values.First() / tCNUDOrder.Values.First() * tCNUDOrder.Keys.First().FEE);
-                        //FEE = (tMHIOs.Keys.First().PRICE * tCNUDOrder[tCNUDOrder.Keys.First()]) * 0.001425m;
-                        //TAX = (tMHIOs.Keys.First().PRICE * tCNUDOrder[tCNUDOrder.Keys.First()]) * 0.003m;
-                        //INCOME = (tMHIOs.Keys.First().PRICE * tCNUDOrder[tCNUDOrder.Keys.First()]) - FEE - TAX;
-                        //COST = Math.Floor(tCNUDOrder.Keys.First().PRICE * tMHIOs.Values.First()) + BFEE;
-                        //PROFIT = INCOME - tCNUDOrder.Keys.First().COST;
+                        tCNUDOrder[tCNUDOrder.Keys.First()] = (Math.Abs(tMHIOs.Values.First().lastQTY - tCNUDOrder.Values.First().lastQTY), tCNUDOrder.Values.First().rollData);
+                        var tC = tCNUDOrder.Values.First().rollData;
+                        var tM = tMHIOs.Values.First().rollData;
 
-                        hCNRHBean.BHNO = tCNUDOrder.Keys.First().BHNO;
-                        hCNRHBean.TDATE = tMHIOs.Keys.First().Tdate;
-                        hCNRHBean.RDATE = tCNUDOrder.Keys.First().TDATE;      //TCNUD.TDATE
-                        hCNRHBean.CSEQ = tCNUDOrder.Keys.First().CSEQ;        //TCNUD.CSEQ
-                        hCNRHBean.BDSEQ = tCNUDOrder.Keys.First().DSEQ;       //TCNUD.DSEQ
-                        hCNRHBean.BDNO = tCNUDOrder.Keys.First().DNO;         //TCNUD.DNO
-                        hCNRHBean.SDSEQ = tMHIOs.Keys.First().DSEQ;
-                        hCNRHBean.SDNO = tMHIOs.Keys.First().JRNUM;
-                        hCNRHBean.STOCK = tCNUDOrder.Keys.First().STOCK;
-                        hCNRHBean.CQTY = tCNUDOrder[tCNUDOrder.Keys.First()];               //==============
-                        hCNRHBean.BPRICE = tCNUDOrder.Keys.First().PRICE;     //TCNUD.PRICE
-                        hCNRHBean.BFEE = Math.Round(tMHIOs.Values.First() / tCNUDOrder.Values.First() * tCNUDOrder.Keys.First().FEE);              //==============
-                        hCNRHBean.SPRICE = tMHIOs.Keys.First().PRICE;
-                        hCNRHBean.SFEE = (tMHIOs.Keys.First().PRICE * tCNUDOrder[tCNUDOrder.Keys.First()]) * 0.001425m;               //==============
-                        hCNRHBean.TAX = (tMHIOs.Keys.First().PRICE * tCNUDOrder[tCNUDOrder.Keys.First()]) * 0.003m;                //==============
-                        hCNRHBean.INCOME = (tMHIOs.Keys.First().PRICE * tCNUDOrder[tCNUDOrder.Keys.First()]) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
-                        hCNRHBean.COST = Math.Floor(tCNUDOrder.Keys.First().PRICE * tMHIOs.Values.First()) + hCNRHBean.BFEE;              //TCNUD.COST
-                        hCNRHBean.PROFIT = hCNRHBean.INCOME - tCNUDOrder.Keys.First().COST;          //
-                        hCNRHBean.ADJDATE = tCNUDOrder.Keys.First().ADJDATE;  //TCNUD.ADJDATE
-                        hCNRHBean.WTYPE = tCNUDOrder.Keys.First().WTYPE;      //TCNUD.WTYPE
-                        hCNRHBean.BQTY = tCNUDOrder.Keys.First().BQTY;        //TCNUD.BQTY
-                        hCNRHBean.SQTY = tMHIOs.Keys.First().QTY;
+
+                        hCNRHBean.BHNO = tC.BHNO;
+                        hCNRHBean.TDATE = tM.Tdate;
+                        hCNRHBean.RDATE = tC.TDATE;      //TCNUD.TDATE
+                        hCNRHBean.CSEQ = tC.CSEQ;        //TCNUD.CSEQ
+                        hCNRHBean.BDSEQ = tC.DSEQ;       //TCNUD.DSEQ
+                        hCNRHBean.BDNO = tC.DNO;         //TCNUD.DNO
+                        hCNRHBean.SDSEQ = tM.DSEQ;
+                        hCNRHBean.SDNO = tM.JRNUM;
+                        hCNRHBean.STOCK = tC.STOCK;
+                        hCNRHBean.CQTY = tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY;               //==============
+                        hCNRHBean.BPRICE = tC.PRICE;     //TCNUD.PRICE
+                        hCNRHBean.BFEE = Math.Round(tMHIOs.Values.First().lastQTY / tCNUDOrder.Values.First().lastQTY * tC.FEE);              //==============
+                        hCNRHBean.SPRICE = tM.PRICE;
+                        hCNRHBean.SFEE = (tM.PRICE * tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY) * 0.001425m;               //==============
+                        hCNRHBean.TAX = (tM.PRICE * tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY) * 0.003m;                //==============
+                        hCNRHBean.INCOME = (tM.PRICE * tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
+                        hCNRHBean.COST = Math.Floor(tC.PRICE * tMHIOs.Values.First().lastQTY) + hCNRHBean.BFEE;              //TCNUD.COST
+                        hCNRHBean.PROFIT = hCNRHBean.INCOME - tC.COST;          //
+                        hCNRHBean.ADJDATE = tC.ADJDATE;  //TCNUD.ADJDATE
+                        hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
+                        hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
+                        hCNRHBean.SQTY = tM.QTY;
 
 
 
                         tMHIOs.Remove(tMHIOs.Keys.First());
                     }
-                    if (tMHIOs.Values.FirstOrDefault() - tCNUDOrder.Values.FirstOrDefault() > 0)
+                    if (tMHIOs.Values.FirstOrDefault().lastQTY - tCNUDOrder.Values.FirstOrDefault().lastQTY > 0)
                     {
-                        tMHIOs[tMHIOs.Keys.First()] = Math.Abs(tMHIOs.Values.First() - tCNUDOrder.Values.First());
+                        tMHIOs[tMHIOs.Keys.First()] = (Math.Abs(tMHIOs.Values.First().lastQTY - tCNUDOrder.Values.First().lastQTY), tMHIOs.Values.First().rollData);
+                        var tC = tCNUDOrder.Values.First().rollData;
+                        var tM = tMHIOs.Values.First().rollData;
 
-                        //QTY = tCNUDOrder.Keys.First().QTY;
-                        //BFEE = tCNUDOrder.Keys.First().FEE;
-                        //FEE = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.001425m;
-                        //TAX = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.003m;
-                        //INCOME = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) - FEE - TAX;
-                        //COST = tCNUDOrder.Keys.First().COST;
-                        //PROFIT = INCOME - tCNUDOrder.Keys.First().COST;
-
-                        hCNRHBean.BHNO = tCNUDOrder.Keys.First().BHNO;
-                        hCNRHBean.TDATE = tMHIOs.Keys.First().Tdate;
-                        hCNRHBean.RDATE = tCNUDOrder.Keys.First().TDATE;      //TCNUD.TDATE
-                        hCNRHBean.CSEQ = tCNUDOrder.Keys.First().CSEQ;        //TCNUD.CSEQ
-                        hCNRHBean.BDSEQ = tCNUDOrder.Keys.First().DSEQ;       //TCNUD.DSEQ
-                        hCNRHBean.BDNO = tCNUDOrder.Keys.First().DNO;         //TCNUD.DNO
-                        hCNRHBean.SDSEQ = tMHIOs.Keys.First().DSEQ;
-                        hCNRHBean.SDNO = tMHIOs.Keys.First().JRNUM;
-                        hCNRHBean.STOCK = tCNUDOrder.Keys.First().STOCK;
-                        hCNRHBean.CQTY = tCNUDOrder.Keys.First().QTY;               //==============
-                        hCNRHBean.BPRICE = tCNUDOrder.Keys.First().PRICE;     //TCNUD.PRICE
-                        hCNRHBean.BFEE = tCNUDOrder.Keys.First().FEE;              //==============
-                        hCNRHBean.SPRICE = tMHIOs.Keys.First().PRICE;
-                        hCNRHBean.SFEE = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.001425m;               //==============
-                        hCNRHBean.TAX = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.003m;                //==============
-                        hCNRHBean.INCOME = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
-                        hCNRHBean.COST = tCNUDOrder.Keys.First().COST;              //TCNUD.COST
-                        hCNRHBean.PROFIT = hCNRHBean.INCOME - tCNUDOrder.Keys.First().COST;          //
-                        hCNRHBean.ADJDATE = tCNUDOrder.Keys.First().ADJDATE;  //TCNUD.ADJDATE
-                        hCNRHBean.WTYPE = tCNUDOrder.Keys.First().WTYPE;      //TCNUD.WTYPE
-                        hCNRHBean.BQTY = tCNUDOrder.Keys.First().BQTY;        //TCNUD.BQTY
-                        hCNRHBean.SQTY = tMHIOs.Keys.First().QTY;
+                        hCNRHBean.BHNO = tC.BHNO;
+                        hCNRHBean.TDATE = tM.Tdate;
+                        hCNRHBean.RDATE = tC.TDATE;      //TCNUD.TDATE
+                        hCNRHBean.CSEQ = tC.CSEQ;        //TCNUD.CSEQ
+                        hCNRHBean.BDSEQ = tC.DSEQ;       //TCNUD.DSEQ
+                        hCNRHBean.BDNO = tC.DNO;         //TCNUD.DNO
+                        hCNRHBean.SDSEQ = tM.DSEQ;
+                        hCNRHBean.SDNO = tM.JRNUM;
+                        hCNRHBean.STOCK = tC.STOCK;
+                        hCNRHBean.CQTY = tMHIOs[tMHIOs.Keys.First()].lastQTY;               //==============
+                        hCNRHBean.BPRICE = tC.PRICE;     //TCNUD.PRICE
+                        hCNRHBean.BFEE = tC.FEE;              //==============
+                        hCNRHBean.SPRICE = tM.PRICE;
+                        hCNRHBean.SFEE = (tM.PRICE * tC.QTY) * 0.001425m;               //==============
+                        hCNRHBean.TAX = (tM.PRICE * tC.QTY) * 0.003m;                //==============
+                        hCNRHBean.INCOME = (tM.PRICE * tC.QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
+                        hCNRHBean.COST = tC.COST;              //TCNUD.COST
+                        hCNRHBean.PROFIT = hCNRHBean.INCOME - tC.COST;          //
+                        hCNRHBean.ADJDATE = tC.ADJDATE;  //TCNUD.ADJDATE
+                        hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
+                        hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
+                        hCNRHBean.SQTY = tM.QTY;
 
 
                         tCNUDOrder.Remove(tCNUDOrder.Keys.First());
                     }
-                    if (tMHIOs.Values.FirstOrDefault() - tCNUDOrder.Values.FirstOrDefault() == 0)
+                    if (tMHIOs.Values.FirstOrDefault().lastQTY - tCNUDOrder.Values.FirstOrDefault().lastQTY == 0)
                     {
-                        //QTY = tCNUDOrder.Keys.First().QTY;
-                        //BFEE = tCNUDOrder.Keys.First().FEE;
-                        //FEE = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.001425m;
-                        //TAX = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.003m;
-                        //INCOME = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) - FEE - TAX;
-                        //COST = tCNUDOrder.Keys.First().COST;
-                        //PROFIT = INCOME - tCNUDOrder.Keys.First().COST;
+                        var tC = tCNUDOrder.Values.First().rollData;
+                        var tM = tMHIOs.Values.First().rollData;
 
-                        hCNRHBean.BHNO = tCNUDOrder.Keys.First().BHNO;
-                        hCNRHBean.TDATE = tMHIOs.Keys.First().Tdate;
-                        hCNRHBean.RDATE = tCNUDOrder.Keys.First().TDATE;      //TCNUD.TDATE
-                        hCNRHBean.CSEQ = tCNUDOrder.Keys.First().CSEQ;        //TCNUD.CSEQ
-                        hCNRHBean.BDSEQ = tCNUDOrder.Keys.First().DSEQ;       //TCNUD.DSEQ
-                        hCNRHBean.BDNO = tCNUDOrder.Keys.First().DNO;         //TCNUD.DNO
-                        hCNRHBean.SDSEQ = tMHIOs.Keys.First().DSEQ;
-                        hCNRHBean.SDNO = tMHIOs.Keys.First().JRNUM;
-                        hCNRHBean.STOCK = tCNUDOrder.Keys.First().STOCK;
-                        hCNRHBean.CQTY = tCNUDOrder.Keys.First().QTY;               //==============
-                        hCNRHBean.BPRICE = tCNUDOrder.Keys.First().PRICE;     //TCNUD.PRICE
-                        hCNRHBean.BFEE = tCNUDOrder.Keys.First().FEE;              //==============
-                        hCNRHBean.SPRICE = tMHIOs.Keys.First().PRICE;
-                        hCNRHBean.SFEE = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.001425m;               //==============
-                        hCNRHBean.TAX = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) * 0.003m;                //==============
-                        hCNRHBean.INCOME = (tMHIOs.Keys.First().PRICE * tCNUDOrder.Keys.First().QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
-                        hCNRHBean.COST = tCNUDOrder.Keys.First().COST;              //TCNUD.COST
-                        hCNRHBean.PROFIT = hCNRHBean.INCOME - tCNUDOrder.Keys.First().COST;          //
-                        hCNRHBean.ADJDATE = tCNUDOrder.Keys.First().ADJDATE;  //TCNUD.ADJDATE
-                        hCNRHBean.WTYPE = tCNUDOrder.Keys.First().WTYPE;      //TCNUD.WTYPE
-                        hCNRHBean.BQTY = tCNUDOrder.Keys.First().BQTY;        //TCNUD.BQTY
-                        hCNRHBean.SQTY = tMHIOs.Keys.First().QTY;
+                        hCNRHBean.BHNO = tC.BHNO;
+                        hCNRHBean.TDATE = tM.Tdate;
+                        hCNRHBean.RDATE = tC.TDATE;      //TCNUD.TDATE
+                        hCNRHBean.CSEQ = tC.CSEQ;        //TCNUD.CSEQ
+                        hCNRHBean.BDSEQ = tC.DSEQ;       //TCNUD.DSEQ
+                        hCNRHBean.BDNO = tC.DNO;         //TCNUD.DNO
+                        hCNRHBean.SDSEQ = tM.DSEQ;
+                        hCNRHBean.SDNO = tM.JRNUM;
+                        hCNRHBean.STOCK = tC.STOCK;
+                        hCNRHBean.CQTY = tC.QTY;               //==============
+                        hCNRHBean.BPRICE = tC.PRICE;     //TCNUD.PRICE
+                        hCNRHBean.BFEE = tC.FEE;              //==============
+                        hCNRHBean.SPRICE = tM.PRICE;
+                        hCNRHBean.SFEE = (tM.PRICE * tC.QTY) * 0.001425m;               //==============
+                        hCNRHBean.TAX = (tM.PRICE * tC.QTY) * 0.003m;                //==============
+                        hCNRHBean.INCOME = (tM.PRICE * tC.QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
+                        hCNRHBean.COST = tC.COST;              //TCNUD.COST
+                        hCNRHBean.PROFIT = hCNRHBean.INCOME - tC.COST;          //
+                        hCNRHBean.ADJDATE = tC.ADJDATE;  //TCNUD.ADJDATE
+                        hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
+                        hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
+                        hCNRHBean.SQTY = tM.QTY;
 
                         tMHIOs.Remove(tMHIOs.Keys.First());
                         tCNUDOrder.Remove(tCNUDOrder.Keys.First());
@@ -557,8 +552,6 @@ namespace ESMP.STOCK.API.QUERYAPI
                     #endregion
                 }
             }
-
-
 
             #region
             //foreach (var tMHIO in tMHIOs)

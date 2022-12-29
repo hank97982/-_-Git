@@ -1,0 +1,156 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.APITests\\ESMP.STOCK.APITests.csproj": {}
+  },
+  "projects": {
+    "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.APITests\\ESMP.STOCK.APITests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.APITests\\ESMP.STOCK.APITests.csproj",
+        "projectName": "ESMP.STOCK.APITests",
+        "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.APITests\\ESMP.STOCK.APITests.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.APITests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {
+                "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.2.8, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.2.8, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.1.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
+        "projectName": "ESMP.STOCK.API",
+        "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Newtonsoft.Json.Bson": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.4, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

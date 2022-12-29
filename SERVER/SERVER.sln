@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SERVERTests1", "SERVERTests1\SERVERTests1.csproj", "{FF973D03-1800-4FDA-85D2-FEB459F7A596}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESMP.STOCK.APITests", "ESMP.STOCK.APITests\ESMP.STOCK.APITests.csproj", "{F703C88A-1C73-4563-A072-C8D30D7C5EA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FF973D03-1800-4FDA-85D2-FEB459F7A596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF973D03-1800-4FDA-85D2-FEB459F7A596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF973D03-1800-4FDA-85D2-FEB459F7A596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F703C88A-1C73-4563-A072-C8D30D7C5EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F703C88A-1C73-4563-A072-C8D30D7C5EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F703C88A-1C73-4563-A072-C8D30D7C5EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F703C88A-1C73-4563-A072-C8D30D7C5EA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
