@@ -283,8 +283,8 @@ namespace ESMP.STOCK.API.QUERYAPI
         //
         public List<TCNUDBean> TMHIOWriteOff(List<TCNUDBean> tCNUDs, List<TMHIOBean> tMHIOs)
         {
-            List<TCNUDBean> total = new List<TCNUDBean>();
-            total.CopyTo(tCNUDs.ToArray());//因為.ToList()把List<>轉換成IEnuable<>，在隱含轉換成List<>
+            List<TCNUDBean> total = new List<TCNUDBean>(tCNUDs);
+            //total.CopyTo(tCNUDs);//因為.ToList()把List<>轉換成IEnuable<>，在隱含轉換成List<>
             //List<TCNUDBean> total = tCNUDs.ToList();//如果加.ToList()，(294)RemoveAll不會連tCNUD也移除掉
             //List<TCNUDBean> total = tCNUDs;
             List<HCNRHBean> hCNRHReturn = new List<HCNRHBean>();
@@ -304,6 +304,10 @@ namespace ESMP.STOCK.API.QUERYAPI
                 var DicTMHIO = tMHIOLQ.ToDictionary(c => c.Tdate + c.BHNO + c.DSEQ + c.JRNUM, c => new ValueTuple<decimal, TMHIOBean>(c.QTY, c));
 
 
+                var DictCNUDBean = tCNUDLQ.ToDictionary(c => c.TDATE + c.BHNO + c.CSEQ + c.DSEQ + c.DNO, c => c);
+                var DictMHIOBean = tMHIOLQ.ToDictionary(c => c.Tdate + c.BHNO + c.DSEQ + c.JRNUM, c => c);
+                var DictCNUDQty = tCNUDLQ.ToDictionary(c => c.TDATE + c.BHNO + c.CSEQ + c.DSEQ + c.DNO, c => c.QTY);
+                var DictMHIOQty = tMHIOLQ.ToDictionary(c => c.Tdate + c.BHNO + c.DSEQ + c.JRNUM, c => c.QTY);
 
                 total.AddRange(isWritOff(DicTMHIO, DicTCNUD));
                 List<TCNUDBean> isWritOff(Dictionary<string, (decimal lastQTY, TMHIOBean rollData)> tMHIOs, Dictionary<string, (decimal lastQTY, TCNUDBean rollData)> tCNUDOrder)
@@ -323,8 +327,10 @@ namespace ESMP.STOCK.API.QUERYAPI
 
 
 
-                    if (tMHIOs.Values.FirstOrDefault().lastQTY - tCNUDOrder.Values.FirstOrDefault().lastQTY < 0)
+
+                    if (tMHIOs.Values.FirstOrDefault().lastQTY < tCNUDOrder.Values.FirstOrDefault().lastQTY)
                     {
+
 
                         tCNUDOrder[tCNUDOrder.Keys.First()] = (Math.Abs(tMHIOs.Values.First().lastQTY - tCNUDOrder.Values.First().lastQTY), tCNUDOrder.Values.First().rollData);
                         var tC = tCNUDOrder.Values.First().rollData;
@@ -353,12 +359,25 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
                         hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
                         hCNRHBean.SQTY = tM.QTY;
+                        hCNRHReturn.Add(hCNRHBean);
 
 
+                        if (tMHIOs.Count == 1)
+                        {
+                            //( 原始BFEE * ( CQTY / BQTY) ) 四捨五入至整數
+                            tCNUDOrder.Values.First().rollData.FEE = Math.Round(tCNUDOrder.Values.First().rollData.FEE * (hCNRHBean.CQTY / tC.BQTY));
+
+                            //( BPRICE * CQTY ) 無條件捨去至整數 + 此筆BFEE
+                            tCNUDOrder.Values.First().rollData.COST = Math.Floor(tC.PRICE* hCNRHBean.CQTY) + tCNUDOrder.Values.First().rollData.FEE;
+
+                            tCNUDOrder.Values.First().rollData.BQTY = tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY;
+
+                        }
 
                         tMHIOs.Remove(tMHIOs.Keys.First());
+                        return isWritOff(tMHIOs, tCNUDOrder);
                     }
-                    if (tMHIOs.Values.FirstOrDefault().lastQTY - tCNUDOrder.Values.FirstOrDefault().lastQTY > 0)
+                    if (tMHIOs.Values.FirstOrDefault().lastQTY > tCNUDOrder.Values.FirstOrDefault().lastQTY)
                     {
                         tMHIOs[tMHIOs.Keys.First()] = (Math.Abs(tMHIOs.Values.First().lastQTY - tCNUDOrder.Values.First().lastQTY), tMHIOs.Values.First().rollData);
                         var tC = tCNUDOrder.Values.First().rollData;
@@ -386,11 +405,12 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
                         hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
                         hCNRHBean.SQTY = tM.QTY;
-
+                        hCNRHReturn.Add(hCNRHBean);
 
                         tCNUDOrder.Remove(tCNUDOrder.Keys.First());
+                        return isWritOff(tMHIOs, tCNUDOrder);
                     }
-                    if (tMHIOs.Values.FirstOrDefault().lastQTY - tCNUDOrder.Values.FirstOrDefault().lastQTY == 0)
+                    if (tMHIOs.Values.FirstOrDefault().lastQTY == tCNUDOrder.Values.FirstOrDefault().lastQTY)
                     {
                         var tC = tCNUDOrder.Values.First().rollData;
                         var tM = tMHIOs.Values.First().rollData;
@@ -417,241 +437,18 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
                         hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
                         hCNRHBean.SQTY = tM.QTY;
+                        hCNRHReturn.Add(hCNRHBean);
 
                         tMHIOs.Remove(tMHIOs.Keys.First());
                         tCNUDOrder.Remove(tCNUDOrder.Keys.First());
+                        return isWritOff(tMHIOs, tCNUDOrder);
                     }
-                    hCNRHReturn.Add(hCNRHBean);
-
-                    return isWritOff(tMHIOs, tCNUDOrder);
-
-                    #region
-                    //hCNRHBean.BHNO = tCNUDOrder.Keys.First().BHNO;
-                    //hCNRHBean.TDATE = tMHIOs.Keys.First().Tdate;
-                    //hCNRHBean.RDATE = tCNUDOrder.Keys.First().TDATE;      //TCNUD.TDATE
-                    //hCNRHBean.CSEQ = tCNUDOrder.Keys.First().CSEQ;        //TCNUD.CSEQ
-                    //hCNRHBean.BDSEQ = tCNUDOrder.Keys.First().DSEQ;       //TCNUD.DSEQ
-                    //hCNRHBean.BDNO = tCNUDOrder.Keys.First().DNO;         //TCNUD.DNO
-                    //hCNRHBean.SDSEQ = tMHIOs.Keys.First().DSEQ;
-                    //hCNRHBean.SDNO = tMHIOs.Keys.First().JRNUM;
-                    //hCNRHBean.STOCK = tCNUDOrder.Keys.First().STOCK;
-                    //hCNRHBean.CQTY = QTY;               //==============
-                    //hCNRHBean.BPRICE = tCNUDOrder.Keys.First().PRICE;     //TCNUD.PRICE
-                    //hCNRHBean.BFEE = BFEE;              //==============
-                    //hCNRHBean.SPRICE = tMHIOs.Keys.First().PRICE;
-                    //hCNRHBean.SFEE = FEE;               //==============
-                    //hCNRHBean.TAX = TAX;                //==============
-                    //hCNRHBean.INCOME = INCOME;          //==============
-                    //hCNRHBean.COST = COST;              //TCNUD.COST
-                    //hCNRHBean.PROFIT = PROFIT;          //
-                    //hCNRHBean.ADJDATE = tCNUDOrder.Keys.First().ADJDATE;  //TCNUD.ADJDATE
-                    //hCNRHBean.WTYPE = tCNUDOrder.Keys.First().WTYPE;      //TCNUD.WTYPE
-                    //hCNRHBean.BQTY = tCNUDOrder.Keys.First().BQTY;        //TCNUD.BQTY
-                    //hCNRHBean.SQTY = tMHIOs.Keys.First().QTY;
-                    //hCNRHReturn.Add(hCNRHBean);
-                    #endregion
 
 
-                    #region
-                    //foreach (var tCNUDOr in tCNUDOrder)
-                    //{
-                    //    //確認有相對應的股票代號
-                    //    if (tMHIOs.First().STOCK == tCNUDOr.STOCK)
-                    //    {
-                    //        decimal QTY = 0;
-                    //        decimal BFEE = 0;
-                    //        decimal FEE = 0;
-                    //        decimal TAX = 0;
-                    //        decimal INCOME = 0;
-                    //        decimal COST = 0;
-                    //        decimal PROFIT = 0;
-                    //        //小大
-                    //        if (tMHIOs.First().QTY - tCNUDOrder.First().QTY < 0)
-                    //        {
+                    return null;
 
-
-                    //        }
-                    //        //大小
-                    //        if (tMHIOs.First().QTY - tCNUDOrder.First().QTY > 0)
-                    //        {
-                    //            //TCNUD HCNRH
-                    //            QTY = tCNUDOrder.First().QTY;
-                    //            BFEE = tCNUDOrder.First().FEE;
-                    //            FEE = (tMHIOs.First().PRICE * tCNUDOrder.First().QTY) * 0.001425m;
-                    //            TAX = (tMHIOs.First().PRICE * tCNUDOrder.First().QTY) * 0.003m;
-                    //            INCOME = (tMHIOs.First().PRICE * tCNUDOrder.First().QTY) - FEE - TAX;
-                    //            COST = tCNUDOrder.First().COST;
-                    //            PROFIT = INCOME - tCNUDOrder.First().COST;
-
-
-                    //            tCNUDOrder.Remove(tCNUDOrder.First(t => t.STOCK == tCNUDOr.STOCK));
-
-                    //        }
-                    //        if (tMHIOs.First().QTY - tCNUDOrder.First().QTY == 0)
-                    //        {
-                    //            //TCNUD HCNRH
-                    //            QTY = tCNUDOrder.First().QTY;
-                    //            BFEE = tCNUDOrder.First().FEE;
-                    //            FEE = (tMHIOs.First().PRICE * tCNUDOrder.First().QTY) * 0.001425m;
-                    //            TAX = (tMHIOs.First().PRICE * tCNUDOrder.First().QTY) * 0.003m;
-                    //            INCOME = (tMHIOs.First().PRICE * tCNUDOrder.First().QTY) - FEE - TAX;
-                    //            COST = tCNUDOrder.First().COST;
-                    //            PROFIT = INCOME - tCNUDOrder.First().COST;
-
-                    //            tMHIOs.Remove(tMHIOs.First());
-                    //            tCNUDOrder.Remove(tCNUDOrder.First(t => t.STOCK == tCNUDOr.STOCK));
-                    //        }
-                    //        HCNRHBean hCNRHBean = new HCNRHBean();
-                    //        hCNRHBean.BHNO = tCNUDOrder.First().BHNO;
-                    //        hCNRHBean.TDATE = tMHIOs.First().Tdate;
-                    //        hCNRHBean.RDATE = tCNUDOrder.First().TDATE;      //TCNUD.TDATE
-                    //        hCNRHBean.CSEQ = tCNUDOrder.First().CSEQ;        //TCNUD.CSEQ
-                    //        hCNRHBean.BDSEQ = tCNUDOrder.First().DSEQ;       //TCNUD.DSEQ
-                    //        hCNRHBean.BDNO = tCNUDOrder.First().DNO;         //TCNUD.DNO
-                    //        hCNRHBean.SDSEQ = tMHIOs.First().DSEQ;
-                    //        hCNRHBean.SDNO = tMHIOs.First().JRNUM;
-                    //        hCNRHBean.STOCK = tCNUDOrder.First().STOCK;
-                    //        hCNRHBean.CQTY = QTY;               //==============
-                    //        hCNRHBean.BPRICE = tCNUDOrder.First().PRICE;     //TCNUD.PRICE
-                    //        hCNRHBean.BFEE = BFEE;              //==============
-                    //        hCNRHBean.SPRICE = tMHIOs.First().PRICE;
-                    //        hCNRHBean.SFEE = FEE;               //==============
-                    //        hCNRHBean.TAX = TAX;                //==============
-                    //        hCNRHBean.INCOME = INCOME;          //==============
-                    //        hCNRHBean.COST = COST;              //TCNUD.COST
-                    //        hCNRHBean.PROFIT = PROFIT;          //
-                    //        hCNRHBean.ADJDATE = tCNUDOrder.First().ADJDATE;  //TCNUD.ADJDATE
-                    //        hCNRHBean.WTYPE = tCNUDOrder.First().WTYPE;      //TCNUD.WTYPE
-                    //        hCNRHBean.BQTY = tCNUDOrder.First().BQTY;        //TCNUD.BQTY
-                    //        hCNRHBean.SQTY = tMHIOs.First().QTY;
-                    //        hCNRHReturn.Add(hCNRHBean);
-                    //        return isWritOff(tMHIOs, tCNUDOrder);
-                    //    }
-                    //}
-
-                    //if (tMHIOs.First().QTY - tCNUDOrder.First().QTY < 0)
-                    //{
-                    //    HCNRHBean hCNRHBean = new HCNRHBean();
-                    //    hCNRHReturn.Add(hCNRHBean);
-                    //    tMHIOs.RemoveAt(0);
-                    //    tCNUDOrder.RemoveAt(0);
-                    //    isWritOff(tMHIOs, tCNUDOrder);
-                    //}
-                    //if (tMHIOs.First().QTY - tCNUDOrder.First().QTY > 0)
-                    //{
-                    //    isWritOff(tMHIOs, tCNUDOrder);
-                    //}
-                    //if (tMHIOs.First().QTY - tCNUDOrder.First().QTY == 0)
-                    //{
-                    //    HCNRHBean hCNRHBean = new HCNRHBean();
-                    //    hCNRHReturn.Add(hCNRHBean);
-                    //    tMHIOs.RemoveAt(0);
-                    //    tCNUDOrder.RemoveAt(0);
-                    //    isWritOff(tMHIOs, tCNUDOrder);
-                    //}
-                    #endregion
                 }
             }
-
-            #region
-            //foreach (var tMHIO in tMHIOs)
-            //{
-            //    foreach (var tCNUD in tCNUDs)
-            //    {
-            //        if (tMHIO.QTY - tCNUD.QTY == 0)
-            //        {
-            //            HCNRHBean hCNRHBean = new HCNRHBean();
-            //            hCNRHBean.BHNO = tCNUD.BHNO;
-            //            hCNRHBean.TDATE = tMHIO.Tdate;
-            //            hCNRHBean.RDATE = tCNUD.TDATE;      //TCNUD.TDATE
-            //            hCNRHBean.CSEQ = tCNUD.CSEQ;        //TCNUD.CSEQ
-            //            hCNRHBean.BDSEQ = tCNUD.DSEQ;       //TCNUD.DSEQ
-            //            hCNRHBean.BDNO = tCNUD.DNO;         //TCNUD.DNO
-            //            hCNRHBean.SDSEQ = tMHIO.DSEQ;
-            //            hCNRHBean.SDNO = tMHIO.JRNUM;
-            //            hCNRHBean.STOCK = tCNUD.STOCK;
-            //            hCNRHBean.CQTY = tCNUD.QTY;         //==============
-            //            hCNRHBean.BPRICE = tCNUD.PRICE;     //TCNUD.PRICE
-            //            hCNRHBean.BFEE = tCNUD.FEE;         //==============
-            //            hCNRHBean.SPRICE = tMHIO.PRICE;
-            //            hCNRHBean.SFEE = (tMHIO.PRICE * tCNUD.QTY) * 0.001425m;     //==============
-            //            hCNRHBean.TAX = (tMHIO.PRICE * tCNUD.QTY) * 0.003m;         //==============
-            //            hCNRHBean.INCOME = (tMHIO.PRICE * tCNUD.QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;   //==============
-            //            hCNRHBean.COST = tCNUD.COST;        //TCNUD.COST
-            //            hCNRHBean.PROFIT = hCNRHBean.INCOME - tCNUD.COST;           //
-            //            hCNRHBean.ADJDATE = tCNUD.ADJDATE;  //TCNUD.ADJDATE
-            //            hCNRHBean.WTYPE = tCNUD.WTYPE;      //TCNUD.WTYPE
-            //            hCNRHBean.BQTY = tCNUD.BQTY;        //TCNUD.BQTY
-            //            hCNRHBean.SQTY = tMHIO.QTY;
-            //            break;
-            //        }
-
-            //        if (tMHIO.QTY - tCNUD.QTY < 0)
-            //        {
-            //            //TCNUD HCNRH
-            //        }
-
-            //        if (tMHIO.QTY - tCNUD.QTY > 0)
-            //        {
-            //            //TCNUD HCNRH
-            //        }
-            //    }
-            //}
-
-            //var machList = tCNUDs.Zip(tMHIOs, (tc, tm) => new { tCNUD = tc , tMHIO = tm });
-            //foreach (var machItem in machList)
-            //{
-            //    decimal QTY = 0;
-            //    decimal FEE = 0;
-            //    decimal TAX = 0;
-            //    decimal INCOME = 0;
-            //    decimal COST = 0;
-            //    decimal PROFIT = 0;
-            //    if (machItem.tCNUD.QTY - machItem.tMHIO.QTY == 0)
-            //    {
-            //        //TCNUD HCNRH
-            //        QTY = machItem.tCNUD.QTY;
-            //        FEE = (machItem.tMHIO.PRICE * machItem.tCNUD.QTY) * 0.001425m;
-            //        TAX = (machItem.tMHIO.PRICE * machItem.tCNUD.QTY) * 0.003m;
-            //        INCOME = (machItem.tMHIO.PRICE * machItem.tCNUD.QTY) - FEE - TAX;
-            //        COST = machItem.tCNUD.COST;
-            //        PROFIT = INCOME - machItem.tCNUD.COST;
-            //    }
-            //    if (machItem.tCNUD.QTY - machItem.tMHIO.QTY > 0)
-            //    {
-            //        //TCNUD HCNRH
-
-            //    }
-            //    if (machItem.tCNUD.QTY - machItem.tMHIO.QTY < 0)
-            //    {
-            //        //TCNUD HCNRH
-
-            //    }
-            //    HCNRHBean hCNRHBean = new HCNRHBean();
-            //    hCNRHBean.BHNO = machItem.tCNUD.BHNO;
-            //    hCNRHBean.TDATE = machItem.tMHIO.Tdate;
-            //    hCNRHBean.RDATE = machItem.tCNUD.TDATE;      //TCNUD.TDATE
-            //    hCNRHBean.CSEQ = machItem.tCNUD.CSEQ;        //TCNUD.CSEQ
-            //    hCNRHBean.BDSEQ = machItem.tCNUD.DSEQ;       //TCNUD.DSEQ
-            //    hCNRHBean.BDNO = machItem.tCNUD.DNO;         //TCNUD.DNO
-            //    hCNRHBean.SDSEQ = machItem.tMHIO.DSEQ;
-            //    hCNRHBean.SDNO = machItem.tMHIO.JRNUM;
-            //    hCNRHBean.STOCK = machItem.tCNUD.STOCK;
-            //    hCNRHBean.CQTY = QTY;               //==============
-            //    hCNRHBean.BPRICE = machItem.tCNUD.PRICE;     //TCNUD.PRICE
-            //    hCNRHBean.BFEE = machItem.tCNUD.FEE;         //==============
-            //    hCNRHBean.SPRICE = machItem.tMHIO.PRICE;
-            //    hCNRHBean.SFEE = FEE;               //==============
-            //    hCNRHBean.TAX = TAX;                //==============
-            //    hCNRHBean.INCOME = INCOME;          //==============
-            //    hCNRHBean.COST = COST;              //TCNUD.COST
-            //    hCNRHBean.PROFIT = PROFIT;          //
-            //    hCNRHBean.ADJDATE = machItem.tCNUD.ADJDATE;  //TCNUD.ADJDATE
-            //    hCNRHBean.WTYPE = machItem.tCNUD.WTYPE;      //TCNUD.WTYPE
-            //    hCNRHBean.BQTY = machItem.tCNUD.BQTY;        //TCNUD.BQTY
-            //    hCNRHBean.SQTY = machItem.tMHIO.QTY;
-            //}
-            #endregion
 
             return total;
         }

@@ -50,8 +50,12 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCNUDBean> check = new List<TCNUDBean>();
             check = _unrealizedGainsAndlLosses.TMHIOWriteOff(tCNUDs, tMHIOs);
-            Assert.AreEqual(4, check.Count);
 
+            Assert.AreEqual(4, check.Count);
+            
+            Assert.AreEqual(138, check.First().BQTY);
+            Assert.AreEqual(13m, check.First().FEE);
+            Assert.AreEqual(9052, check.First().COST);
         }
     }
 }
