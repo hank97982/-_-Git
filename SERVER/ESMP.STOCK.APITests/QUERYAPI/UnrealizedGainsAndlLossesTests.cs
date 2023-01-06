@@ -39,11 +39,11 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         {
             List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
             tCNUDs.Add(new TCNUDBean() { TDATE = "20131028", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 0, QTY = 138, BQTY = 138, FEE = 0, COST = 0 });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20131106", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 84.7m, QTY = 1000, BQTY = 1000, FEE = 120, COST = 84.820m });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20131205", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 65.5m, QTY = 1000, BQTY = 1000, FEE = 93, COST = 65.593m });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20131206", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 66.6m, QTY = 862, BQTY = 862, FEE = 81, COST = 57.489m });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20140521", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 62.2m, QTY = 1000, BQTY = 1000, FEE = 88, COST = 62.288m });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50.872m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20131106", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 84.7m, QTY = 1000, BQTY = 1000, FEE = 120, COST = 84820m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20131205", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 65.5m, QTY = 1000, BQTY = 1000, FEE = 93, COST = 65593m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20131206", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 66.6m, QTY = 862, BQTY = 862, FEE = 81, COST = 57489m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140521", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 62.2m, QTY = 1000, BQTY = 1000, FEE = 88, COST = 62288m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
             List<TMHIOBean> tMHIOs = new List<TMHIOBean>();
             tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "amPM0", JRNUM = "02844984", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 27.5m, SALES = "0085", ORGIN = "0", MTIME = "300106186" });
             tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "amPM2", JRNUM = "02844985", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 27.8m, SALES = "0085", ORGIN = "0", MTIME = "300106187" });
@@ -54,7 +54,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             Assert.AreEqual(4, check.Count);
             
             Assert.AreEqual(138, check.First().BQTY);
-            Assert.AreEqual(13m, check.First().FEE);
+            Assert.AreEqual(13, check.First().FEE);
             Assert.AreEqual(9052, check.First().COST);
         }
     }

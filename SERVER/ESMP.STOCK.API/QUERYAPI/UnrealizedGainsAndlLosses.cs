@@ -338,7 +338,7 @@ namespace ESMP.STOCK.API.QUERYAPI
 
 
                         hCNRHBean.BHNO = tC.BHNO;
-                        hCNRHBean.TDATE = tM.Tdate;
+                        hCNRHBean.TDATE = DateTime.Now.ToString("yyyyMMdd");
                         hCNRHBean.RDATE = tC.TDATE;      //TCNUD.TDATE
                         hCNRHBean.CSEQ = tC.CSEQ;        //TCNUD.CSEQ
                         hCNRHBean.BDSEQ = tC.DSEQ;       //TCNUD.DSEQ
@@ -346,14 +346,20 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHBean.SDSEQ = tM.DSEQ;
                         hCNRHBean.SDNO = tM.JRNUM;
                         hCNRHBean.STOCK = tC.STOCK;
-                        hCNRHBean.CQTY = tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY;               //==============
+                        hCNRHBean.CQTY = tMHIOs[tMHIOs.Keys.First()].lastQTY;               //==============
                         hCNRHBean.BPRICE = tC.PRICE;     //TCNUD.PRICE
-                        hCNRHBean.BFEE = Math.Round(tMHIOs.Values.First().lastQTY / tCNUDOrder.Values.First().lastQTY * tC.FEE);              //==============
+                        hCNRHBean.BFEE = Math.Round(tCNUDOrder.Values.First().rollData.FEE * (hCNRHBean.CQTY / tC.BQTY));              //==============
                         hCNRHBean.SPRICE = tM.PRICE;
-                        hCNRHBean.SFEE = (tM.PRICE * tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY) * 0.001425m;               //==============
-                        hCNRHBean.TAX = (tM.PRICE * tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY) * 0.003m;                //==============
-                        hCNRHBean.INCOME = (tM.PRICE * tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
-                        hCNRHBean.COST = Math.Floor(tC.PRICE * tMHIOs.Values.First().lastQTY) + hCNRHBean.BFEE;              //TCNUD.COST
+                        //零股最小手續費1元，整股最小手續費10元
+                        decimal sfee = Math.Round(tM.PRICE * hCNRHBean.CQTY * 0.001425m);
+                        if (hCNRHBean.CQTY >= 1000 && Math.Round(tM.PRICE * hCNRHBean.CQTY * 0.001425m) < 20)
+                        {
+                            sfee = 20m;
+                        }
+                        hCNRHBean.SFEE = sfee;               //==============
+                        hCNRHBean.TAX = Math.Round(tM.PRICE * hCNRHBean.CQTY * 0.003m);                //==============
+                        hCNRHBean.INCOME = Math.Floor(tM.PRICE * hCNRHBean.CQTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
+                        hCNRHBean.COST = Math.Floor(tC.PRICE * hCNRHBean.CQTY + hCNRHBean.BFEE);              //TCNUD.COST
                         hCNRHBean.PROFIT = hCNRHBean.INCOME - tC.COST;          //
                         hCNRHBean.ADJDATE = tC.ADJDATE;  //TCNUD.ADJDATE
                         hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
@@ -362,13 +368,13 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHReturn.Add(hCNRHBean);
 
 
-                        if (tMHIOs.Count == 1)
+                        if (tMHIOs.Count == 1 )
                         {
                             //( 原始BFEE * ( CQTY / BQTY) ) 四捨五入至整數
-                            tCNUDOrder.Values.First().rollData.FEE = Math.Round(tCNUDOrder.Values.First().rollData.FEE * (hCNRHBean.CQTY / tC.BQTY));
+                            tCNUDOrder.Values.First().rollData.FEE = tCNUDOrder.Values.First().rollData.FEE- hCNRHBean.BFEE;
 
                             //( BPRICE * CQTY ) 無條件捨去至整數 + 此筆BFEE
-                            tCNUDOrder.Values.First().rollData.COST = Math.Floor(tC.PRICE* hCNRHBean.CQTY) + tCNUDOrder.Values.First().rollData.FEE;
+                            tCNUDOrder.Values.First().rollData.COST = tCNUDOrder.Values.First().rollData.COST - hCNRHBean.COST;
 
                             tCNUDOrder.Values.First().rollData.BQTY = tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY;
 
@@ -384,7 +390,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                         var tM = tMHIOs.Values.First().rollData;
 
                         hCNRHBean.BHNO = tC.BHNO;
-                        hCNRHBean.TDATE = tM.Tdate;
+                        hCNRHBean.TDATE = DateTime.Now.ToString("yyyyMMdd");
                         hCNRHBean.RDATE = tC.TDATE;      //TCNUD.TDATE
                         hCNRHBean.CSEQ = tC.CSEQ;        //TCNUD.CSEQ
                         hCNRHBean.BDSEQ = tC.DSEQ;       //TCNUD.DSEQ
@@ -392,20 +398,39 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHBean.SDSEQ = tM.DSEQ;
                         hCNRHBean.SDNO = tM.JRNUM;
                         hCNRHBean.STOCK = tC.STOCK;
-                        hCNRHBean.CQTY = tMHIOs[tMHIOs.Keys.First()].lastQTY;               //==============
+                        hCNRHBean.CQTY = tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY;               //==============
                         hCNRHBean.BPRICE = tC.PRICE;     //TCNUD.PRICE
-                        hCNRHBean.BFEE = tC.FEE;              //==============
+                        hCNRHBean.BFEE = Math.Round(tCNUDOrder.Values.First().rollData.FEE * (hCNRHBean.CQTY / tC.BQTY));              //==============
                         hCNRHBean.SPRICE = tM.PRICE;
-                        hCNRHBean.SFEE = (tM.PRICE * tC.QTY) * 0.001425m;               //==============
-                        hCNRHBean.TAX = (tM.PRICE * tC.QTY) * 0.003m;                //==============
-                        hCNRHBean.INCOME = (tM.PRICE * tC.QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
-                        hCNRHBean.COST = tC.COST;              //TCNUD.COST
+                        hCNRHBean.SPRICE = tM.PRICE;
+                        //零股最小手續費1元，整股最小手續費10元
+                        decimal sfee = Math.Round(tM.PRICE * hCNRHBean.CQTY * 0.001425m);
+                        if (hCNRHBean.CQTY >= 1000 && Math.Round((tM.PRICE * hCNRHBean.CQTY) * 0.001425m) < 20)
+                        {
+                            sfee = 20m;
+                        }
+                        hCNRHBean.SFEE = sfee;               //==============
+                        hCNRHBean.TAX = Math.Round(tM.PRICE * hCNRHBean.CQTY * 0.003m);                //==============
+                        hCNRHBean.INCOME = Math.Floor(tM.PRICE * hCNRHBean.CQTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
+                        hCNRHBean.COST = Math.Floor(tC.PRICE * hCNRHBean.CQTY + hCNRHBean.BFEE);              //TCNUD.COST
                         hCNRHBean.PROFIT = hCNRHBean.INCOME - tC.COST;          //
                         hCNRHBean.ADJDATE = tC.ADJDATE;  //TCNUD.ADJDATE
                         hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
                         hCNRHBean.BQTY = tC.BQTY;        //TCNUD.BQTY
                         hCNRHBean.SQTY = tM.QTY;
                         hCNRHReturn.Add(hCNRHBean);
+
+                        if (tCNUDOrder.Count == 1)
+                        {
+                            //( 原始BFEE * ( CQTY / BQTY) ) 四捨五入至整數
+                            tCNUDOrder.Values.First().rollData.FEE = tCNUDOrder.Values.First().rollData.FEE - hCNRHBean.BFEE;
+
+                            //( BPRICE * CQTY ) 無條件捨去至整數 + 此筆BFEE
+                            tCNUDOrder.Values.First().rollData.COST = tCNUDOrder.Values.First().rollData.COST - hCNRHBean.COST;
+
+                            tCNUDOrder.Values.First().rollData.BQTY = tCNUDOrder[tCNUDOrder.Keys.First()].lastQTY;
+
+                        }
 
                         tCNUDOrder.Remove(tCNUDOrder.Keys.First());
                         return isWritOff(tMHIOs, tCNUDOrder);
@@ -416,7 +441,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                         var tM = tMHIOs.Values.First().rollData;
 
                         hCNRHBean.BHNO = tC.BHNO;
-                        hCNRHBean.TDATE = tM.Tdate;
+                        hCNRHBean.TDATE = DateTime.Now.ToString("yyyyMMdd");
                         hCNRHBean.RDATE = tC.TDATE;      //TCNUD.TDATE
                         hCNRHBean.CSEQ = tC.CSEQ;        //TCNUD.CSEQ
                         hCNRHBean.BDSEQ = tC.DSEQ;       //TCNUD.DSEQ
@@ -428,10 +453,16 @@ namespace ESMP.STOCK.API.QUERYAPI
                         hCNRHBean.BPRICE = tC.PRICE;     //TCNUD.PRICE
                         hCNRHBean.BFEE = tC.FEE;              //==============
                         hCNRHBean.SPRICE = tM.PRICE;
-                        hCNRHBean.SFEE = (tM.PRICE * tC.QTY) * 0.001425m;               //==============
-                        hCNRHBean.TAX = (tM.PRICE * tC.QTY) * 0.003m;                //==============
-                        hCNRHBean.INCOME = (tM.PRICE * tC.QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
-                        hCNRHBean.COST = tC.COST;              //TCNUD.COST
+                        //零股最小手續費1元，整股最小手續費10元
+                        decimal sfee = Math.Round(tM.PRICE * tC.QTY * 0.001425m);
+                        if (hCNRHBean.CQTY >= 1000 && Math.Round((tM.PRICE * tC.QTY) * 0.001425m) < 20)
+                        {
+                            sfee = 20m;
+                        }
+                        hCNRHBean.SFEE = sfee;               //==============
+                        hCNRHBean.TAX = Math.Round(tM.PRICE * tC.QTY * 0.003m);                //==============
+                        hCNRHBean.INCOME = Math.Floor(tM.PRICE * tC.QTY) - hCNRHBean.SFEE - hCNRHBean.TAX;          //==============
+                        hCNRHBean.COST = Math.Floor(tC.PRICE * hCNRHBean.CQTY + hCNRHBean.BFEE); ;              //TCNUD.COST
                         hCNRHBean.PROFIT = hCNRHBean.INCOME - tC.COST;          //
                         hCNRHBean.ADJDATE = tC.ADJDATE;  //TCNUD.ADJDATE
                         hCNRHBean.WTYPE = tC.WTYPE;      //TCNUD.WTYPE
@@ -443,13 +474,9 @@ namespace ESMP.STOCK.API.QUERYAPI
                         tCNUDOrder.Remove(tCNUDOrder.Keys.First());
                         return isWritOff(tMHIOs, tCNUDOrder);
                     }
-
-
                     return null;
-
                 }
             }
-
             return total;
         }
     }
