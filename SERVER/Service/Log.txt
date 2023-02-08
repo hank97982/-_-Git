@@ -4,3 +4,36 @@
    at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.<TMHIOWriteOff>g__isWritOff|5_13(Dictionary`2 tMHIOs, Dictionary`2 tCNUDOrder, <>c__DisplayClass5_0& ) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 324
    at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.TMHIOWriteOff(List`1 tCNUDs, List`1 tMHIOs) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 307
    at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 mSTMBBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 135
+2023/01/11 10:02:41 : 交易異常: System.TypeInitializationException: The type initializer for 'Inner' threw an exception.
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.<.ctor>b__1_0(MSTMBBean x) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 23
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB..ctor() in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 23
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.Inner..cctor() in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 35
+   --- End of inner exception stack trace ---
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.get_queryProvider() in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 39
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228
+2023/01/11 10:06:24 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '2485' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.MSTMBQueryCPRICE(String STOCK) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 52
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228
+2023/01/11 10:07:00 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '2485' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.MSTMBQueryCPRICE(String STOCK) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 52
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228
+2023/01/11 10:08:03 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '2485' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.MSTMBQueryCPRICE(String STOCK) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 52
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228
+2023/01/11 10:12:44 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '2485' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.MSTMBQueryCPRICE(String STOCK) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 52
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228
+2023/01/11 10:15:13 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '2485' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.MSTMBQueryCPRICE(String STOCK) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 52
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228
+2023/01/11 10:15:38 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '2485' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMSTMB.MSTMBQueryCPRICE(String STOCK) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMSTMB.cs:line 52
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 228

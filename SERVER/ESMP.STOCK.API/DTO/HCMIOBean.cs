@@ -34,29 +34,29 @@ namespace ESMP.STOCK.API.DTO
         public decimal AMT { get; set; }            //價金
         [Column("FEE")]
         public decimal FEE { get; set; }            //手續費
-        [Column("TAX")]                             
+        [Column("TAX")]
         public decimal TAX { get; set; }            //交易稅
-        [Column("RVINT")]                           
+        [Column("RVINT")]
         public decimal RVINT { get; set; }          //債息
-        [Column("NETAMT")]                          
+        [Column("NETAMT")]
         public decimal NETAMT { get; set; }         //淨收付金額
-        [Column("DBFEE")]                           
+        [Column("DBFEE")]
         public decimal DBFEE { get; set; }          //融券手續費
-        [Column("CRAMT")]                           
+        [Column("CRAMT")]
         public decimal CRAMT { get; set; }          //融資/保證金金額
-        [Column( "DNAMT")]                          
+        [Column("DNAMT")]
         public decimal DNAMT { get; set; }          //擔保品金額
-        [Column("CRINT")]                           
+        [Column("CRINT")]
         public decimal CRINT { get; set; }          //融資/保證金利息
-        [Column("DNINT")]                           
+        [Column("DNINT")]
         public decimal DNINT { get; set; }          //擔保品利息
-        [Column("DLFEE")]                           
+        [Column("DLFEE")]
         public decimal DLFEE { get; set; }          //標借卷費
-        [Column("BFINT")]                           
+        [Column("BFINT")]
         public decimal BFINT { get; set; }          //標借卷費利息
-        [Column("OBAMT")]                           
+        [Column("OBAMT")]
         public decimal OBAMT { get; set; }          //逾期手續費
-        [Column("INTAX")]                           
+        [Column("INTAX")]
         public decimal INTAX { get; set; }          //代扣所得稅
         [Column("SFCODE")]
         public string? SFCODE { get; set; }         //證金代號
@@ -80,14 +80,15 @@ namespace ESMP.STOCK.API.DTO
         public decimal HEALTHFEE { get; set; }      //健保補充費
         [Column("TRDATE")]
         public string? TRDATE { get; set; }         //轉檔日期
-        [Column("TRTIME")]                          
+        [Column("TRTIME")]
         public string? TRTIME { get; set; }         //轉檔時間
-        [Column("MODDATE")]                         
+        [Column("MODDATE")]
         public string? MODDATE { get; set; }        //異動日期
-        [Column("MODTIME")]                         
+        [Column("MODTIME")]
         public string? MODTIME { get; set; }        //異動時間
-        [Column("MODUSER")]                         
+        [Column("MODUSER")]
         public string? MODUSER { get; set; }        //異動人員
+        public decimal LastQtyRam { get; set; }
 
     }
 }

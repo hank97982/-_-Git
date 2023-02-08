@@ -93,7 +93,7 @@ namespace ESMP.STOCK.API.Utils
                 var obj = XDocument.Parse(value);
                 return true;
             }
-            catch (JsonReaderException)
+            catch (XmlException)
             {
                 return false;
             }

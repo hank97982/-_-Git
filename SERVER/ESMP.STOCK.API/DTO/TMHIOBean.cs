@@ -44,5 +44,6 @@ namespace ESMP.STOCK.API.DTO
         public string? MODDATE { get; set; }        //異動日期
         [Column("MODTIME")]
         public string? MODTIME { get; set; }        //異動時間
+        public decimal LastQtyRam { get; set; }
     }
 }

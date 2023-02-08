@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace ESMP.STOCK.API.DTO
 {
+    //股票是否有現股當沖資格
     //MSTMB 商品主檔
     public class MSTMBBean
     {

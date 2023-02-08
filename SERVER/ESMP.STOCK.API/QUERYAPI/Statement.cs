@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ESMP.STOCK.API.DTO;
 using ESMP.STOCK.API.DTO.Statement;
+using ESMP.STOCK.API.Utils;
 using SERVER.Utils;
 using System;
 using System.Collections.Generic;
@@ -22,78 +23,117 @@ namespace ESMP.STOCK.API.QUERYAPI
         }
         public object GetQuerys(StatementDTO root)
         {
-            IEnumerable<HCMIOBean> hCMIOBean = new List<HCMIOBean>();
-            IEnumerable<TMHIOBean> tMHIOBean = new List<TMHIOBean>();
-            IEnumerable<MSTMBBean> mSTMBBean = new List<MSTMBBean>();
-            try
-            {
+            #region
+            //IEnumerable<HCMIOBean> hCMIOBean = new List<HCMIOBean>();
+            //IEnumerable<TMHIOBean> tMHIOBean = new List<TMHIOBean>();
+            ////IEnumerable<MSTMBBean> mSTMBBean = new List<MSTMBBean>();
+            //try
+            //{
 
-                Dapper.SqlMapper.SetTypeMap(typeof(HCMIOBean), new ColumnAttributeTypeMapper<HCMIOBean>());
+            //    Dapper.SqlMapper.SetTypeMap(typeof(HCMIOBean), new ColumnAttributeTypeMapper<HCMIOBean>());
 
-                string sqlCommend = @"SELECT * FROM HCMIO
-                            WHERE BHNO = @BHNO
-                            AND CSEQ = @CSEQ
-                            AND TDATE >= @Sdate
-                            AND TDATE <= @Edate";
-                var parameters = new DynamicParameters();
-                parameters.Add("BHNO", root.Bhno, System.Data.DbType.String);
-                parameters.Add("CSEQ", root.Cseq, System.Data.DbType.String);
-                parameters.Add("Sdate", root.Sdate, System.Data.DbType.String);
-                parameters.Add("Edate", root.Edate, System.Data.DbType.String);
-                //第三題增加股票代號查詢 StockSymbol
-                if (root.StockSymbol != "")
-                {
-                    sqlCommend += " AND STOCK = @STOCK";
-                    parameters.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
-                }
-                using (var conn = new SqlConnection(_connstr))
-                    hCMIOBean = conn.Query<HCMIOBean>(sqlCommend, parameters);
-
-
-
-
-                string sqlCommend2;
-                Dapper.SqlMapper.SetTypeMap(typeof(TMHIOBean), new ColumnAttributeTypeMapper<TMHIOBean>());
-
-                sqlCommend2 = @"SELECT * FROM TMHIO
-                            WHERE BHNO = @BHNO
-                            AND CSEQ = @CSEQ
-                            AND TDATE >= @Sdate
-                            AND TDATE <= @Edate";
+            //    string sqlCommend = @"SELECT * FROM HCMIO
+            //                WHERE BHNO = @BHNO
+            //                AND CSEQ = @CSEQ
+            //                AND TDATE >= @Sdate
+            //                AND TDATE <= @Edate";
+            //    var parameters = new DynamicParameters();
+            //    parameters.Add("BHNO", root.Bhno, System.Data.DbType.String);
+            //    parameters.Add("CSEQ", root.Cseq, System.Data.DbType.String);
+            //    parameters.Add("Sdate", root.Sdate, System.Data.DbType.String);
+            //    parameters.Add("Edate", root.Edate, System.Data.DbType.String);
+            //    //第三題增加股票代號查詢 StockSymbol
+            //    if (root.StockSymbol != "")
+            //    {
+            //        sqlCommend += " AND STOCK = @STOCK";
+            //        parameters.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
+            //    }
+            //    using (var conn = new SqlConnection(_connstr))
+            //        hCMIOBean = conn.Query<HCMIOBean>(sqlCommend, parameters);
 
 
 
-                var parameters2 = new DynamicParameters();
-                parameters2.Add("BHNO", root.Bhno, System.Data.DbType.String);
-                parameters2.Add("CSEQ", root.Cseq, System.Data.DbType.String);
-                parameters2.Add("Sdate", root.Sdate, System.Data.DbType.String);
-                parameters2.Add("Edate", root.Edate, System.Data.DbType.String);
-                //第三題增加股票代號查詢 StockSymbol
-                if (root.StockSymbol != "")
-                {
-                    sqlCommend2 += " AND STOCK = @STOCK";
-                    parameters2.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
-                }
-                using (var conn = new SqlConnection(_connstr))
-                    tMHIOBean = conn.Query<TMHIOBean>(sqlCommend2, parameters2);
+
+            //    string sqlCommend2;
+            //    Dapper.SqlMapper.SetTypeMap(typeof(TMHIOBean), new ColumnAttributeTypeMapper<TMHIOBean>());
+
+            //    sqlCommend2 = @"SELECT * FROM TMHIO
+            //                WHERE BHNO = @BHNO
+            //                AND CSEQ = @CSEQ
+            //                AND TDATE >= @Sdate
+            //                AND TDATE <= @Edate";
 
 
 
-                string sqlCommend3 = @"SELECT * FROM MSTMB";
-                var parameters3 = new DynamicParameters();
-                using (var conn = new SqlConnection(_connstr))
-                    mSTMBBean = conn.Query<MSTMBBean>(sqlCommend3, parameters3);
+            //    var parameters2 = new DynamicParameters();
+            //    parameters2.Add("BHNO", root.Bhno, System.Data.DbType.String);
+            //    parameters2.Add("CSEQ", root.Cseq, System.Data.DbType.String);
+            //    parameters2.Add("Sdate", root.Sdate, System.Data.DbType.String);
+            //    parameters2.Add("Edate", root.Edate, System.Data.DbType.String);
+            //    //第三題增加股票代號查詢 StockSymbol
+            //    if (root.StockSymbol != "")
+            //    {
+            //        sqlCommend2 += " AND STOCK = @STOCK";
+            //        parameters2.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
+            //    }
+            //    using (var conn = new SqlConnection(_connstr))
+            //        tMHIOBean = conn.Query<TMHIOBean>(sqlCommend2, parameters2);
 
-            }
-            catch (Exception ex)
-            {
-                Utils.Util.Log(ex.ToString());
-                throw;
-            }
+
+
+            //    //string sqlCommend3 = @"SELECT * FROM MSTMB";
+            //    //var parameters3 = new DynamicParameters();
+            //    //using (var conn = new SqlConnection(_connstr))
+            //    //    mSTMBBean = conn.Query<MSTMBBean>(sqlCommend3, parameters3);
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    Utils.Util.Log(ex.ToString());
+            //    throw;
+            //}
             //Debug.WriteLine("HCMIO Count: "+ hCMIOBean.Count()+ "TMHIO Count: "+ tMHIOBean.Count());
-            return QueryIntoFormatString(root, hCMIOBean, tMHIOBean, mSTMBBean);
+            #endregion
+
+            //return QueryIntoFormatString(root, hCMIOBean, tMHIOBean);
+            return QueryIntoFormatString(root, QueryCondition(QueryHCMIO(),root), QueryCondition(QueryTMHIO(),root));
         }
-        public object QueryIntoFormatString(StatementDTO root, IEnumerable<HCMIOBean> hcmioBean, IEnumerable<TMHIOBean> tmhioBean, IEnumerable<MSTMBBean> mstmbBean)
+
+        /*
+         * 摘要:
+         *      取得該查尋容器項目，依照篩選條件取得結果
+         * 
+         * 參數:
+         *      QueryItems:
+         *          篩選條件的所有項目
+         *      
+         *      root:
+         *          篩選條件的依據
+         * 
+         * 類型參數: 
+         *      T:
+         *          被帶進去的DTO
+         * 傳回:
+         *      回傳查詢結果   
+         * 
+         * 例外狀況:
+         * 
+         */
+        private IEnumerable<T> QueryCondition<T>(IEnumerable<T> QueryItems, StatementDTO root)
+        {
+            IEnumerable<T> QueryFinal = QueryItems
+                .Where(x => x.GetType().GetProperty("BHNO").GetValue(x).ToString() == root.Bhno)
+                .Where(x => x.GetType().GetProperty("CSEQ").GetValue(x).ToString() == root.Cseq)
+                .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) >= Convert.ToInt32(root.Sdate))
+                .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) <= Convert.ToInt32(root.Edate));
+            if (root.StockSymbol != "")
+            {
+                QueryFinal.Where(x => x.GetType().GetProperty("STOCK").GetValue(x).ToString() == root.StockSymbol);
+            }
+            return QueryFinal;
+        }
+
+        private object QueryIntoFormatString(StatementDTO root, IEnumerable<HCMIOBean> hcmioBean, IEnumerable<TMHIOBean> tmhioBean)
         {
             try
             {
@@ -105,7 +145,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                     profile.Cseq = hCMIOBeanItem.CSEQ;
                     profile.Name = "";
                     profile.Stock = hCMIOBeanItem.STOCK;
-                    profile.Stocknm = (from a in mstmbBean where a.STOCK == hCMIOBeanItem.STOCK select a.CNAME).ToArray()[0];
+                    profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
                     profile.Mdate = hCMIOBeanItem.Tdate;
                     profile.Dseq = hCMIOBeanItem.DSEQ;
                     profile.Dno = hCMIOBeanItem.DNO;
@@ -132,7 +172,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                         profile.Cseq = tMHIOBeanitem.CSEQ;
                         profile.Name = "";
                         profile.Stock = tMHIOBeanitem.STOCK;
-                        profile.Stocknm = (from a in mstmbBean where a.STOCK == tMHIOBeanitem.STOCK select a.CNAME).ToArray()[0];
+                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(tMHIOBeanitem.STOCK);
                         profile.Mdate = tMHIOBeanitem.Tdate;
                         profile.Dseq = tMHIOBeanitem.DSEQ;
                         profile.Dno = tMHIOBeanitem.JRNUM;

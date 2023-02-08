@@ -2,6 +2,7 @@
 using ESMP.STOCK.API.Bean;
 using ESMP.STOCK.API.DTO;
 using ESMP.STOCK.API.DTO.RealizedProfitAndLoss;
+using ESMP.STOCK.API.Utils;
 using SERVER.Utils;
 
 using System.Data.SqlClient;
@@ -13,90 +14,133 @@ namespace ESMP.STOCK.API.QUERYAPI
 
     public class RealizedProfitAndLoss : BaseAPI
     {
-        private string _connstr = "";
+        //private string _connstr = "";
         public RealizedProfitAndLoss(string connstr) : base(connstr)
         {
-            _connstr = connstr;
+            //_connstr = connstr;
         }
         public object GetQuerys(RealizedProfitAndLossDTO root)
         {
-            IEnumerable<HCNRHBean> hCNRHBean = new List<HCNRHBean>();
-            IEnumerable<HCNTDBean> hCNTDBean = new List<HCNTDBean>();
-            IEnumerable<MSTMBBean> mSTMBBean = new List<MSTMBBean>();
+            #region
+            //IEnumerable<HCNRHBean> hCNRHBean = new List<HCNRHBean>();
+            //IEnumerable<HCNTDBean> hCNTDBean = new List<HCNTDBean>();
+            //IEnumerable<MSTMBBean> mSTMBBean = new List<MSTMBBean>();
             try
             {
+                //Dapper.SqlMapper.SetTypeMap(typeof(HCNRHBean), new ColumnAttributeTypeMapper<HCNRHBean>());
 
-                Dapper.SqlMapper.SetTypeMap(typeof(HCNRHBean), new ColumnAttributeTypeMapper<HCNRHBean>());
+                //string sqlCommend = @"SELECT * FROM HCNRH
+                //            WHERE BHNO = @BHNO
+                //            AND CSEQ = @CSEQ
+                //            AND TDATE >= @Sdate
+                //            AND TDATE <= @Edate";
+                //var parameters = new DynamicParameters();
+                //parameters.Add("BHNO", root.Bhno, System.Data.DbType.String);
+                //parameters.Add("CSEQ", root.Cseq, System.Data.DbType.String);
+                //parameters.Add("Sdate", root.Sdate, System.Data.DbType.String);
+                //parameters.Add("Edate", root.Edate, System.Data.DbType.String);
+                ////第三題增加股票代號查詢 StockSymbol
+                //if (root.StockSymbol != "")
+                //{
+                //    sqlCommend += " AND STOCK = @STOCK";
+                //    parameters.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
+                //}
 
-                string sqlCommend = @"SELECT * FROM HCNRH
-                            WHERE BHNO = @BHNO
-                            AND CSEQ = @CSEQ
-                            AND TDATE >= @Sdate
-                            AND TDATE <= @Edate";
-                var parameters = new DynamicParameters();
-                parameters.Add("BHNO", root.Bhno, System.Data.DbType.String);
-                parameters.Add("CSEQ", root.Cseq, System.Data.DbType.String);
-                parameters.Add("Sdate", root.Sdate, System.Data.DbType.String);
-                parameters.Add("Edate", root.Edate, System.Data.DbType.String);
-                //第三題增加股票代號查詢 StockSymbol
-                if (root.StockSymbol != "")
-                {
-                    sqlCommend += " AND STOCK = @STOCK";
-                    parameters.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
-                }
+                //using (var conn = new SqlConnection(_connstr))
+                //    hCNRHBean = conn.Query<HCNRHBean>(sqlCommend, parameters);
 
-                using (var conn = new SqlConnection(_connstr))
-                    hCNRHBean = conn.Query<HCNRHBean>(sqlCommend, parameters);
+                //Dapper.SqlMapper.SetTypeMap(typeof(HCNTDBean), new ColumnAttributeTypeMapper<HCNTDBean>());
 
-                Dapper.SqlMapper.SetTypeMap(typeof(HCNTDBean), new ColumnAttributeTypeMapper<HCNTDBean>());
-
-                string sqlCommend2 = @"SELECT * FROM HCNTD
-                            WHERE BHNO = @BHNO
-                            AND CSEQ = @CSEQ
-                            AND TDATE >= @Sdate
-                            AND TDATE <= @Edate";
-                var parameters2 = new DynamicParameters();
-                parameters2.Add("BHNO", root.Bhno, System.Data.DbType.String);
-                parameters2.Add("CSEQ", root.Cseq, System.Data.DbType.String);
-                parameters2.Add("Sdate", root.Sdate, System.Data.DbType.String);
-                parameters2.Add("Edate", root.Edate, System.Data.DbType.String);
-                //第三題增加股票代號查詢 StockSymbol
-                if (root.StockSymbol != "")
-                {
-                    sqlCommend2 += " AND STOCK = @STOCK";
-                    parameters2.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
-                }
-
-
-                using (var conn = new SqlConnection(_connstr))
-                    hCNTDBean = conn.Query<HCNTDBean>(sqlCommend2, parameters2);
-
-                Dapper.SqlMapper.SetTypeMap(typeof(HCNTDBean), new ColumnAttributeTypeMapper<HCNTDBean>());
-
-                string sqlCommend3 = @"SELECT * FROM MSTMB";
-                var parameters3 = new DynamicParameters();
+                //string sqlCommend2 = @"SELECT * FROM HCNTD
+                //            WHERE BHNO = @BHNO
+                //            AND CSEQ = @CSEQ
+                //            AND TDATE >= @Sdate
+                //            AND TDATE <= @Edate";
+                //var parameters2 = new DynamicParameters();
+                //parameters2.Add("BHNO", root.Bhno, System.Data.DbType.String);
+                //parameters2.Add("CSEQ", root.Cseq, System.Data.DbType.String);
+                //parameters2.Add("Sdate", root.Sdate, System.Data.DbType.String);
+                //parameters2.Add("Edate", root.Edate, System.Data.DbType.String);
+                ////第三題增加股票代號查詢 StockSymbol
+                //if (root.StockSymbol != "")
+                //{
+                //    sqlCommend2 += " AND STOCK = @STOCK";
+                //    parameters2.Add("STOCK", root.StockSymbol, System.Data.DbType.String);
+                //}
 
 
-                using (var conn = new SqlConnection(_connstr))
-                    mSTMBBean = conn.Query<MSTMBBean>(sqlCommend3, parameters3);
+                //using (var conn = new SqlConnection(_connstr))
+                //    hCNTDBean = conn.Query<HCNTDBean>(sqlCommend2, parameters2);
+
+                //Dapper.SqlMapper.SetTypeMap(typeof(HCNTDBean), new ColumnAttributeTypeMapper<HCNTDBean>());
+
+                //string sqlCommend3 = @"SELECT * FROM MSTMB";
+                //var parameters3 = new DynamicParameters();
+
+                //using (var conn = new SqlConnection(_connstr))
+                //    mSTMBBean = conn.Query<MSTMBBean>(sqlCommend3, parameters3);
+
             }
             catch (Exception ex)
             {
                 Utils.Util.Log(ex.ToString());
                 throw;
             }
+            #endregion
 
-            return QueryIntoFormatString(hCNRHBean, hCNTDBean, mSTMBBean);
+            //return QueryIntoFormatString(hCNRHBean, hCNTDBean);
+            return QueryIntoFormatString(QueryCondition(QueryHCNRH(), root), QueryCondition(QueryHCNTD(),root),QueryCondition(QueryTCNUD(),root),QueryCondition(QueryTMHIO(),root), QueryCondition(QueryTCSIO(), root));
         }
-        public object QueryIntoFormatString(IEnumerable<HCNRHBean> hcnrhBean, IEnumerable<HCNTDBean> hcntdBean, IEnumerable<MSTMBBean> mstmbBean)
+        /*
+         * 摘要:
+         *      取得該查尋容器項目，依照篩選條件取得結果
+         * 
+         * 參數:
+         *      QueryItems:
+         *          篩選條件的所有項目
+         *      
+         *      root:
+         *          篩選條件的依據
+         * 
+         * 類型參數: 
+         *      T:
+         *          被帶進去的DTO
+         * 傳回:
+         *      回傳查詢結果   
+         * 
+         * 例外狀況:
+         * 
+         */
+        private IEnumerable<T> QueryCondition<T>(IEnumerable<T> QueryItems, RealizedProfitAndLossDTO root)
+        {
+            IEnumerable<T> QueryFinal = QueryItems
+                .Where(x => x.GetType().GetProperty("BHNO").GetValue(x).ToString() == root.Bhno)
+                .Where(x => x.GetType().GetProperty("CSEQ").GetValue(x).ToString() == root.Cseq)
+                .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) >= Convert.ToInt32(root.Sdate))
+                .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) <= Convert.ToInt32(root.Edate));
+            if (root.StockSymbol != "")
+            {
+                QueryFinal.Where(x => x.GetType().GetProperty("STOCK").GetValue(x).ToString() == root.StockSymbol);
+            }
+            return QueryFinal;
+        }
+        private object QueryIntoFormatString(IEnumerable<HCNRHBean> hcnrhBean, IEnumerable<HCNTDBean> hcntdBean, IEnumerable<TCNUDBean> tcnudBean, IEnumerable<TMHIOBean> tmhioBean, IEnumerable<TCSIOBean> tcsioBean)
         {
             try
             {
+                List<HCNRHBean> hcnRam = hcnrhBean.ToList();
+
+                //沖銷賣出
+                WriteOff wfTM = new WriteOff();
+                (List<TCNUDBean> TC, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tcnudBean.ToList(), tmhioBean.ToList(), tcsioBean.ToList());
+                hcnRam = HC;
+
+
                 Accsum accsum = new Accsum();
                 List<Sum> sums = new List<Sum>();
 
 
-                var hcnrhDetailOutLQ = from db_hcnrh in hcnrhBean
+                var hcnrhDetailOutLQ = from db_hcnrh in hcnRam
                                        group db_hcnrh by new { db_hcnrh.TDATE, db_hcnrh.SDSEQ, db_hcnrh.SDNO, db_hcnrh.WTYPE, db_hcnrh.STOCK, db_hcnrh.BHNO, db_hcnrh.CSEQ } into g
                                        select new
                                        {
@@ -190,7 +234,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                     sum.Ttypename = "現股";
                     sum.Bstype = "S";
                     sum.Stock = item.STOCK;
-                    sum.Stocknm = (from a in mstmbBean where a.STOCK == item.STOCK select a.CNAME).ToArray()[0];
+                    sum.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(item.STOCK);
                     sum.Cqty = detailOut.Cqty;
                     sum.Mprice = detailOut.Mprice;
                     sum.Fee = detailOut.Fee;
@@ -295,7 +339,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                     sum.Ttypename = "現股";
                     sum.Bstype = "S";
                     sum.Stock = item.STOCK;
-                    sum.Stocknm = (from a in mstmbBean where a.STOCK == item.STOCK select a.CNAME).ToArray()[0];
+                    sum.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(item.STOCK);
                     sum.Cqty = detailOut.Cqty;
                     sum.Mprice = detailOut.Mprice;
                     sum.Fee = detailOut.Fee;

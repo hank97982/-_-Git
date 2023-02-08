@@ -1,12 +1,15 @@
 ﻿using Dapper;
 using ESMP.STOCK.API.Bean;
+using ESMP.STOCK.API.DTO;
 using ESMP.STOCK.API.DTO.RealizedProfitAndLoss;
 using ESMP.STOCK.API.DTO.Statement;
 using ESMP.STOCK.API.DTO.UnrealizedGainsAndlLosses;
 using ESMP.STOCK.API.Utils;
 using Newtonsoft.Json.Linq;
+using SERVER.Utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -20,12 +23,15 @@ namespace ESMP.STOCK.API.QUERYAPI
 {
     public class BaseAPI
     {
-        protected static string _connstr ="";
-        public BaseAPI(string connstr) {
+
+
+        private static string _connstr = "";
+        public BaseAPI(string connstr)
+        {
             _connstr = connstr;
             TMHIO_TDATE_UPDATE();
         }
-        public void TMHIO_TDATE_UPDATE()
+        private void TMHIO_TDATE_UPDATE()
         {
             using (var connection = new SqlConnection(_connstr))
             {
@@ -99,6 +105,55 @@ namespace ESMP.STOCK.API.QUERYAPI
                 return Util.Serialize(accsum);
             }
             return null;
+        }
+
+        protected IEnumerable<TCNUDBean> QueryTCNUD()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(TCNUDBean), new ColumnAttributeTypeMapper<TCNUDBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<TCNUDBean>(@"SELECT * FROM TCNUD");
+        }
+
+        protected IEnumerable<TMHIOBean> QueryTMHIO()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(TMHIOBean), new ColumnAttributeTypeMapper<TMHIOBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<TMHIOBean>(@"SELECT * FROM TMHIO");
+        }
+
+        protected IEnumerable<TCSIOBean> QueryTCSIO()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(TCSIOBean), new ColumnAttributeTypeMapper<TCSIOBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<TCSIOBean>(@"SELECT * FROM TCSIO");
+        }
+
+        protected IEnumerable<HCMIOBean> QueryHCMIO()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(HCMIOBean), new ColumnAttributeTypeMapper<HCMIOBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<HCMIOBean>(@"SELECT * FROM HCMIO");
+        }
+
+        protected IEnumerable<HCNRHBean> QueryHCNRH()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(HCNRHBean), new ColumnAttributeTypeMapper<HCNRHBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<HCNRHBean>(@"SELECT * FROM HCNRH");
+        }
+
+        protected IEnumerable<HCNTDBean> QueryHCNTD()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(HCNTDBean), new ColumnAttributeTypeMapper<HCNTDBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<HCNTDBean>(@"SELECT * FROM HCNTD");
+        }
+
+        protected IEnumerable<MCUMSBean> QueryMCUMS()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(MCUMSBean), new ColumnAttributeTypeMapper<MCUMSBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<MCUMSBean>(@"SELECT * FROM MCUMS");
         }
     }
 }
