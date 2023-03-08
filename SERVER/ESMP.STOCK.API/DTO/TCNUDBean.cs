@@ -46,5 +46,6 @@ namespace ESMP.STOCK.API.Bean
         public string? IOFLAG { get; set; }
         public decimal AMT { get; set; }
         public decimal LastQtyRam { get; set; }
+        public decimal TAXRam { get; set; }
     }
 }

@@ -83,13 +83,16 @@ namespace ESMP.STOCK.API.DTO.UnrealizedGainsAndlLosses
         public string? Ttype { get; set; }               //交易別 0:現股 
         [XmlElement("ttypename")]
         [JsonPropertyName("ttypename")]
-        public string? Ttypename { get; set; }           //交易類別名稱
+        public string? Ttypename { get; set; }           //交易類別名稱(現買/現賣)
         [XmlElement("bstype")]
         [JsonPropertyName("bstype")]
         public string? Bstype { get; set; }              //買賣別(B/S)
         [XmlElement("bqty")]
         [JsonPropertyName("bqty")]
         public decimal Bqty { get; set; }               //昨日庫存股數
+        [XmlElement("real_qty")]
+        [JsonPropertyName("real_qty")]
+        public decimal RealQTY { get; set; }            //即時庫存股數
         [XmlElement("cost")]
         [JsonPropertyName("cost")]
         public decimal Cost { get; set; }               //成本金額

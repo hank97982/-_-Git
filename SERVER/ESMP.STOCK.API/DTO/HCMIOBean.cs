@@ -89,6 +89,9 @@ namespace ESMP.STOCK.API.DTO
         [Column("MODUSER")]
         public string? MODUSER { get; set; }        //異動人員
         public decimal LastQtyRam { get; set; }
+        public decimal COSTRam { get; set; }
+        public string tTypeName { get; set; }
+
 
     }
 }

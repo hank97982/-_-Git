@@ -54,5 +54,7 @@ namespace ESMP.STOCK.API.DTO
         public string? MODTIME { get; set; }
         [Column("MODUSER")]
         public string? MODUSER { get; set; }
+
+
     }
 }

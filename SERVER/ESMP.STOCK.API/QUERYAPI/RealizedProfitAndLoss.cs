@@ -129,12 +129,13 @@ namespace ESMP.STOCK.API.QUERYAPI
             try
             {
                 List<HCNRHBean> hcnRam = hcnrhBean.ToList();
+                List<HCNTDBean> hcntdRam = hcntdBean.ToList();
 
                 //沖銷賣出
                 WriteOff wfTM = new WriteOff();
-                (List<TCNUDBean> TC, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tcnudBean.ToList(), tmhioBean.ToList(), tcsioBean.ToList());
-                hcnRam = HC;
-
+                (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tcnudBean.ToList(), tmhioBean.ToList(), tcsioBean.ToList());
+                hcnRam.AddRange(HC);
+                hcntdRam.AddRange(HCNT);
 
                 Accsum accsum = new Accsum();
                 List<Sum> sums = new List<Sum>();

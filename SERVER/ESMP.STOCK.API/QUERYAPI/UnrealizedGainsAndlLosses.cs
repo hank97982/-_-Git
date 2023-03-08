@@ -100,7 +100,7 @@ namespace ESMP.STOCK.API.QUERYAPI
             #endregion
 
             //return QueryIntoFormatString(tCNUDBean, tMHIOBean, tCSIOBean);
-            return QueryIntoFormatString(QueryCondition(QueryTCNUD(), root), QueryCondition(QueryTMHIO(), root), QueryCondition(QueryTCSIO(), root), QueryCondition(QueryMCUMS(), root));
+            return QueryIntoFormatString(QueryCondition(QueryTCNUD(), root), QueryCondition(QueryTMHIO(), root), QueryCondition(QueryTCSIO(), root));
         }
         /*
          * 摘要:
@@ -135,7 +135,7 @@ namespace ESMP.STOCK.API.QUERYAPI
         }
 
 
-        public object QueryIntoFormatString(IEnumerable<TCNUDBean> tCNUDBean, IEnumerable<TMHIOBean> tMHIOBean, IEnumerable<TCSIOBean> tCSIOBean, IEnumerable<MCUMSBean> mCUMSBeans)
+        public object QueryIntoFormatString(IEnumerable<TCNUDBean> tCNUDBean, IEnumerable<TMHIOBean> tMHIOBean, IEnumerable<TCSIOBean> tCSIOBean)
         {
 
             try
@@ -172,7 +172,7 @@ namespace ESMP.STOCK.API.QUERYAPI
 
 
                 WriteOff wfTM = new WriteOff();
-                (List<TCNUDBean> TC, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tCNUDBean.ToList(), tMHIOBean.ToList(), tCSIOBean.ToList());
+                (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tCNUDBean.ToList(), tMHIOBean.ToList(), tCSIOBean.ToList());
                 tMBRam = TC;
 
 
@@ -209,8 +209,8 @@ namespace ESMP.STOCK.API.QUERYAPI
 
 
                 var sumsLQ = (from d in tMBRam
-                              group d by new { d.STOCK } into g
-                              select new Sum { Stock = g.Key.STOCK });
+                              group d by new { d.STOCK, d.BQTY, type = d.BQTY < 0 ? "S" : "B" } into g
+                              select new { Stock = g.Key.STOCK, type = g.Key.type });
 
                 List<Sum> sums = new List<Sum>();
                 List<Detail> details;
@@ -227,13 +227,22 @@ namespace ESMP.STOCK.API.QUERYAPI
                                     select t;
                     foreach (var item1 in detailsLQ)
                     {
-
+                        decimal tempMarketValue = 0m;
                         //這裡是第三層
                         Detail detail = new Detail();
                         detail.Tdate = item1.TDATE;
                         detail.Ttype = "0";
-                        detail.Ttypename = "現買";
-                        detail.Bstype = "B";
+                        if (item1.BQTY < 0)
+                        {
+                            detail.Ttypename = "現賣";
+                            detail.Bstype = "S";
+                        }
+                        else
+                        {
+                            detail.Ttypename = "現買";
+                            detail.Bstype = "B";
+                        }
+
                         detail.Dseq = item1.DSEQ;
                         detail.Dno = item1.DNO;
                         detail.Bqty = item1.BQTY;
@@ -241,13 +250,27 @@ namespace ESMP.STOCK.API.QUERYAPI
                         detail.Mamt = item1.BQTY * item1.PRICE;
                         detail.Lastprice = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCPRICE(sum.Stock);
                         detail.Fee = item1.FEE < 20 ? 20m : item1.FEE;       //［手續費］計算如小於20時，以20計算
-                        detail.Tax = 0;
+
                         detail.Cost = item1.COST;
                         detail.EstimateAmt = Math.Floor(detail.Lastprice * detail.Bqty);
                         detail.EstimateFee = Math.Floor(detail.EstimateAmt * 0.001425m);
-                        detail.EstimateTax = Math.Floor(detail.EstimateAmt * 0.003m);
-                        detail.Marketvalue = detail.EstimateAmt - detail.EstimateFee - detail.EstimateTax;
-                        detail.Profit = detail.Marketvalue - item1.COST;
+
+                        if (item1.BQTY < 0)
+                        {
+                            detail.Tax = item1.TAXRam;
+                            detail.EstimateTax = 0;
+                            tempMarketValue = detail.EstimateAmt + detail.EstimateFee;
+                            detail.Marketvalue = -1 * tempMarketValue;//前端顯示邏輯現賣的市值為負的
+                            detail.Profit = item1.COST - tempMarketValue;
+                        }
+                        else
+                        {
+                            detail.Tax = 0;
+                            detail.EstimateTax = Math.Floor(detail.EstimateAmt * 0.003m);
+                            detail.Marketvalue = detail.EstimateAmt - detail.EstimateFee - detail.EstimateTax;
+                            detail.Profit = detail.Marketvalue - item1.COST;
+                        }
+
                         detail.PlRatio = (item1.COST == 0 ? 0 : detail.Profit / item1.COST).ToString();//資料TCSIO的cost必定為零，所以報酬率會出現除以零的錯誤，其視為零報酬率
                         detail.Wtype = item1.WTYPE;
                         detail.Ioflag = item1.IOFLAG;//這裡 匯撥集保代碼/匯撥集保名稱 ioflag/ioname 預設先給死資料"0"
@@ -256,9 +279,22 @@ namespace ESMP.STOCK.API.QUERYAPI
                     }
                     sum.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(sum.Stock);
                     sum.Ttype = "0";
+                    sum.Bstype = item.type;
+                    //if (item.type == "B")
+                    //{
+                    //    sum.Ttypename = "現買";
+                    //    //sum.Bqty = details.Sum(x => x.Bqty);
+                    //    sum.Bqty = SingletonQueryProviderMCSRH.queryProvider.MCSRHQueryCNQBALE(tMBRam.FirstOrDefault().BHNO, tMBRam.FirstOrDefault().CSEQ, sum.Stock);
+                    //}
+                    //else
+                    //{
+                    //    sum.Ttypename = "現賣";
+                    //    sum.Bqty = 0m;
+                    //}
                     sum.Ttypename = "現買";
-                    sum.Bstype = "B";
                     sum.Bqty = details.Sum(x => x.Bqty);
+
+                    sum.RealQTY = details.Sum(x => x.Bqty);
                     sum.Cost = details.Sum(x => x.Cost);
                     sum.Avgprice = sum.Cost != 0 ? sum.Bqty / sum.Cost : 0;//因為TCSIO的來源資料PRICE固定為零，所以先給死資料"0"
                     sum.Lastprice = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCPRICE(sum.Stock);

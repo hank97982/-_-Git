@@ -27,6 +27,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "057047"; //lastQTY =15.0000
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
@@ -35,7 +37,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -49,6 +51,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0070"; //lastQTY =75.0000
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
@@ -57,7 +61,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -71,6 +75,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0081"; //lastQTY =936.0000
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
@@ -79,7 +85,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -93,6 +99,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         {
             List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "057047"; //lastQTY =15.0000
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
@@ -101,7 +109,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -115,6 +123,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0070"; //lastQTY =75.0000
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
@@ -123,7 +133,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -137,6 +147,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0081"; //lastQTY =936.0000
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
@@ -145,7 +157,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -162,6 +174,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         {
             List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "057047"; //lastQTY =15.0000
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
@@ -170,7 +184,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -184,6 +198,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0070"; //lastQTY =75.0000
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
@@ -192,7 +208,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -206,6 +222,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0081"; //lastQTY =936.0000
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
@@ -214,7 +232,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -230,6 +248,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         {
             List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "057047"; //lastQTY =15.0000
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
@@ -238,7 +258,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -252,7 +272,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
-
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0070"; //lastQTY =75.0000
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
@@ -261,7 +282,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -275,6 +296,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0081"; //lastQTY =936.0000
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
@@ -283,7 +306,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -299,6 +322,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         {
             List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "057047"; //lastQTY =15.0000
             tCNUD.BQTY = 200;
             tCNUD.COST = 20;
@@ -308,7 +333,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -322,6 +347,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0070"; //lastQTY =75.0000
             tCNUD.BQTY = 100;
             tCNUD.COST = 10;
@@ -331,7 +358,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -345,6 +372,8 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCNUDBean>
              tCNUDs = new List<TCNUDBean>();
             TCNUDBean tCNUD = new TCNUDBean();
+            tCNUD.BHNO = "592S";
+            tCNUD.CSEQ = "0000019";
             tCNUD.STOCK = "0081"; //lastQTY =936.0000
             tCNUD.BQTY = 10;
             tCNUD.COST = 50;
@@ -354,7 +383,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, mCUMS);
+            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -395,17 +424,17 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         public void TMHIOWriteOffTest()
         {
             List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20160504", BHNO = "5920", CSEQ = "0126687", DSEQ = "k8563", STOCK = "2330", PRICE = 147, QTY = 1000, BQTY = 1000, FEE = 78, COST = 147.078m });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20160509", BHNO = "5920", CSEQ = "0126687", DSEQ = "k0254", STOCK = "2330", PRICE = 148.5m, QTY = 1000, BQTY = 1000, FEE = 79, COST = 148.579m });
-            tCNUDs.Add(new TCNUDBean() { TDATE = "20160509", BHNO = "5920", CSEQ = "0126687", DSEQ = "k0266", STOCK = "2330", PRICE = 148.5m, QTY = 1000, BQTY = 1000, FEE = 79, COST = 148.579m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20160504", BHNO = "592z", CSEQ = "0126687", DSEQ = "k8563", STOCK = "2330", PRICE = 147, QTY = 1000, BQTY = 1000, FEE = 78, COST = 147.078m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20160509", BHNO = "592z", CSEQ = "0126687", DSEQ = "k0254", STOCK = "2330", PRICE = 148.5m, QTY = 1000, BQTY = 1000, FEE = 79, COST = 148.579m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20160509", BHNO = "592z", CSEQ = "0126687", DSEQ = "k0266", STOCK = "2330", PRICE = 148.5m, QTY = 1000, BQTY = 1000, FEE = 79, COST = 148.579m });
             List<TMHIOBean> tMHIOs = new List<TMHIOBean>();
-            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592a", DSEQ = "j0614", JRNUM = "01413598", MTYPE = "T", CSEQ = "0424032", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "2330", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114543715" });
-            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592a", DSEQ = "j0614", JRNUM = "01413599", MTYPE = "T", CSEQ = "0424032", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "2330", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413598", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "2330", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114543715" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413599", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "2330", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
 
-            (List<TCNUDBean> TC, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
             List<TCNUDBean> checkTC = TC;
             List<HCNRHBean> checkHC = HC;
             Assert.AreEqual(1, checkTC.Count);
@@ -429,14 +458,13 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
             List<TCNUDBean> checkTC = TC;
             List<HCNRHBean> checkHC = HC;
             Assert.AreEqual(4, checkHC.Count);
             Assert.AreEqual(862, checkHC.Last().CQTY);
             Assert.AreEqual(80, checkHC.Last().BFEE);
             Assert.AreEqual(65.5m, checkHC.Last().BPRICE);
-
 
 
             Assert.AreEqual(4, checkTC.Count);
@@ -462,7 +490,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
             List<TCNUDBean> checkTC = TC;
             List<HCNRHBean> checkHC = HC;
             Assert.AreEqual(4, checkHC.Count);
@@ -479,10 +507,179 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         }
 
         [TestMethod()]
+        //［現股當沖資格：X］今日賣出10張、今日買進10張－檢核 (Ram)HCNTD資料是否如預期
         public void TMHIOWriteOffTest3()
         {
+            WriteOff cover = new CoverStockPermissions("X");
+            List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
+
+
+            List<TMHIOBean> tMHIOs = new List<TMHIOBean>();
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413598", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114543715" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413599", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413600", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413601", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413602", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413603", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413604", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413605", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413606", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01413607", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNUDBean> checkTC = TC;
+            List<HCNTDBean> checkHCNT = HCNT;
+            Assert.AreEqual(1, checkTC.Count);
+            Assert.AreEqual(5, checkHCNT.Count);
+
+        }
+        //［現股當沖資格：X］今日賣出10張、今日買進12張（需部分沖銷）－檢核(Ram)HCNTD資料是否如預期
+        [TestMethod()]
+        public void TMHIOWriteOffTest4()
+        {
+            WriteOff cover = new CoverStockPermissions("X");
+            List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
+
+
+            List<TMHIOBean> tMHIOs = new List<TMHIOBean>();
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114543715" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "02", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "03", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "04", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "05", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "06", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "07", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "08", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "09", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "10", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "11", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 500, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "12", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "13", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "14", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "15", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "16", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "17", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "18", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "19", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "20", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "21", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "22", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNUDBean> checkTC = TC;
+            List<HCNTDBean> checkHCNT = HCNT;
+            Assert.AreEqual(3, checkTC.Count);
+            Assert.AreEqual(20, checkHCNT.Count);
+
 
         }
 
+        //［現股當沖資格：X］有昨日現股餘額、今日賣出10張、今日買進7張（需含部分沖銷）－檢核(Ram)TCNUD、(Ram)HCNRH 與 (Ram)HCNTD資料是否如預期
+
+        [TestMethod()]
+        public void TMHIOWriteOffTest5()
+        {
+            WriteOff cover = new CoverStockPermissions("X");
+            List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
+
+
+            List<TMHIOBean> tMHIOs = new List<TMHIOBean>();
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114543715" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "02", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "03", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "04", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "05", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "06", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "07", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "08", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "09", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "10", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "11", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 500, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "12", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "13", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "14", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "15", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "16", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "17", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            
+            List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNUDBean> checkTC = TC;
+            List<HCNTDBean> checkHCNT = HCNT;
+            //沖銷完後剩下4筆賣單
+            Assert.AreEqual(4, checkTC.Count);
+            //歷史現股當沖對應檔總共有13筆
+            Assert.AreEqual(13, checkHCNT.Count);
+        }
+
+        //［現股當沖資格：Y］有昨日現股餘額、今日賣出10張（其中3張買進早）、今日買進7張（需含部分沖銷）－檢核(Ram)TCNUD、(Ram)HCNRH 與 (Ram)HCNTD資料是否如預期
+        [TestMethod()]
+        public void TMHIOWriteOffTest6()
+        {
+            //(Ram)TCNUD－昨日餘額扣掉3張
+            WriteOff cover = new CoverStockPermissions("Y");
+            List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
+            tCNUDs.Add(new TCNUDBean() { TDATE = "20140704", BHNO = "592z", CSEQ = "0105097", STOCK = "3630", PRICE = 50.8m, QTY = 1000, BQTY = 1000, FEE = 72, COST = 50872m });
+
+
+            List<TMHIOBean> tMHIOs = new List<TMHIOBean>();
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "04", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114543715" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "05", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "06", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "07", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "08", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "09", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "10", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "11", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "12", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "13", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "S", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            //其中三張買進早
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "01", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 500, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "02", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "03", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "14", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "15", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "16", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+            tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "17", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
+
+            List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNUDBean> checkTC = TC;
+            List<HCNTDBean> checkHCNT = HCNT;
+            //沖銷完後剩下4筆賣單
+            Assert.AreEqual(9, checkTC.Count);
+            //歷史現股當沖對應檔總共有13筆
+            Assert.AreEqual(5, checkHCNT.Count);
+        }
+
+
+    }
+    //CoverStockPermissions去覆蓋WriteOff裡面StockPermissions的權限資料
+    public class CoverStockPermissions : WriteOff
+    {
+        private string type = "";
+        public CoverStockPermissions(string type)
+        {
+            this.type = type;
+        }
+        public override string StockPermissions(string costomer, string stock)
+        {
+            return type;
+        }
     }
 }

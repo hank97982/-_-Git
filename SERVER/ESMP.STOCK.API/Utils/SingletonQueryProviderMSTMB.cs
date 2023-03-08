@@ -52,5 +52,10 @@ namespace ESMP.STOCK.API.Utils
         {
             return STOCK == null ? 0 : _query[STOCK].CPRICE;
         }
+
+        public string MSTMBQueryCNTDTYPE(string STOCK)
+        {
+            return STOCK == null ? "" : _query[STOCK].CNTDTYPE;
+        }
     }
 }
