@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ESMP.STOCK.API.QUERYAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ESMP.STOCK.API.Utils;
 using ESMP.STOCK.API.Bean;
 using ESMP.STOCK.API.DTO;
@@ -85,7 +79,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -109,7 +103,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -133,7 +127,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -157,7 +151,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -184,7 +178,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -208,7 +202,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -232,7 +226,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -258,7 +252,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -282,7 +276,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -306,7 +300,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -333,7 +327,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -358,7 +352,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -383,7 +377,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
             Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
 
@@ -665,6 +659,19 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             Assert.AreEqual(9, checkTC.Count);
             //歷史現股當沖對應檔總共有13筆
             Assert.AreEqual(5, checkHCNT.Count);
+        }
+        [TestMethod()]
+        public void testQuote()
+        {
+            BaseAPI baseAPI = new BaseAPI("Server = .;Database = ESMP;Trusted_Connection=true");
+            List<string> listStr = new List<string>();
+            listStr.Add("0050");
+            listStr.Add("0056");
+            var list =baseAPI.QuoteAsync(listStr).Result;
+            
+            Assert.AreEqual("元大台灣50", list.First().ShortName);
+            Assert.AreEqual("元大高股息", list.Last().ShortName);
+
         }
 
 

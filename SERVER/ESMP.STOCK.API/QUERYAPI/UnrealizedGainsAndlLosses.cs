@@ -212,6 +212,11 @@ namespace ESMP.STOCK.API.QUERYAPI
                               group d by new { d.STOCK, d.BQTY, type = d.BQTY < 0 ? "S" : "B" } into g
                               select new { Stock = g.Key.STOCK, type = g.Key.type });
 
+                List<Symbol> s = QuoteAsync(sumsLQ.Select(x => x.Stock).ToList()).Result;
+                Dictionary<string, Symbol> keyValuePairs = new Dictionary<string, Symbol>();
+                s.ForEach(x => keyValuePairs.Add(x.Id, x));
+
+
                 List<Sum> sums = new List<Sum>();
                 List<Detail> details;
                 foreach (var item in sumsLQ)
@@ -225,6 +230,8 @@ namespace ESMP.STOCK.API.QUERYAPI
                     var detailsLQ = from t in tMBRam
                                     where t.STOCK == sum.Stock
                                     select t;
+                    decimal Lastprice = Convert.ToDecimal(keyValuePairs[sum.Stock].DealPrice);
+
                     foreach (var item1 in detailsLQ)
                     {
                         decimal tempMarketValue = 0m;
@@ -248,7 +255,8 @@ namespace ESMP.STOCK.API.QUERYAPI
                         detail.Bqty = item1.BQTY;
                         detail.Mprice = item1.PRICE;
                         detail.Mamt = item1.BQTY * item1.PRICE;
-                        detail.Lastprice = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCPRICE(sum.Stock);
+                        //detail.Lastprice = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCPRICE(sum.Stock);
+                        detail.Lastprice = Lastprice;
                         detail.Fee = item1.FEE < 20 ? 20m : item1.FEE;       //［手續費］計算如小於20時，以20計算
 
                         detail.Cost = item1.COST;
@@ -297,7 +305,8 @@ namespace ESMP.STOCK.API.QUERYAPI
                     sum.RealQTY = details.Sum(x => x.Bqty);
                     sum.Cost = details.Sum(x => x.Cost);
                     sum.Avgprice = sum.Cost != 0 ? sum.Bqty / sum.Cost : 0;//因為TCSIO的來源資料PRICE固定為零，所以先給死資料"0"
-                    sum.Lastprice = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCPRICE(sum.Stock);
+                    //sum.Lastprice = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCPRICE(sum.Stock);
+                    sum.Lastprice = Lastprice;
                     sum.Marketvalue = details.Sum(x => x.Marketvalue);
                     sum.EstimateAmt = details.Sum(x => x.EstimateAmt);
                     sum.EstimateFee = details.Sum(x => x.EstimateFee);

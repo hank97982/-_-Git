@@ -7,7 +7,7 @@ namespace ESMP.STOCK.API.Utils
     {
         /*
          * 回傳:
-         *  (List<TCNUDBean>)回傳剩於庫存
+         *  (List<TCNUDBean>)回傳剩餘庫存
          *  (List<HCNTDBean>)回傳當沖明細
          *  (List<HCNRHBean>)回傳沖銷明細
          *  (List<HCNRHBean>)不能被零股沖銷的賣單
@@ -197,7 +197,7 @@ namespace ESMP.STOCK.API.Utils
                 //雙向現股沖還沒有買單對應的賣單，加進去TCNUD
                 tCNUDtotal.AddRange(proccessHCMIOSalesToTCNUD(hCMIOIgnore));
                 //將不能被零股沖銷的賣單保留起來，回傳給對帳單查詢
-                hCMIOIgnoreReturn.AddRange(hCMIOIgnore);
+                //hCMIOIgnoreReturn.AddRange(hCMIOIgnore);
 
                 //重新計算HCNTD交易稅從0.003改成0.0015
                 hCNTDTotalReturn.AddRange(HCNTDCalculate(hCNTDReturn));
@@ -377,7 +377,6 @@ namespace ESMP.STOCK.API.Utils
 
 
             HCNTDBean hCNTDBean = new HCNTDBean();
-
             HCMIOBean hCSale = hCMIOSales.FirstOrDefault();//(Sale)
             HCMIOBean hCBuy = hCMIOBuys.FirstOrDefault();//(Buy)
 

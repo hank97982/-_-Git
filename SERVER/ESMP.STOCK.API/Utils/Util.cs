@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
-using static System.Net.Mime.MediaTypeNames;
-using Newtonsoft.Json.Linq;
+using System.Xml.Serialization;
 
 namespace ESMP.STOCK.API.Utils
 {

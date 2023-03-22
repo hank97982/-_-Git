@@ -117,7 +117,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                 .Where(x => x.GetType().GetProperty("BHNO").GetValue(x).ToString() == root.Bhno)
                 .Where(x => x.GetType().GetProperty("CSEQ").GetValue(x).ToString() == root.Cseq)
                 .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) >= Convert.ToInt32(root.Sdate))
-                .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) <= Convert.ToInt32(root.Edate)).ToList();
+                .Where(x => Convert.ToInt32(x.GetType().GetProperty("EDATE").GetValue(x)) <= Convert.ToInt32(root.Edate)).ToList();
             if (root.StockSymbol != "")
             {
                 QueryFinal.Where(x => x.GetType().GetProperty("STOCK").GetValue(x).ToString() == root.StockSymbol);
@@ -144,11 +144,117 @@ namespace ESMP.STOCK.API.QUERYAPI
                     //沖銷賣出
                     WriteOff wfTM = new WriteOff();
                     (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tcnudBean.ToList(), tmhioBean.ToList(), tcsioBean.ToList());
-                    (List<HCMIOBean> BuysNow, List<HCMIOBean> SalesNow, List<HCMIOBean> Buys, List<HCMIOBean> Sales) = hCNTDInToStatement(HCNT, HC);
+                    (List<HCMIOBean> BuysNow, List<HCMIOBean> SalesNow, List<HCMIOBean> Buys, List<HCMIOBean> Sales, List<HCMIOBean> WritOffNotYet) = hCNTDInToStatement(HCNT, HC, TC);
 
-                    #region 買沖
+                    #region 
                     //歷史交易明細
+
+                    //買沖
                     foreach (HCMIOBean hCMIOBeanItem in BuysNow)
+                    {
+                        Profile profile = new Profile();
+                        profile.Bhno = hCMIOBeanItem.BHNO;
+                        profile.Cseq = hCMIOBeanItem.CSEQ;
+                        profile.Name = "";
+                        profile.Stock = hCMIOBeanItem.STOCK;
+                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
+                        profile.Mdate = hCMIOBeanItem.Tdate;
+                        profile.Dseq = hCMIOBeanItem.DSEQ;
+                        profile.Dno = hCMIOBeanItem.DNO;
+                        profile.Ttype = hCMIOBeanItem.TTYPE;
+                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
+                        profile.Bstype = hCMIOBeanItem.BSTYPE;
+                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
+                        profile.Etype = hCMIOBeanItem.ETYPE;
+                        profile.Mprice = hCMIOBeanItem.PRICE;
+                        profile.Mqty = hCMIOBeanItem.QTY;
+                        profile.Mamt = hCMIOBeanItem.AMT;
+                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
+                        profile.Tax = hCMIOBeanItem.TAX;
+                        profile.Netamt = hCMIOBeanItem.NETAMT;
+                        profiles.Add(profile);
+                    }
+
+                    //賣沖
+                    foreach (HCMIOBean hCMIOBeanItem in SalesNow)
+                    {
+                        Profile profile = new Profile();
+                        profile.Bhno = hCMIOBeanItem.BHNO;
+                        profile.Cseq = hCMIOBeanItem.CSEQ;
+                        profile.Name = "";
+                        profile.Stock = hCMIOBeanItem.STOCK;
+                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
+                        profile.Mdate = hCMIOBeanItem.Tdate;
+                        profile.Dseq = hCMIOBeanItem.DSEQ;
+                        profile.Dno = hCMIOBeanItem.DNO;
+                        profile.Ttype = hCMIOBeanItem.TTYPE;
+                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
+                        profile.Bstype = hCMIOBeanItem.BSTYPE;
+                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
+                        profile.Etype = hCMIOBeanItem.ETYPE;
+                        profile.Mprice = hCMIOBeanItem.PRICE;
+                        profile.Mqty = hCMIOBeanItem.QTY;
+                        profile.Mamt = hCMIOBeanItem.AMT;
+                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
+                        profile.Tax = hCMIOBeanItem.TAX;
+                        profile.Netamt = hCMIOBeanItem.NETAMT;
+                        profiles.Add(profile);
+                    }
+
+                    //現買
+                    foreach (HCMIOBean hCMIOBeanItem in Buys)
+                    {
+                        Profile profile = new Profile();
+                        profile.Bhno = hCMIOBeanItem.BHNO;
+                        profile.Cseq = hCMIOBeanItem.CSEQ;
+                        profile.Name = "";
+                        profile.Stock = hCMIOBeanItem.STOCK;
+                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
+                        profile.Mdate = hCMIOBeanItem.Tdate;
+                        profile.Dseq = hCMIOBeanItem.DSEQ;
+                        profile.Dno = hCMIOBeanItem.DNO;
+                        profile.Ttype = hCMIOBeanItem.TTYPE;
+                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
+                        profile.Bstype = hCMIOBeanItem.BSTYPE;
+                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
+                        profile.Etype = hCMIOBeanItem.ETYPE;
+                        profile.Mprice = hCMIOBeanItem.PRICE;
+                        profile.Mqty = hCMIOBeanItem.QTY;
+                        profile.Mamt = hCMIOBeanItem.AMT;
+                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
+                        profile.Tax = hCMIOBeanItem.TAX;
+                        profile.Netamt = hCMIOBeanItem.NETAMT;
+                        profiles.Add(profile);
+                    }
+
+                    //先賣
+                    foreach (HCMIOBean hCMIOBeanItem in Sales)
+                    {
+                        Profile profile = new Profile();
+                        profile.Bhno = hCMIOBeanItem.BHNO;
+                        profile.Cseq = hCMIOBeanItem.CSEQ;
+                        profile.Name = "";
+                        profile.Stock = hCMIOBeanItem.STOCK;
+                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
+                        profile.Mdate = hCMIOBeanItem.Tdate;
+                        profile.Dseq = hCMIOBeanItem.DSEQ;
+                        profile.Dno = hCMIOBeanItem.DNO;
+                        profile.Ttype = hCMIOBeanItem.TTYPE;
+                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
+                        profile.Bstype = hCMIOBeanItem.BSTYPE;
+                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
+                        profile.Etype = hCMIOBeanItem.ETYPE;
+                        profile.Mprice = hCMIOBeanItem.PRICE;
+                        profile.Mqty = hCMIOBeanItem.QTY;
+                        profile.Mamt = hCMIOBeanItem.AMT;
+                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
+                        profile.Tax = hCMIOBeanItem.TAX;
+                        profile.Netamt = hCMIOBeanItem.NETAMT;
+                        profiles.Add(profile);
+                    }
+
+                    //不能被零股沖銷的賣單
+                    foreach (HCMIOBean hCMIOBeanItem in WritOffNotYet)
                     {
                         Profile profile = new Profile();
                         profile.Bhno = hCMIOBeanItem.BHNO;
@@ -194,319 +300,6 @@ namespace ESMP.STOCK.API.QUERYAPI
                                                 Mant = g.Sum(g => g.Mamt)
                                             };
 
-
-
-                    if (profilesLQ.FirstOrDefault() == null)
-                    {
-                        AccsumErr accsumErr = new AccsumErr();
-                        accsumErr.Errcode = "0008";
-                        accsumErr.Errmsg = "查無符合設定條件之資料";
-                        return accsumErr;
-                    }
-                    foreach (var profilesItem in profilesLQ)
-                    {
-
-                        bill.Cnbamt = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mant).ToArray()[0];
-                        bill.Cnsamt = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mant).ToArray()[0];
-                        bill.Cnfee = profilesItem.Fee;
-                        bill.Cntax = profilesItem.Tax;
-                        bill.Cnnetamt = profilesItem.Netamt;
-                        bill.Bqty = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mqty).ToArray()[0];
-                        bill.Sqty = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mqty).ToArray()[0];
-
-                        accsum.Errcode = "0000";
-                        accsum.Errmsg = "成功";
-                        accsum.Netamt = profilesItem.Netamt;
-                        accsum.Fee = profilesItem.Fee;
-                        accsum.Tax = profilesItem.Tax;
-                        accsum.Mqty = profilesItem.Mqty;
-                        accsum.Mamt = profilesItem.Mamt;
-                    }
-                    accsum.Sum = bill;
-                    accsum.Profile = profiles;
-                    #endregion
-                    #region 賣沖
-                    //歷史交易明細
-                    foreach (HCMIOBean hCMIOBeanItem in SalesNow)
-                    {
-                        Profile profile = new Profile();
-                        profile.Bhno = hCMIOBeanItem.BHNO;
-                        profile.Cseq = hCMIOBeanItem.CSEQ;
-                        profile.Name = "";
-                        profile.Stock = hCMIOBeanItem.STOCK;
-                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
-                        profile.Mdate = hCMIOBeanItem.Tdate;
-                        profile.Dseq = hCMIOBeanItem.DSEQ;
-                        profile.Dno = hCMIOBeanItem.DNO;
-                        profile.Ttype = hCMIOBeanItem.TTYPE;
-                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
-                        profile.Bstype = hCMIOBeanItem.BSTYPE;
-                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
-                        profile.Etype = hCMIOBeanItem.ETYPE;
-                        profile.Mprice = hCMIOBeanItem.PRICE;
-                        profile.Mqty = hCMIOBeanItem.QTY;
-                        profile.Mamt = hCMIOBeanItem.AMT;
-                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
-                        profile.Tax = hCMIOBeanItem.TAX;
-                        profile.Netamt = hCMIOBeanItem.NETAMT;
-                        profiles.Add(profile);
-                    }
-
-
-                    var profilesLQ2 = from p in profiles
-                                      group p by 0 into g
-                                      select new
-                                      {
-                                          Mamt = g.Sum(g => g.Mamt),
-                                          Fee = g.Sum(g => g.Fee),
-                                          Tax = g.Sum(g => g.Tax),
-                                          Netamt = g.Sum(g => g.Netamt),
-                                          Mqty = g.Sum(g => g.Mqty)
-                                      };
-                    //https://dotblogs.com.tw/noncoder/2019/03/25/Lambda-GroupBy-Sum
-                    var profilesMqtySumLQ2 = from p in profiles
-                                             group p by new { p.Bstype } into g
-                                             select new
-                                             {
-                                                 Bstype = g.Key.Bstype,
-                                                 Mqty = g.Sum(g => g.Mqty),
-                                                 Mant = g.Sum(g => g.Mamt)
-                                             };
-
-
-
-                    if (profilesLQ.FirstOrDefault() == null)
-                    {
-                        AccsumErr accsumErr = new AccsumErr();
-                        accsumErr.Errcode = "0008";
-                        accsumErr.Errmsg = "查無符合設定條件之資料";
-                        return accsumErr;
-                    }
-                    foreach (var profilesItem in profilesLQ)
-                    {
-
-                        bill.Cnbamt = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mant).ToArray()[0];
-                        bill.Cnsamt = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mant).ToArray()[0];
-                        bill.Cnfee = profilesItem.Fee;
-                        bill.Cntax = profilesItem.Tax;
-                        bill.Cnnetamt = profilesItem.Netamt;
-                        bill.Bqty = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mqty).ToArray()[0];
-                        bill.Sqty = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mqty).ToArray()[0];
-
-                        accsum.Errcode = "0000";
-                        accsum.Errmsg = "成功";
-                        accsum.Netamt = profilesItem.Netamt;
-                        accsum.Fee = profilesItem.Fee;
-                        accsum.Tax = profilesItem.Tax;
-                        accsum.Mqty = profilesItem.Mqty;
-                        accsum.Mamt = profilesItem.Mamt;
-                    }
-                    accsum.Sum = bill;
-                    accsum.Profile = profiles;
-                    #endregion
-                    #region 現買
-                    //歷史交易明細
-                    foreach (HCMIOBean hCMIOBeanItem in Buys)
-                    {
-                        Profile profile = new Profile();
-                        profile.Bhno = hCMIOBeanItem.BHNO;
-                        profile.Cseq = hCMIOBeanItem.CSEQ;
-                        profile.Name = "";
-                        profile.Stock = hCMIOBeanItem.STOCK;
-                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
-                        profile.Mdate = hCMIOBeanItem.Tdate;
-                        profile.Dseq = hCMIOBeanItem.DSEQ;
-                        profile.Dno = hCMIOBeanItem.DNO;
-                        profile.Ttype = hCMIOBeanItem.TTYPE;
-                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
-                        profile.Bstype = hCMIOBeanItem.BSTYPE;
-                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
-                        profile.Etype = hCMIOBeanItem.ETYPE;
-                        profile.Mprice = hCMIOBeanItem.PRICE;
-                        profile.Mqty = hCMIOBeanItem.QTY;
-                        profile.Mamt = hCMIOBeanItem.AMT;
-                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
-                        profile.Tax = hCMIOBeanItem.TAX;
-                        profile.Netamt = hCMIOBeanItem.NETAMT;
-                        profiles.Add(profile);
-                    }
-
-
-                    var profilesLQ3 = from p in profiles
-                                      group p by 0 into g
-                                      select new
-                                      {
-                                          Mamt = g.Sum(g => g.Mamt),
-                                          Fee = g.Sum(g => g.Fee),
-                                          Tax = g.Sum(g => g.Tax),
-                                          Netamt = g.Sum(g => g.Netamt),
-                                          Mqty = g.Sum(g => g.Mqty)
-                                      };
-                    //https://dotblogs.com.tw/noncoder/2019/03/25/Lambda-GroupBy-Sum
-                    var profilesMqtySumLQ3 = from p in profiles
-                                             group p by new { p.Bstype } into g
-                                             select new
-                                             {
-                                                 Bstype = g.Key.Bstype,
-                                                 Mqty = g.Sum(g => g.Mqty),
-                                                 Mant = g.Sum(g => g.Mamt)
-                                             };
-
-
-                    if (profilesLQ.FirstOrDefault() == null)
-                    {
-                        AccsumErr accsumErr = new AccsumErr();
-                        accsumErr.Errcode = "0008";
-                        accsumErr.Errmsg = "查無符合設定條件之資料";
-                        return accsumErr;
-                    }
-                    foreach (var profilesItem in profilesLQ)
-                    {
-
-                        bill.Cnbamt = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mant).ToArray()[0];
-                        bill.Cnsamt = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mant).ToArray()[0];
-                        bill.Cnfee = profilesItem.Fee;
-                        bill.Cntax = profilesItem.Tax;
-                        bill.Cnnetamt = profilesItem.Netamt;
-                        bill.Bqty = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mqty).ToArray()[0];
-                        bill.Sqty = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mqty).ToArray()[0];
-
-                        accsum.Errcode = "0000";
-                        accsum.Errmsg = "成功";
-                        accsum.Netamt = profilesItem.Netamt;
-                        accsum.Fee = profilesItem.Fee;
-                        accsum.Tax = profilesItem.Tax;
-                        accsum.Mqty = profilesItem.Mqty;
-                        accsum.Mamt = profilesItem.Mamt;
-                    }
-                    accsum.Sum = bill;
-                    accsum.Profile = profiles;
-                    #endregion
-                    #region 先賣
-                    //歷史交易明細
-                    foreach (HCMIOBean hCMIOBeanItem in Sales)
-                    {
-                        Profile profile = new Profile();
-                        profile.Bhno = hCMIOBeanItem.BHNO;
-                        profile.Cseq = hCMIOBeanItem.CSEQ;
-                        profile.Name = "";
-                        profile.Stock = hCMIOBeanItem.STOCK;
-                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
-                        profile.Mdate = hCMIOBeanItem.Tdate;
-                        profile.Dseq = hCMIOBeanItem.DSEQ;
-                        profile.Dno = hCMIOBeanItem.DNO;
-                        profile.Ttype = hCMIOBeanItem.TTYPE;
-                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
-                        profile.Bstype = hCMIOBeanItem.BSTYPE;
-                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
-                        profile.Etype = hCMIOBeanItem.ETYPE;
-                        profile.Mprice = hCMIOBeanItem.PRICE;
-                        profile.Mqty = hCMIOBeanItem.QTY;
-                        profile.Mamt = hCMIOBeanItem.AMT;
-                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
-                        profile.Tax = hCMIOBeanItem.TAX;
-                        profile.Netamt = hCMIOBeanItem.NETAMT;
-                        profiles.Add(profile);
-                    }
-
-
-                    var profilesLQ4 = from p in profiles
-                                      group p by 0 into g
-                                      select new
-                                      {
-                                          Mamt = g.Sum(g => g.Mamt),
-                                          Fee = g.Sum(g => g.Fee),
-                                          Tax = g.Sum(g => g.Tax),
-                                          Netamt = g.Sum(g => g.Netamt),
-                                          Mqty = g.Sum(g => g.Mqty)
-                                      };
-                    //https://dotblogs.com.tw/noncoder/2019/03/25/Lambda-GroupBy-Sum
-                    var profilesMqtySumLQ4 = from p in profiles
-                                             group p by new { p.Bstype } into g
-                                             select new
-                                             {
-                                                 Bstype = g.Key.Bstype,
-                                                 Mqty = g.Sum(g => g.Mqty),
-                                                 Mant = g.Sum(g => g.Mamt)
-                                             };
-
-
-                    if (profilesLQ.FirstOrDefault() == null)
-                    {
-                        AccsumErr accsumErr = new AccsumErr();
-                        accsumErr.Errcode = "0008";
-                        accsumErr.Errmsg = "查無符合設定條件之資料";
-                        return accsumErr;
-                    }
-                    foreach (var profilesItem in profilesLQ)
-                    {
-
-                        bill.Cnbamt = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mant).ToArray()[0];
-                        bill.Cnsamt = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mant).ToArray()[0];
-                        bill.Cnfee = profilesItem.Fee;
-                        bill.Cntax = profilesItem.Tax;
-                        bill.Cnnetamt = profilesItem.Netamt;
-                        bill.Bqty = (from a in profilesMqtySumLQ where a.Bstype == "B" select a.Mqty).ToArray()[0];
-                        bill.Sqty = (from a in profilesMqtySumLQ where a.Bstype == "S" select a.Mqty).ToArray()[0];
-
-                        accsum.Errcode = "0000";
-                        accsum.Errmsg = "成功";
-                        accsum.Netamt = profilesItem.Netamt;
-                        accsum.Fee = profilesItem.Fee;
-                        accsum.Tax = profilesItem.Tax;
-                        accsum.Mqty = profilesItem.Mqty;
-                        accsum.Mamt = profilesItem.Mamt;
-                    }
-                    accsum.Sum = bill;
-                    accsum.Profile = profiles;
-                    #endregion
-                    #region 不能被零股沖銷的賣單
-                    //歷史交易明細
-                    foreach (HCMIOBean hCMIOBeanItem in HCM)
-                    {
-                        Profile profile = new Profile();
-                        profile.Bhno = hCMIOBeanItem.BHNO;
-                        profile.Cseq = hCMIOBeanItem.CSEQ;
-                        profile.Name = "";
-                        profile.Stock = hCMIOBeanItem.STOCK;
-                        profile.Stocknm = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNAME(hCMIOBeanItem.STOCK);
-                        profile.Mdate = hCMIOBeanItem.Tdate;
-                        profile.Dseq = hCMIOBeanItem.DSEQ;
-                        profile.Dno = hCMIOBeanItem.DNO;
-                        profile.Ttype = hCMIOBeanItem.TTYPE;
-                        profile.Ttypename = TtypenameCalculate("HCMIO", hCMIOBeanItem.TTYPE, hCMIOBeanItem.BSTYPE, hCMIOBeanItem.ETYPE, hCMIOBeanItem.tTypeName);
-                        profile.Bstype = hCMIOBeanItem.BSTYPE;
-                        profile.Bstypename = BstypenameCalculate(hCMIOBeanItem.BSTYPE);
-                        profile.Etype = hCMIOBeanItem.ETYPE;
-                        profile.Mprice = hCMIOBeanItem.PRICE;
-                        profile.Mqty = hCMIOBeanItem.QTY;
-                        profile.Mamt = hCMIOBeanItem.AMT;
-                        profile.Fee = Math.Floor(FeeCalculate(hCMIOBeanItem.QTY, hCMIOBeanItem.FEE));
-                        profile.Tax = hCMIOBeanItem.TAX;
-                        profile.Netamt = hCMIOBeanItem.NETAMT;
-                        profiles.Add(profile);
-                    }
-
-
-                    var profilesLQ5 = from p in profiles
-                                      group p by 0 into g
-                                      select new
-                                      {
-                                          Mamt = g.Sum(g => g.Mamt),
-                                          Fee = g.Sum(g => g.Fee),
-                                          Tax = g.Sum(g => g.Tax),
-                                          Netamt = g.Sum(g => g.Netamt),
-                                          Mqty = g.Sum(g => g.Mqty)
-                                      };
-                    //https://dotblogs.com.tw/noncoder/2019/03/25/Lambda-GroupBy-Sum
-                    var profilesMqtySumLQ5 = from p in profiles
-                                             group p by new { p.Bstype } into g
-                                             select new
-                                             {
-                                                 Bstype = g.Key.Bstype,
-                                                 Mqty = g.Sum(g => g.Mqty),
-                                                 Mant = g.Sum(g => g.Mamt)
-                                             };
 
 
                     if (profilesLQ.FirstOrDefault() == null)
@@ -800,18 +593,24 @@ namespace ESMP.STOCK.API.QUERYAPI
             return false;
         }
 
-        public (List<HCMIOBean>, List<HCMIOBean>, List<HCMIOBean>, List<HCMIOBean>) hCNTDInToStatement(List<HCNTDBean> hCNTDs, List<HCNRHBean> hCNRHs)
+        public (List<HCMIOBean>, List<HCMIOBean>, List<HCMIOBean>, List<HCMIOBean>, List<HCMIOBean>) hCNTDInToStatement(List<HCNTDBean> hCNTDs, List<HCNRHBean> hCNRHs, List<TCNUDBean> tCNUDs)
         {
             //List<HCMIOBean> hCMIOReturn = new List<HCMIOBean>();
             List<HCMIOBean> hCMIOBuysNow = new List<HCMIOBean>();
             List<HCMIOBean> hCMIOSalesNow = new List<HCMIOBean>();
             List<HCMIOBean> hCMIOSales = new List<HCMIOBean>();
             List<HCMIOBean> hCMIOBuys = new List<HCMIOBean>();
+            List<HCMIOBean> caNotSalesWriteOff = new List<HCMIOBean>();
+
+            List<HCMIOBean> tCNUDsInToHCMIOs = new List<HCMIOBean>();
+
+
+
             foreach (var hC in hCNTDs)
             {
                 HCMIOBean hCMIOBuy = new HCMIOBean();
                 HCMIOBean hCMIOSale = new HCMIOBean();
-                //  (買單)
+                //  (買沖)
                 hCMIOBuy.Tdate = hC.TDATE;
                 hCMIOBuy.BHNO = hC.BHNO;
                 hCMIOBuy.CSEQ = hC.CSEQ;
@@ -855,7 +654,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                 hCMIOBuy.tTypeName = "買沖";
                 hCMIOBuysNow.Add(hCMIOBuy);
 
-                //  (賣單)
+                //  (賣沖)
                 hCMIOSale.Tdate = hC.TDATE;
                 hCMIOSale.BHNO = hC.BHNO;
                 hCMIOSale.CSEQ = hC.CSEQ;
@@ -905,52 +704,8 @@ namespace ESMP.STOCK.API.QUERYAPI
                 HCMIOBean hCBuy = new HCMIOBean();
                 HCMIOBean hCSale = new HCMIOBean();
 
-                //  (買單)
-                hCSale.Tdate = hc.TDATE;
-                hCSale.BHNO = hc.BHNO;
-                hCSale.CSEQ = hc.CSEQ;
-                hCSale.DSEQ = hc.SDSEQ;
-                hCSale.DNO = hc.SDNO;
-                //hCSale.WTYPE = ;
-                hCSale.STOCK = hc.STOCK;
-                hCSale.TTYPE = "0";
-                //hCSale.ETYPE = ;
-                hCSale.BSTYPE = "B";
-                hCSale.PRICE = hc.SPRICE;
-                hCSale.QTY = hc.CQTY;
-                //hCSale.AMT = ;
-                hCSale.FEE = hc.SFEE;
-                hCSale.TAX = hc.TAX;
-                //hCBean.RVINT = ;
-                hCSale.NETAMT = hc.INCOME;
-                //hCBean.DBFEE = ;
-                //hCBean.CRAMT = ;
-                //hCBean.DNAMT = ;
-                //hCBean.CRINT = ;
-                //hCBean.DNINT = ;
-                //hCBean.DLFEE = ;
-                //hCBean.BFINT = ;
-                //hCBean.OBAMT = ;
-                //hCBean.INTAX = ;
-                //hCBean.SFCODE = ;
-                //hCBean.CDTDQTY = ;
-                //hCBean.ORIGN = ;
-                //hCBean.SALES = ;
-                //hCBean.DATAFLAG = ;
-                //hCBean.IOFLAG = ;
-                //hCBean.ADJCOST = ;
-                //hCBean.ADJDATE = ;
-                //hCBean.STINTAX = ;
-                //hCBean.HEALTHFEE = ;
-                //hCBean.TRDATE = ;
-                //hCBean.TRTIME = ;
-                //hCBean.MODDATE = ;
-                //hCBean.MODTIME = ;
-                //hCBean.MODUSER = ;
-                hCSale.tTypeName = "現買";
-                hCMIOSales.Add(hCSale);
 
-                //  (賣單)
+                //  (現賣)
                 hCSale.Tdate = hc.TDATE;
                 hCSale.BHNO = hc.BHNO;
                 hCSale.CSEQ = hc.CSEQ;
@@ -963,7 +718,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                 hCSale.BSTYPE = "S";
                 hCSale.PRICE = hc.SPRICE;
                 hCSale.QTY = hc.CQTY;
-                //hCBean.AMT = ;
+                hCSale.AMT = hc.CQTY * hc.SPRICE;
                 hCSale.FEE = hc.SFEE;
                 hCSale.TAX = hc.TAX;
                 //hCBean.RVINT = ;
@@ -997,9 +752,67 @@ namespace ESMP.STOCK.API.QUERYAPI
 
             }
 
+            //取出今日日期
+            var tCNUDNow = tCNUDs.Where(x => x.TDATE == DateTime.Now.ToString("yyyyMMdd"));//--------------
+
+            foreach (var tc in tCNUDNow)
+            {
+                HCMIOBean hCMIOBean = new HCMIOBean();
+                hCMIOBean.Tdate = tc.TDATE;
+                hCMIOBean.BHNO = tc.BHNO;
+                hCMIOBean.CSEQ = tc.CSEQ;
+                hCMIOBean.DSEQ = tc.DSEQ;
+                hCMIOBean.DNO = tc.DNO;
+                hCMIOBean.WTYPE = tc.WTYPE;
+                hCMIOBean.STOCK = tc.STOCK;
+                //hCMIOBean.TTYPE =
+                //hCMIOBean.ETYPE =
+                //hCMIOBean.BSTYPE    
+                hCMIOBean.PRICE = tc.PRICE;
+                hCMIOBean.QTY = tc.BQTY;//-------------
+                hCMIOBean.AMT = tc.AMT;
+                hCMIOBean.FEE = tc.FEE;
+                hCMIOBean.TAX = tc.TAXRam;
+                //hCMIOBean.RVINT     
+                hCMIOBean.NETAMT = tc.COST;
+                //hCMIOBean.DBFEE     
+                //hCMIOBean.CRAMT     
+                //hCMIOBean.DNAMT     
+                //hCMIOBean.CRINT     
+                //hCMIOBean.DNINT     
+                //hCMIOBean.DLFEE     
+                //hCMIOBean.BFINT     
+                //hCMIOBean.OBAMT     
+                //hCMIOBean.INTAX     
+                //hCMIOBean.SFCODE    
+                //hCMIOBean.CDTDQTY   
+                //hCMIOBean.ORIGN     
+                //hCMIOBean.SALES     
+                //hCMIOBean.DATAFLAG  
+                //hCMIOBean.IOFLAG    
+                //hCMIOBean.ADJCOST   
+                //hCMIOBean.ADJDATE   
+                //hCMIOBean.STINTAX   
+                //hCMIOBean.HEALTHFEE 
+                //hCMIOBean.TRDATE    
+                //hCMIOBean.TRTIME    
+                //hCMIOBean.MODDATE   
+                //hCMIOBean.MODTIME   
+                //hCMIOBean.MODUSER
+                tCNUDsInToHCMIOs.Add(hCMIOBean);
+            }
+
+
+            // (現買)
+            hCMIOBuys.AddRange(tCNUDsInToHCMIOs.Where(x => x.QTY > 0));//-------------------
+
+            //不能沖銷零股的賣單
+            //今天的現股當充先賣
+            caNotSalesWriteOff.AddRange(tCNUDsInToHCMIOs.Where(x => x.QTY < 0));//------------------
+
+
 
             //不清楚再想甚麼
-
             //var joined = hCMIOSalesNow.Join(hCMIOSales,
             //    a => new { a.BHNO, a.CSEQ, a.DSEQ, a.DNO },
             //    b => new { b.BHNO, b.CSEQ, b.DSEQ, b.DNO },
@@ -1033,9 +846,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                 });
 
 
-            //return hCMIOBuysNow
-            //    .Concat(hCMIOSalesNowGroupIn).ToList();
-            return (hCMIOBuysNow, hCMIOSalesNow, hCMIOBuys, hCMIOSales);
+            return (hCMIOBuysNow, hCMIOSalesNow, hCMIOBuys, hCMIOSales, caNotSalesWriteOff);
         }
     }
 }

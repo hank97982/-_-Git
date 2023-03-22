@@ -7,23 +7,17 @@ using ESMP.STOCK.API.DTO.UnrealizedGainsAndlLosses;
 using ESMP.STOCK.API.Utils;
 using Newtonsoft.Json.Linq;
 using SERVER.Utils;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace ESMP.STOCK.API.QUERYAPI
 {
     public class BaseAPI
     {
-
+        private static readonly HttpClient client = new HttpClient();
 
         private static string _connstr = "";
         public BaseAPI(string connstr)
@@ -68,7 +62,7 @@ namespace ESMP.STOCK.API.QUERYAPI
             if (Util.TryParseXml(str))
             {
                 XDocument dox = XDocument.Parse(str);
-                switch (dox.Descendants().Where(n=> n.Name == "qtype").FirstOrDefault().Value)
+                switch (dox.Descendants().Where(n => n.Name == "qtype").FirstOrDefault().Value)
                 {
                     case "0001":
                         UnrealizedGainsAndlLosses unrealized = new UnrealizedGainsAndlLosses(_connstr);
@@ -106,6 +100,29 @@ namespace ESMP.STOCK.API.QUERYAPI
             }
             return null;
         }
+
+        public async Task<List<Symbol>> QuoteAsync(List<string> list)
+        {
+            
+            List<QuoteBean> result = new List<QuoteBean>();
+            var values = new Dictionary<string, string>
+            {
+                { "stock", string.Join(",",list.ToArray())},
+            };
+
+            var content = new FormUrlEncodedContent(values);
+
+            var response = await client.PostAsync("http://10.10.56.182:8080/Quote/Stock.jsp", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            result.Add(Util.Deserialize<QuoteBean>(responseString));
+
+            List<Symbol> ans = result.Select(x => x.SymbolList).ToList().First();
+
+            return ans;
+        }
+
 
         protected IEnumerable<TCNUDBean> QueryTCNUD()
         {
