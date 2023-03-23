@@ -20,16 +20,16 @@ namespace ESMP.STOCK.API.DTO
     public class Symbol
     {
         [XmlAttribute("id")]
-        public string? Id { get; set; }
+        public string? Id { get; set; }             //股票代號
         [XmlAttribute("dealprice")]
-        public string? DealPrice { get; set; }
+        public string? DealPrice { get; set; }      //現價
         [XmlAttribute("shortname")]
-        public string? ShortName { get; set; }
+        public string? ShortName { get; set; }      //股票中文名稱
         [XmlAttribute("refprice")]
-        public string? RefPrice { get; set; }
+        public string? RefPrice { get; set; }       //參考價
         [XmlAttribute("moddate")]
-        public string? ModDate { get; set; }
+        public string? ModDate { get; set; }        //更新日期
         [XmlAttribute("modtime")]
-        public string ModTime { get; set; }
+        public string ModTime { get; set; }         //更新時間
     }
 }

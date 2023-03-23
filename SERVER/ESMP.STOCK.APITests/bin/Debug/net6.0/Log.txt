@@ -552,3 +552,130 @@
    at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
    at System.Threading.Tasks.Task`1.get_Result()
    at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 216
+2023/03/23 11:35:37 : 交易異常: System.AggregateException: One or more errors occurred. (連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080))
+ ---> System.Net.Http.HttpRequestException: 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080)
+ ---> System.Net.Sockets.SocketException (10060): 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|277_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(HttpRequestMessage request)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ESMP.STOCK.API.QUERYAPI.BaseAPI.QuoteAsync(List`1 list) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\BaseAPI.cs:line 115
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 215
+2023/03/23 11:41:23 : 交易異常: System.AggregateException: One or more errors occurred. (連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080))
+ ---> System.Net.Http.HttpRequestException: 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080)
+ ---> System.Net.Sockets.SocketException (10060): 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|277_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(HttpRequestMessage request)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ESMP.STOCK.API.QUERYAPI.BaseAPI.QuoteAsync(List`1 list) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\BaseAPI.cs:line 115
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 215
+2023/03/23 13:55:36 : 交易異常: System.ArgumentNullException: Value cannot be null. (Parameter 'key')
+   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.<>c__DisplayClass3_0.<QueryIntoFormatString>b__3(Symbol x) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 217
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 217
+2023/03/23 13:56:16 : 交易異常: System.ArgumentNullException: Value cannot be null. (Parameter 'key')
+   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.<>c__DisplayClass3_0.<QueryIntoFormatString>b__3(Symbol x) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 217
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 217
+2023/03/23 14:24:10 : 交易異常: System.AggregateException: One or more errors occurred. (連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080))
+ ---> System.Net.Http.HttpRequestException: 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080)
+ ---> System.Net.Sockets.SocketException (10060): 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|277_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(HttpRequestMessage request)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ESMP.STOCK.API.QUERYAPI.BaseAPI.QuoteAsync(List`1 list) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\BaseAPI.cs:line 115
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 215
+2023/03/23 15:19:37 : 交易異常: System.AggregateException: One or more errors occurred. (連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080))
+ ---> System.Net.Http.HttpRequestException: 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080)
+ ---> System.Net.Sockets.SocketException (10060): 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|277_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(HttpRequestMessage request)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ESMP.STOCK.API.QUERYAPI.BaseAPI.QuoteAsync(List`1 list) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\BaseAPI.cs:line 115
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 215
+2023/03/23 15:40:18 : 交易異常: System.AggregateException: One or more errors occurred. (連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080))
+ ---> System.Net.Http.HttpRequestException: 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。 (10.10.56.182:8080)
+ ---> System.Net.Sockets.SocketException (10060): 連線嘗試失敗，因為連線對象有一段時間並未正確回應，或是連線建立失敗，因為連線的主機無法回應。
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|277_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(HttpRequestMessage request)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ESMP.STOCK.API.QUERYAPI.BaseAPI.QuoteAsync(List`1 list) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\BaseAPI.cs:line 115
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 215

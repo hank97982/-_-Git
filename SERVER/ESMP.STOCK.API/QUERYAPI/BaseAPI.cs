@@ -101,9 +101,9 @@ namespace ESMP.STOCK.API.QUERYAPI
             return null;
         }
 
-        public async Task<List<Symbol>> QuoteAsync(List<string> list)
+        public async virtual Task<List<Symbol>> QuoteAsync(List<string> list)
         {
-            
+
             List<QuoteBean> result = new List<QuoteBean>();
             var values = new Dictionary<string, string>
             {
@@ -119,6 +119,27 @@ namespace ESMP.STOCK.API.QUERYAPI
             result.Add(Util.Deserialize<QuoteBean>(responseString));
 
             List<Symbol> ans = result.Select(x => x.SymbolList).ToList().First();
+
+            return ans;
+        }
+        public async Task<Symbol> QuoteAsync(string str)
+        {
+
+            List<QuoteBean> result = new List<QuoteBean>();
+            var values = new Dictionary<string, string>
+            {
+                { "stock", str},
+            };
+
+            var content = new FormUrlEncodedContent(values);
+
+            var response = await client.PostAsync("http://10.10.56.182:8080/Quote/Stock.jsp", content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            result.Add(Util.Deserialize<QuoteBean>(responseString));
+
+            Symbol ans = result.Select(x => x.SymbolList).ToList().First().Select(x => x).First();
 
             return ans;
         }

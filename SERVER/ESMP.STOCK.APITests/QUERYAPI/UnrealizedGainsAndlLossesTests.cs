@@ -1,8 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ESMP.STOCK.API.Utils;
-using ESMP.STOCK.API.Bean;
+﻿using ESMP.STOCK.API.Bean;
 using ESMP.STOCK.API.DTO;
 using ESMP.STOCK.API.DTO.UnrealizedGainsAndlLosses;
+using ESMP.STOCK.API.Utils;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ESMP.STOCK.API.QUERYAPI.Tests
 {
@@ -14,6 +16,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         /// 未實現損益
         /// </summary>
         private UnrealizedGainsAndlLosses _realizedGainsAndlls = new UnrealizedGainsAndlLosses("Server = .;Database = ESMP;Trusted_Connection=true");
+        private BaseAPI baseAPI = new BaseAPI("Server = .;Database = ESMP;Trusted_Connection=true");
         //預估賣出價金計算結果 - 3組
         [TestMethod()]
         public void PriceCheck1()
@@ -23,21 +26,43 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             TCNUDBean tCNUD = new TCNUDBean();
             tCNUD.BHNO = "592S";
             tCNUD.CSEQ = "0000019";
-            tCNUD.STOCK = "057047"; //lastQTY =15.0000
+            tCNUD.STOCK = "057047"; 
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
 
 
+            string DealPrice = "3.7300";    //現價
+
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateAmt, 200 * 15);
-
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出價金=現價*庫存股數
+                Assert.AreEqual(details.EstimateAmt,Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
         [TestMethod()]
         public void PriceCheck2()
@@ -51,16 +76,38 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum)_realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateAmt, 100 * 75);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出價金=現價*庫存股數
+                Assert.AreEqual(details.EstimateAmt, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
 
         }
         [TestMethod()]
@@ -75,16 +122,38 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateAmt, 10 * 936);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出價金=現價*庫存股數
+                Assert.AreEqual(details.EstimateAmt, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
 
         }
         //預估賣出手續費計算結果 - 3組
@@ -99,16 +168,39 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
+
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateFee, Math.Floor(200 * 15 * 0.001425m));
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出手續費 = 股數*現價*手續費比率
+                Assert.AreEqual(details.EstimateFee, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別"+ obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -123,16 +215,40 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
+
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateFee, Math.Floor(100 * 75 * 0.001425m));
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出手續費 = 股數*現價*手續費比率
+                Assert.AreEqual(details.EstimateFee, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別"+ obj.GetType());
+            }
+
         }
 
         [TestMethod()]
@@ -147,16 +263,39 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
+
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateFee, Math.Floor(10 * 936 * 0.001425m));
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出手續費 = 股數*現價*手續費比率
+                Assert.AreEqual(details.EstimateFee, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
 
         }
 
@@ -170,20 +309,43 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             TCNUDBean tCNUD = new TCNUDBean();
             tCNUD.BHNO = "592S";
             tCNUD.CSEQ = "0000019";
-            tCNUD.STOCK = "057047"; //lastQTY =15.0000
+            tCNUD.STOCK = "057047";
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
+
+            string DealPrice = "3.7300";    //現價
 
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateTax, Math.Floor(200 * 15 * 0.003m));
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出交易稅 = 股數*現價*交易稅比率
+                Assert.AreEqual(details.EstimateTax, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -194,20 +356,43 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             TCNUDBean tCNUD = new TCNUDBean();
             tCNUD.BHNO = "592S";
             tCNUD.CSEQ = "0000019";
-            tCNUD.STOCK = "0070"; //lastQTY =75.0000
+            tCNUD.STOCK = "0070";
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
+
+            string DealPrice = "3.7300";    //現價
 
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateTax, Math.Floor(100 * 75 * 0.003m));
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出交易稅 = 股數*現價*交易稅比率
+                Assert.AreEqual(details.EstimateTax, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -218,20 +403,43 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             TCNUDBean tCNUD = new TCNUDBean();
             tCNUD.BHNO = "592S";
             tCNUD.CSEQ = "0000019";
-            tCNUD.STOCK = "0081"; //lastQTY =936.0000
+            tCNUD.STOCK = "0081";
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
+
+            string DealPrice = "3.7300";    //現價
 
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.EstimateTax, Math.Floor(10 * 936 * 0.003m));
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估賣出交易稅 = 股數*現價*交易稅比率
+                Assert.AreEqual(details.EstimateTax, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
 
         }
 
@@ -248,16 +456,40 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
-
-            Assert.AreEqual(details.Marketvalue, 200 * 15 - Math.Floor(200 * 15 * 0.001425m) - Math.Floor(200 * 15 * 0.003m));
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //現值(市值)= 預估賣出價金 * 預估賣出手續費 *預估賣出交易稅
+                Assert.AreEqual(details.Marketvalue,
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -272,16 +504,40 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 100;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
-
-            Assert.AreEqual(details.Marketvalue, 100 * 75 - Math.Floor(100 * 75 * 0.001425m) - Math.Floor(100 * 75 * 0.003m));
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //現值(市值)= 預估賣出價金 * 預估賣出手續費 *預估賣出交易稅
+                Assert.AreEqual(details.Marketvalue,
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -296,16 +552,40 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 10;
             tCNUDs.Add(tCNUD);
 
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
-
-            Assert.AreEqual(details.Marketvalue, 10 * 936 - Math.Floor(10 * 936 * 0.001425m) - Math.Floor(10 * 936 * 0.003m));
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //現值(市值)= 預估賣出價金 * 預估賣出手續費 *預估賣出交易稅
+                Assert.AreEqual(details.Marketvalue,
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
 
         }
 
@@ -322,17 +602,42 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 200;
             tCNUD.COST = 20;
             tCNUDs.Add(tCNUD);
-
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.Profit, (200 * 15 - Math.Floor(200 * 15 * 0.001425m) - Math.Floor(200 * 15 * 0.003m)) - details.Cost);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估損益=(預估賣出價金*預估賣出手續費*預估賣出交易稅)-成本
+                Assert.AreEqual(details.Profit,
+                    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) - 
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m)) -
+                    tCNUDs.First().COST));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -347,17 +652,42 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 100;
             tCNUD.COST = 10;
             tCNUDs.Add(tCNUD);
-
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.Profit, (100 * 75 - Math.Floor(100 * 75 * 0.001425m) - Math.Floor(100 * 75 * 0.003m)) - details.Cost);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估損益=(預估賣出價金*預估賣出手續費*預估賣出交易稅)-成本
+                Assert.AreEqual(details.Profit,
+                    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m)) -
+                    tCNUDs.First().COST));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
         }
 
         [TestMethod()]
@@ -372,17 +702,42 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tCNUD.BQTY = 10;
             tCNUD.COST = 50;
             tCNUDs.Add(tCNUD);
-
+            string DealPrice = "3.7300";    //現價
 
             List<TMHIOBean> tmHIO = new List<TMHIOBean>();
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
-            Accsum ac = (Accsum) _realizedGainsAndlls.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = tCNUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList());
 
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
 
-            Assert.AreEqual(details.Profit, (10 * 936 - Math.Floor(10 * 936 * 0.001425m) - Math.Floor(10 * 936 * 0.003m)) - details.Cost);
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估損益=(預估賣出價金*預估賣出手續費*預估賣出交易稅)-成本
+                Assert.AreEqual(details.Profit,
+                    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m)) -
+                    tCNUDs.First().COST));
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
 
         }
         //當日現股買進－價金計算－整股/零股各2組
@@ -605,7 +960,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "15", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
             tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "16", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
             tMHIOs.Add(new TMHIOBean() { Tdate = "20221017", BHNO = "592z", DSEQ = "j0614", JRNUM = "17", MTYPE = "T", CSEQ = "0105097", TTYPE = "0", ETYPE = "0", BSTYPE = "B", STOCK = "3630", QTY = 1000, PRICE = 399.5m, SALES = "0071", ORGIN = "1", MTIME = "114553161" });
-            
+
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
             (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
@@ -663,12 +1018,12 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         [TestMethod()]
         public void testQuote()
         {
-            BaseAPI baseAPI = new BaseAPI("Server = .;Database = ESMP;Trusted_Connection=true");
+
             List<string> listStr = new List<string>();
             listStr.Add("0050");
             listStr.Add("0056");
-            var list =baseAPI.QuoteAsync(listStr).Result;
-            
+            var list = baseAPI.QuoteAsync(listStr).Result;
+
             Assert.AreEqual("元大台灣50", list.First().ShortName);
             Assert.AreEqual("元大高股息", list.Last().ShortName);
 
@@ -686,6 +1041,26 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         }
         public override string StockPermissions(string costomer, string stock)
         {
+            return type;
+        }
+    }
+
+    //CoverQuote去覆蓋BaseAPI裡面QuoteAsync的資料
+    public class CoverQuote : UnrealizedGainsAndlLosses
+    {
+        private string _connstr = "";
+        private static List<Symbol> _list = null;
+
+
+        public CoverQuote(string connstr, List<Symbol> list) : base(connstr)
+        {
+            this._connstr = connstr;
+            CoverQuote._list = list;
+        }
+
+        public override Task<List<Symbol>> QuoteAsync(List<string> strings)
+        {
+            Task<List<Symbol>> type = Task.FromResult(_list);
             return type;
         }
     }
