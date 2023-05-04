@@ -42,5 +42,21 @@ namespace ESMP.STOCK.API.Utils
         {
             return BHNO == null && CSEQ == null && stock == null ? 0 : _query[BHNO + CSEQ + stock].CNQBAL;
         }
+        public decimal MCSRHQueryCRAQTY(string BHNO, string CSEQ, string stock)
+        {
+            return BHNO == null && CSEQ == null && stock == null ? 0 : _query[BHNO + CSEQ + stock].CRAQTY;
+        }
+        public decimal MCSRHQueryCROQTY(string BHNO, string CSEQ, string stock)
+        {
+            return BHNO == null && CSEQ == null && stock == null ? 0 : _query[BHNO + CSEQ + stock].CROQTY;
+        }
+        public decimal MCSRHQueryDBAQTY(string BHNO, string CSEQ, string stock)
+        {
+            return BHNO == null && CSEQ == null && stock == null ? 0 : _query[BHNO + CSEQ + stock].DBAQTY;
+        }
+        public decimal MCSRHQueryDBOQTY(string BHNO, string CSEQ, string stock)
+        {
+            return BHNO == null && CSEQ == null && stock == null ? 0 : _query[BHNO + CSEQ + stock].DBOQTY;
+        }
     }
 }

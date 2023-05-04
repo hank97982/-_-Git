@@ -5,9 +5,11 @@ using ESMP.STOCK.API.DTO.RealizedProfitAndLoss;
 using ESMP.STOCK.API.DTO.Statement;
 using ESMP.STOCK.API.DTO.UnrealizedGainsAndlLosses;
 using ESMP.STOCK.API.Utils;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using SERVER.Utils;
 using System.Data.SqlClient;
+using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
@@ -17,8 +19,6 @@ namespace ESMP.STOCK.API.QUERYAPI
 {
     public class BaseAPI
     {
-        private static readonly HttpClient client = new HttpClient();
-
         private static string _connstr = "";
         public BaseAPI(string connstr)
         {
@@ -103,44 +103,159 @@ namespace ESMP.STOCK.API.QUERYAPI
 
         public async virtual Task<List<Symbol>> QuoteAsync(List<string> list)
         {
-
+            //api一次性極限承載量
+            //共 1625 筆股票代碼;
+            //字串大小共 8174 ;
+            int maxByteSize = 8175;
             List<QuoteBean> result = new List<QuoteBean>();
-            var values = new Dictionary<string, string>
+            string sendStr;
+            HttpResponseMessage response;
+            HttpClient client;
+            string responseString;
+            List<Symbol> ans = new List<Symbol>();
+            string strUrl = "http://10.10.56.182:8080/Quote/Stock.jsp?stock=";
+
+
+            #region
+            //while (list.Count > 0)
+            //{
+            //    List<string> strings = new List<string>();
+            //    while (Encoding.ASCII.GetBytes(string.Format("http://10.10.56.182:8080/Quote/Stock.jsp?stock={0}", string.Join(",", strings.ToArray()))).Length < maxByteSize)
+            //    {
+            //        strings.Add(list[count]);
+            //        count++;
+            //    }
+
+            //    count--;
+            //    result = new List<QuoteBean>();
+            //    client = new HttpClient();
+            //    sendStr = string.Format("http://10.10.56.182:8080/Quote/Stock.jsp?stock={0}", string.Join(",", list.GetRange(0, count).ToArray()));
+            //    response = await client.GetAsync(sendStr);
+            //    responseString = response.Content.ReadAsStringAsync().Result;
+            //    result.Add(Util.Deserialize<QuoteBean>(responseString));
+            //    ans.AddRange(result.Select(x => x.SymbolList).ToList().First());
+            //    list.RemoveRange(0, count);
+            //}
+            #endregion
+
+            #region
+            //while (list.Count > 0)
+            //{
+            //    List<string> strings = new List<string>();
+            //    int sizeCount = 0;
+
+            //    //累加股票代碼至url裡驗證是否大於最大長度，直到否的話無視右邊判斷直接送出請求&&累加資料等於或小於實際資料，直到否的話無視左邊判斷直接送出請求
+            //    while (string.Format(strUrl + "{0}", string.Join(",", strings.ToArray())).Length < maxByteSize && sizeCount < list.Count)
+            //    {
+            //        strings.Add(list[sizeCount]);
+            //        sizeCount++;
+            //    }
+
+            //    if (string.Format(strUrl + "{0}", string.Join(",", list.ToArray())).Length > maxByteSize)
+            //    {
+            //        sizeCount--;    //累加資料與限制資料比對後扣除累加資料的多項
+            //    }
+
+            //    result = new List<QuoteBean>();
+            //    client = new HttpClient();
+            //    sendStr = string.Format(strUrl + "{0}", string.Join(",", list.GetRange(0, sizeCount).ToArray()));
+            //    response = await client.GetAsync(sendStr);
+            //    responseString = response.Content.ReadAsStringAsync().Result;
+            //    result.Add(Util.Deserialize<QuoteBean>(responseString));
+            //    ans.AddRange(result.Select(x => x.SymbolList).ToList().First());
+            //    list.RemoveRange(0, sizeCount);
+
+            //}
+            #endregion
+
+            #region
+            //while (list.Count > 0)
+            //{
+            //    string strUrlValue = "";
+
+            //    //累加股票代碼至url裡驗證是否大於最大長度，直到否的話無視右邊判斷直接送出請求&&累加資料等於或小於實際資料，直到否的話無視左邊判斷直接送出請求
+            //    while (string.Format(strUrl + "{0}", string.Join(",", list.ToArray())).Length < maxByteSize)
+            //    {
+
+            //    }
+            //    //if (string.Format(strUrl + "{0}", string.Join(",", list.ToArray())).Length > maxByteSize)
+            //    //{
+
+            //    //}
+
+            //    result = new List<QuoteBean>();
+            //    client = new HttpClient();
+            //    sendStr = string.Format(strUrl + "{0}", strUrlValue);
+            //    response = await client.GetAsync(sendStr);
+            //    responseString = response.Content.ReadAsStringAsync().Result;
+            //    result.Add(Util.Deserialize<QuoteBean>(responseString));
+            //    ans.AddRange(result.Select(x => x.SymbolList).ToList().First());
+
+            //}
+            #endregion
+
+            #region
+            //List<string> strings = new List<string>();
+
+            //string urlpath = "http://10.10.56.182:8080/Quote/Stock.jsp?stock=";
+            //string urlStr = string.Format(urlpath + "{0}", string.Join(",", list.ToArray()));
+            //char[] trimChars = { ',' };
+            //string resultUrl = "";
+            //bool flag = false;
+
+            //while (flag == false)
+            //{
+
+            //    if (maxByteSize < urlStr.Length)
+            //    {
+            //        int separatorIndex = urlStr.LastIndexOf(",", maxByteSize);//會出現娶不到逗號的情況
+            //        resultUrl = urlStr.Substring(0, separatorIndex);
+            //        urlStr = urlpath + urlStr.Substring(resultUrl.Length).Trim(trimChars);
+            //    }
+            //    else if (maxByteSize > urlStr.Length)
+            //    {
+            //        resultUrl = urlStr;
+            //        flag = true;
+            //    }
+            //    result = new List<QuoteBean>();
+            //    client = new HttpClient();
+            //    response = await client.GetAsync(resultUrl);
+            //    responseString = response.Content.ReadAsStringAsync().Result;
+            //    result.Add(Util.Deserialize<QuoteBean>(responseString));
+            //    ans.AddRange(result.Select(x => x.SymbolList).ToList().First());
+            //};
+            #endregion
+
+            List<string> strings = new List<string>();
+
+            string urlpath = "http://10.10.56.182:8080/Quote/Stock.jsp?stock=";
+            int urlPathLength = urlpath.Length;
+            string urlStr = string.Join(",", list.ToArray());
+            string resultUrl = "";
+            List<string> urls = new List<string>();
+            char[] trimChars = { ',' };
+            do
             {
-                { "stock", string.Join(",",list.ToArray())},
-            };
+                result = new List<QuoteBean>();
+                client = new HttpClient();
+                if (maxByteSize < string.Format(urlpath + "{0}", urlStr).Length)
+                {
+                    int separatorIndex = string.Format(urlpath + "{0}", urlStr).LastIndexOf(",", maxByteSize);//會出現娶不到逗號的情況
+                    resultUrl = string.Format(urlpath + "{0}", urlStr).Substring(0, separatorIndex);
+                    urlStr = string.Format(urlpath + "{0}", urlStr).Substring(resultUrl.Length).Trim(trimChars);
 
-            var content = new FormUrlEncodedContent(values);
-
-            var response = await client.PostAsync("http://10.10.56.182:8080/Quote/Stock.jsp", content);
-
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            result.Add(Util.Deserialize<QuoteBean>(responseString));
-
-            List<Symbol> ans = result.Select(x => x.SymbolList).ToList().First();
-
-            return ans;
-        }
-        public async Task<Symbol> QuoteAsync(string str)
-        {
-
-            List<QuoteBean> result = new List<QuoteBean>();
-            var values = new Dictionary<string, string>
-            {
-                { "stock", str},
-            };
-
-            var content = new FormUrlEncodedContent(values);
-
-            var response = await client.PostAsync("http://10.10.56.182:8080/Quote/Stock.jsp", content);
-
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            result.Add(Util.Deserialize<QuoteBean>(responseString));
-
-            Symbol ans = result.Select(x => x.SymbolList).ToList().First().Select(x => x).First();
-
+                }
+                else
+                {
+                    resultUrl = string.Format(urlpath + "{0}", urlStr);
+                    urlStr = string.Format(urlpath + "{0}", urlStr).Substring(resultUrl.Length).Trim(trimChars);
+                    //urlStr = "";
+                }
+                response = await client.GetAsync(resultUrl);
+                responseString = response.Content.ReadAsStringAsync().Result;
+                result.Add(Util.Deserialize<QuoteBean>(responseString));
+                ans.AddRange(result.Select(x => x.SymbolList).ToList().First());
+            } while (string.Format(urlpath + "{0}", urlStr).Length > urlPathLength);
             return ans;
         }
 
@@ -192,6 +307,55 @@ namespace ESMP.STOCK.API.QUERYAPI
             Dapper.SqlMapper.SetTypeMap(typeof(MCUMSBean), new ColumnAttributeTypeMapper<MCUMSBean>());
             using (var conn = new SqlConnection(_connstr))
                 return conn.Query<MCUMSBean>(@"SELECT * FROM MCUMS");
+        }
+
+        protected IEnumerable<TCNTDBean> QueryTCNTD()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(TCNTDBean), new ColumnAttributeTypeMapper<TCNTDBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<TCNTDBean>(@"SELECT * FROM TCNTD");
+        }
+
+        protected IEnumerable<T201Bean> QueryT201()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(T201Bean), new ColumnAttributeTypeMapper<T201Bean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<T201Bean>(@"SELECT * FROM t201");
+        }
+
+        protected IEnumerable<TCRUDBean> QueryTCRUD()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(TCRUDBean), new ColumnAttributeTypeMapper<TCRUDBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<TCRUDBean>(@"SELECT * FROM TCRUD");
+        }
+
+        protected virtual IEnumerable<TDBUDBean> QueryTDBUD()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(TDBUDBean), new ColumnAttributeTypeMapper<TDBUDBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<TDBUDBean>(@"SELECT * FROM TDBUD");
+        }
+
+        protected IEnumerable<HCRRHBean> QueryHCRRH()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(HCRRHBean), new ColumnAttributeTypeMapper<HCRRHBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<HCRRHBean>(@"SELECT * FROM HCRRH");
+        }
+
+        protected IEnumerable<HDBRHBean> QueryHDBRH()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(HDBRHBean), new ColumnAttributeTypeMapper<HDBRHBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<HDBRHBean>(@"SELECT * FROM HDBRH");
+        }
+
+        protected IEnumerable<HCDTDBean> QueryHCDTD()
+        {
+            Dapper.SqlMapper.SetTypeMap(typeof(HCDTDBean), new ColumnAttributeTypeMapper<HCDTDBean>());
+            using (var conn = new SqlConnection(_connstr))
+                return conn.Query<HCDTDBean>(@"SELECT * FROM HCDTD");
         }
     }
 }

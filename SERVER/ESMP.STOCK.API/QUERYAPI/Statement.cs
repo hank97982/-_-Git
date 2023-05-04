@@ -88,50 +88,21 @@ namespace ESMP.STOCK.API.QUERYAPI
             #endregion
 
             //return QueryIntoFormatString(root, hCMIOBean, tMHIOBean);
-            return QueryIntoFormatString(root, QueryCondition(QueryHCMIO(), root), QueryCondition(QueryTCNUD(), root), QueryCondition(QueryTMHIO(), root), QueryCondition(QueryTCSIO(), root));
+            return QueryIntoFormatString(root,
+                SQLProviderHCMIO.Where(root.Bhno, root.Cseq, root.Sdate, root.Edate, root.StockSymbol).ToList(),
+                SQLProviderTCNUD.Where(root.Bhno, root.Cseq, root.StockSymbol),
+                SQLProviderTMHIO.Where(root.Bhno, root.Cseq, root.StockSymbol),
+                SQLProviderTCSIO.Where(root.Bhno, root.Cseq, root.StockSymbol),
+                SQLProviderTCNTD.Where(root.Bhno, root.Cseq, root.StockSymbol),
+                SQLProviderT201.Where(root.Bhno, root.Cseq, root.StockSymbol));
         }
 
-        /*
-         * 摘要:
-         *      取得該查尋容器項目，依照篩選條件取得結果
-         * 
-         * 參數:
-         *      QueryItems:
-         *          篩選條件的所有項目
-         *      
-         *      root:
-         *          篩選條件的依據
-         * 
-         * 類型參數: 
-         *      T:
-         *          被帶進去的DTO
-         * 傳回:
-         *      回傳查詢結果   
-         * 
-         * 例外狀況:
-         * 
-         */
-        private List<T> QueryCondition<T>(IEnumerable<T> QueryItems, StatementDTO root)
-        {
-            List<T> QueryFinal = QueryItems
-                .Where(x => x.GetType().GetProperty("BHNO").GetValue(x).ToString() == root.Bhno)
-                .Where(x => x.GetType().GetProperty("CSEQ").GetValue(x).ToString() == root.Cseq)
-                .Where(x => Convert.ToInt32(x.GetType().GetProperty("TDATE").GetValue(x)) >= Convert.ToInt32(root.Sdate))
-                .Where(x => Convert.ToInt32(x.GetType().GetProperty("EDATE").GetValue(x)) <= Convert.ToInt32(root.Edate)).ToList();
-            if (root.StockSymbol != "")
-            {
-                QueryFinal.Where(x => x.GetType().GetProperty("STOCK").GetValue(x).ToString() == root.StockSymbol);
-            }
-            return QueryFinal;
-        }
 
-        private object QueryIntoFormatString(StatementDTO root, List<HCMIOBean> hcmioBean, IEnumerable<TCNUDBean> tcnudBean, IEnumerable<TMHIOBean> tmhioBean, IEnumerable<TCSIOBean> tcsioBean)
+        private object QueryIntoFormatString(StatementDTO root, List<HCMIOBean> hcmioBean, IEnumerable<TCNUDBean> tcnudBean, IEnumerable<TMHIOBean> tmhioBean, IEnumerable<TCSIOBean> tcsioBean, IEnumerable<TCNTDBean> tcntdBean, IEnumerable<T201Bean> t201Bean)
         {
             try
             {
                 List<Profile> profiles = new List<Profile>();
-
-
 
 
                 int datetime = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
@@ -143,7 +114,7 @@ namespace ESMP.STOCK.API.QUERYAPI
                 {
                     //沖銷賣出
                     WriteOff wfTM = new WriteOff();
-                    (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tcnudBean.ToList(), tmhioBean.ToList(), tcsioBean.ToList());
+                    (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wfTM.StockWriteOff(tcnudBean.ToList(), tmhioBean.ToList(), tcsioBean.ToList(), tcntdBean.ToList(), t201Bean.ToList());
                     (List<HCMIOBean> BuysNow, List<HCMIOBean> SalesNow, List<HCMIOBean> Buys, List<HCMIOBean> Sales, List<HCMIOBean> WritOffNotYet) = hCNTDInToStatement(HCNT, HC, TC);
 
                     #region 

@@ -679,3 +679,320 @@
    at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
    at System.Threading.Tasks.Task`1.get_Result()
    at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean) in E:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 215
+2023/04/10 11:33:51 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:51 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:51 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:51 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:52 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:52 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:52 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:52 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:53 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:54 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:54 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:54 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:55 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:55 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:33:55 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 11:44:21 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 299
+2023/04/10 13:53:14 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:14 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:14 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:15 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:15 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:15 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:15 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:16 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:16 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:17 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:18 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:18 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:18 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:18 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:53:19 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.BuySale(Sum sum, List`1 tMBRam) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 367
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 296
+2023/04/10 13:56:03 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:03 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:03 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:03 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:04 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:04 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:04 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:04 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:05 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:06 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:06 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:07 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:07 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:07 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 13:56:07 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:26 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:33 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:35 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:36 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:37 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:37 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:38 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:39 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:40 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:40 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:42 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:43 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:43 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S0000019057047' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:44 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190070' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/10 14:06:45 : 交易異常: System.Collections.Generic.KeyNotFoundException: The given key '592S00000190081' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at ESMP.STOCK.API.Utils.SingletonQueryProviderMCSRH.MCSRHQueryCNQBALE(String BHNO, String CSEQ, String stock) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\Utils\SingletonQueryProviderMCSRH.cs:line 43
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 301
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:58 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:59 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:59 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:16:59 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:17:00 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:17:00 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:17:00 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:17:00 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:17:37 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 14:22:47 : 交易異常: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 554
+2023/04/12 16:15:33 : 交易異常: System.DivideByZeroException: Attempted to divide by zero.
+   at System.Decimal.DecCalc.VarDecDiv(DecCalc& d1, DecCalc& d2)
+   at System.Decimal.op_Division(Decimal d1, Decimal d2)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 437
+2023/04/12 16:15:47 : 交易異常: System.DivideByZeroException: Attempted to divide by zero.
+   at System.Decimal.DecCalc.VarDecDiv(DecCalc& d1, DecCalc& d2)
+   at System.Decimal.op_Division(Decimal d1, Decimal d2)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 437
+2023/04/12 16:16:12 : 交易異常: System.DivideByZeroException: Attempted to divide by zero.
+   at System.Decimal.DecCalc.VarDecDiv(DecCalc& d1, DecCalc& d2)
+   at System.Decimal.op_Division(Decimal d1, Decimal d2)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 437
+2023/04/12 16:17:59 : 交易異常: System.DivideByZeroException: Attempted to divide by zero.
+   at System.Decimal.DecCalc.VarDecDiv(DecCalc& d1, DecCalc& d2)
+   at System.Decimal.op_Division(Decimal d1, Decimal d2)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 437
+2023/04/12 16:21:58 : 交易異常: System.DivideByZeroException: Attempted to divide by zero.
+   at System.Decimal.DecCalc.VarDecDiv(DecCalc& d1, DecCalc& d2)
+   at System.Decimal.op_Division(Decimal d1, Decimal d2)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 437
+2023/04/12 16:27:23 : 交易異常: System.DivideByZeroException: Attempted to divide by zero.
+   at System.Decimal.DecCalc.VarDecDiv(DecCalc& d1, DecCalc& d2)
+   at System.Decimal.op_Division(Decimal d1, Decimal d2)
+   at ESMP.STOCK.API.QUERYAPI.UnrealizedGainsAndlLosses.QueryIntoFormatString(IEnumerable`1 tCNUDBean, IEnumerable`1 tMHIOBean, IEnumerable`1 tCSIOBean, IEnumerable`1 tcntdBean, IEnumerable`1 t201Bean, IEnumerable`1 tCRUDBean, IEnumerable`1 tDBUDBean) in D:\Systex_edu\testUtility\帳務中心_學習新手包Git\SERVER\ESMP.STOCK.API\QUERYAPI\UnrealizedGainsAndlLosses.cs:line 437

@@ -158,6 +158,15 @@ namespace ESMP.STOCK.API.DTO.RealizedProfitAndLoss
         [XmlElement("netamt")]
         [JsonPropertyName("netamt")]
         public decimal Netamt { get; set; }                //淨收付
+        [XmlElement("ccramt")]
+        [JsonPropertyName("ccramt")]
+        public decimal Ccramt { get; set; } = 0m;          //償還融資金額
+        [XmlElement("cdnamt")]
+        [JsonPropertyName("cdnamt")]
+        public decimal Cdnamt { get; set; } = 0m;          //償還擔保品
+        [XmlElement("cgtamt")]
+        [JsonPropertyName("cgtamt")]
+        public decimal Cgtamt { get; set; } = 0m;          //償還保證金
         [XmlElement("fee")]
         [JsonPropertyName("fee")]
         public decimal Fee { get; set; }                   //手續費
@@ -231,6 +240,15 @@ namespace ESMP.STOCK.API.DTO.RealizedProfitAndLoss
         [XmlElement("netamt")]
         [JsonPropertyName("netamt")]
         public decimal Netamt { get; set; }               //淨收付
+        [XmlElement("ccramt")]
+        [JsonPropertyName("ccramt")]
+        public decimal Ccramt { get; set; } = 0m;         //償還融資金額
+        [XmlElement("cdnamt")]
+        [JsonPropertyName("cdnamt")]
+        public decimal Cdnamt { get; set; } = 0m;         //償還擔保品
+        [XmlElement("cgtamt")]
+        [JsonPropertyName("cgtamt")]
+        public decimal Cgtamt { get; set; } = 0m;         //償還保證金
         [XmlElement("fee")]
         [JsonPropertyName("fee")]
         public decimal Fee { get; set; }                  //手續費

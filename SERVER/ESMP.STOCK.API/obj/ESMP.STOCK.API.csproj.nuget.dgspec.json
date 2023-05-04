@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {}
+    "D:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {}
   },
   "projects": {
-    "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {
+    "D:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
+        "projectUniqueName": "D:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
         "projectName": "ESMP.STOCK.API",
-        "projectPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "E:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\obj\\",
+        "projectPath": "D:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\ESMP.STOCK.API.csproj",
+        "packagesPath": "C:\\Users\\2200636M\\.nuget\\packages\\",
+        "outputPath": "D:\\Systex_edu\\testUtility\\帳務中心_學習新手包Git\\SERVER\\ESMP.STOCK.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\2200636M\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

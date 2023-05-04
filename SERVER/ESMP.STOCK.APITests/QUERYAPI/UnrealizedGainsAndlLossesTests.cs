@@ -17,6 +17,9 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         /// </summary>
         private UnrealizedGainsAndlLosses _realizedGainsAndlls = new UnrealizedGainsAndlLosses("Server = .;Database = ESMP;Trusted_Connection=true");
         private BaseAPI baseAPI = new BaseAPI("Server = .;Database = ESMP;Trusted_Connection=true");
+
+        private List<TCRUDBean> _tCRUDs = new List<TCRUDBean>();
+        private List<TDBUDBean> _tDBUDs = new List<TDBUDBean>();
         //預估賣出價金計算結果 - 3組
         [TestMethod()]
         public void PriceCheck1()
@@ -26,7 +29,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             TCNUDBean tCNUD = new TCNUDBean();
             tCNUD.BHNO = "592S";
             tCNUD.CSEQ = "0000019";
-            tCNUD.STOCK = "057047"; 
+            tCNUD.STOCK = "057047";
             tCNUD.BQTY = 200;
             tCNUDs.Add(tCNUD);
 
@@ -37,22 +40,25 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
                 Accsum ac = (Accsum)obj;
                 Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
                 //預估賣出價金=現價*庫存股數
-                Assert.AreEqual(details.EstimateAmt,Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)));
+                Assert.AreEqual(details.EstimateAmt, Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice)));
             }
             else if (obj.GetType() == typeof(AccsumErr))
             {
@@ -82,15 +88,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -128,15 +137,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -175,15 +187,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -199,7 +214,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             }
             else
             {
-                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別"+ obj.GetType());
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
             }
         }
 
@@ -222,15 +237,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -246,7 +264,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             }
             else
             {
-                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別"+ obj.GetType());
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
             }
 
         }
@@ -270,15 +288,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -320,15 +341,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -367,15 +391,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -414,15 +441,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -462,15 +492,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
             if (obj.GetType() == typeof(Accsum))
             {
                 Accsum ac = (Accsum)obj;
@@ -510,15 +543,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
             if (obj.GetType() == typeof(Accsum))
             {
                 Accsum ac = (Accsum)obj;
@@ -558,15 +594,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
             if (obj.GetType() == typeof(Accsum))
             {
                 Accsum ac = (Accsum)obj;
@@ -608,15 +647,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -624,7 +666,7 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
                 Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
                 //預估損益=(預估賣出價金*預估賣出手續費*預估賣出交易稅)-成本
                 Assert.AreEqual(details.Profit,
-                    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) - 
+                    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) -
                     Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
                     Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m)) -
                     tCNUDs.First().COST));
@@ -658,15 +700,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -708,15 +753,18 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             List<TCSIOBean> tCSIO = new List<TCSIOBean>();
             List<MCUMSBean> mCUMS = new List<MCUMSBean>();
 
-            var change = new CoverQuote("Server = .;Database = ESMP;Trusted_Connection=true",
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
                 new List<Symbol>().Append(
                     new Symbol
                     {
                         Id = tCNUDs.First().STOCK,
                         DealPrice = DealPrice
-                    }).ToList());
+                    }).ToList(), 100, 0, 0, 0, 0);
 
-            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO);
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
 
             if (obj.GetType() == typeof(Accsum))
             {
@@ -743,6 +791,119 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         //當日現股買進－價金計算－整股/零股各2組
         //當日現股買進－手續費計算－整股/零股各2組
         //當日現股買進－成本計算－整股/零股各2組
+
+        //融資未實現損益
+        [TestMethod()]
+        public void tCRUDCheck()
+        {
+            _tCRUDs = new List<TCRUDBean>();
+            TCRUDBean tCRUD = new TCRUDBean();
+            tCRUD.BHNO = "592S";
+            tCRUD.CSEQ = "0000019";
+            tCRUD.STOCK = "0081"; //lastQTY =936.0000
+            tCRUD.BQTY = 10;
+            tCRUD.COST = 50;
+            tCRUD.PRICE = 100;
+            tCRUD.BCRAMT = 50;
+            _tCRUDs.Add(tCRUD);
+
+            string DealPrice = "3.7300";    //現價
+            List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
+            List<TMHIOBean> tmHIO = new List<TMHIOBean>();
+            List<TCSIOBean> tCSIO = new List<TCSIOBean>();
+            List<MCUMSBean> mCUMS = new List<MCUMSBean>();
+
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = _tCRUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList(), 100, 0, 0, 0, 0);
+
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
+
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估損益=(預估賣出價金*預估賣出手續費*預估賣出交易稅)-成本
+                //Assert.AreEqual(details.Profit,
+                //    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) -
+                //    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                //    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m)) -
+                //    tCNUDs.First().COST));
+
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
+        }
+
+        //融券未實現損益
+        [TestMethod()]
+        public void tDBUDCheck()
+        {
+            _tDBUDs = new List<TDBUDBean>();
+            TDBUDBean tDBUD = new TDBUDBean();
+            tDBUD.BHNO = "592S";
+            tDBUD.CSEQ = "0000019";
+            tDBUD.STOCK = "0081"; //lastQTY =936.0000
+            tDBUD.BQTY = 10;
+            tDBUD.COST = 50;
+            tDBUD.PRICE = 100;
+            _tDBUDs.Add(tDBUD);
+
+            string DealPrice = "3.7300";    //現價
+            List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
+            List<TMHIOBean> tmHIO = new List<TMHIOBean>();
+            List<TCSIOBean> tCSIO = new List<TCSIOBean>();
+            List<MCUMSBean> mCUMS = new List<MCUMSBean>();
+
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            var change = new CoverQuoteUnrealize("Server = .;Database = ESMP;Trusted_Connection=true",
+                new List<Symbol>().Append(
+                    new Symbol
+                    {
+                        Id = _tDBUDs.First().STOCK,
+                        DealPrice = DealPrice
+                    }).ToList(), 100, 0, 0, 0, 0);
+
+            var obj = change.QueryIntoFormatString(tCNUDs, tmHIO, tCSIO, tCNTDBeans, t201Beans, _tCRUDs, _tDBUDs);
+
+            if (obj.GetType() == typeof(Accsum))
+            {
+                Accsum ac = (Accsum)obj;
+                Detail details = ac.UnoffsetQtypeSum.First().UnoffsetQtypeDetail.First();
+                //預估損益=(預估賣出價金*預估賣出手續費*預估賣出交易稅)-成本
+                //Assert.AreEqual(details.Profit,
+                //    (Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) -
+                //    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.001425m) -
+                //    Math.Floor(tCNUDs.First().BQTY * Convert.ToDecimal(DealPrice) * 0.003m)) -
+                //    tCNUDs.First().COST));
+
+            }
+            else if (obj.GetType() == typeof(AccsumErr))
+            {
+                AccsumErr acEr = (AccsumErr)obj;
+                Assert.Fail(acEr.Errcode + " : " + acEr.Errmsg);
+            }
+            else
+            {
+                Assert.Fail("QueryIntoFormatString的回傳尚未匹配到任何型別" + obj.GetType());
+            }
+        }
 
 
         /// <summary>
@@ -782,8 +943,11 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNRHBean> checkHC = HC;
             Assert.AreEqual(1, checkTC.Count);
@@ -807,7 +971,10 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNRHBean> checkHC = HC;
             Assert.AreEqual(4, checkHC.Count);
@@ -839,7 +1006,10 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = wf.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNRHBean> checkHC = HC;
             Assert.AreEqual(4, checkHC.Count);
@@ -879,7 +1049,10 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNTDBean> checkHCNT = HCNT;
             Assert.AreEqual(1, checkTC.Count);
@@ -922,7 +1095,10 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNTDBean> checkHCNT = HCNT;
             Assert.AreEqual(3, checkTC.Count);
@@ -963,7 +1139,10 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNTDBean> checkHCNT = HCNT;
             //沖銷完後剩下4筆賣單
@@ -1007,7 +1186,10 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
 
             List<TCSIOBean> tCSIOBeans = new List<TCSIOBean>();
 
-            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans);
+            List<TCNTDBean> tCNTDBeans = new List<TCNTDBean>();
+            List<T201Bean> t201Beans = new List<T201Bean>();
+
+            (List<TCNUDBean> TC, List<HCNTDBean> HCNT, List<HCNRHBean> HC, List<HCMIOBean> HCM) = cover.StockWriteOff(tCNUDs, tMHIOs, tCSIOBeans, tCNTDBeans, t201Beans);
             List<TCNUDBean> checkTC = TC;
             List<HCNTDBean> checkHCNT = HCNT;
             //沖銷完後剩下4筆賣單
@@ -1018,14 +1200,32 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
         [TestMethod()]
         public void testQuote()
         {
-
+            //測試假資料
+            //int testdata = 3240;
+            int testdata = 100000;
             List<string> listStr = new List<string>();
-            listStr.Add("0050");
-            listStr.Add("0056");
+            for (int i = 0; i < testdata; i++)
+            {
+                //listStr.Add("0050");
+                listStr.Add("0056");
+            }
+
             var list = baseAPI.QuoteAsync(listStr).Result;
 
-            Assert.AreEqual("元大台灣50", list.First().ShortName);
-            Assert.AreEqual("元大高股息", list.Last().ShortName);
+            Assert.AreEqual(testdata, list.Count);
+            //Assert.AreEqual("元大台灣50", list.First().ShortName);
+            //Assert.AreEqual("元大高股息", list.Last().ShortName);
+
+        }
+
+        [TestMethod()]
+        public void TCNUDProvider()
+        {
+
+            IEnumerable<TCNUDBean> tCNUDBeans0001 =
+            SQLProviderTCNUD.Where("592S", "0034661","1303");
+
+
 
         }
 
@@ -1046,16 +1246,26 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
     }
 
     //CoverQuote去覆蓋BaseAPI裡面QuoteAsync的資料
-    public class CoverQuote : UnrealizedGainsAndlLosses
+    public class CoverQuoteUnrealize : UnrealizedGainsAndlLosses
     {
         private string _connstr = "";
         private static List<Symbol> _list = null;
+        private static decimal MCSRH_CNQBALE = 0;
+        private static decimal MCSRH_CRAQTY = 0;
+        private static decimal MCSRH_CROQTY = 0;
+        private static decimal MCSRH_DBAQTY = 0;
+        private static decimal MCSRH_DBOQTY = 0;
 
 
-        public CoverQuote(string connstr, List<Symbol> list) : base(connstr)
+        public CoverQuoteUnrealize(string connstr, List<Symbol> list, decimal MCSRH_CNQBALE, decimal MCSRH_CRAQTY, decimal MCSRH_CROQTY, decimal MCSRH_DBAQTY, decimal MCSRH_DBOQTY) : base(connstr)
         {
             this._connstr = connstr;
-            CoverQuote._list = list;
+            CoverQuoteUnrealize._list = list;
+            CoverQuoteUnrealize.MCSRH_CNQBALE = MCSRH_CNQBALE;
+            CoverQuoteUnrealize.MCSRH_CRAQTY = MCSRH_CRAQTY;
+            CoverQuoteUnrealize.MCSRH_CROQTY = MCSRH_CROQTY;
+            CoverQuoteUnrealize.MCSRH_DBAQTY = MCSRH_DBAQTY;
+            CoverQuoteUnrealize.MCSRH_DBOQTY = MCSRH_DBOQTY;
         }
 
         public override Task<List<Symbol>> QuoteAsync(List<string> strings)
@@ -1063,5 +1273,38 @@ namespace ESMP.STOCK.API.QUERYAPI.Tests
             Task<List<Symbol>> type = Task.FromResult(_list);
             return type;
         }
+
+        public override decimal MCSRHQueryCNQBALE(string BHNO, string CSEQ, string stock)
+        {
+            return MCSRH_CNQBALE;
+        }
+        public override decimal MCSRHQueryCRAQTY(string BHNO, string CSEQ, string stock)
+        {
+            return MCSRH_CRAQTY;
+        }
+        public override decimal MCSRHQueryCROQTY(string BHNO, string CSEQ, string stock)
+        {
+            return MCSRH_CROQTY;
+        }
+        public override decimal MCSRHQueryDBAQTY(string BHNO, string CSEQ, string stock)
+        {
+            return MCSRH_DBAQTY;
+        }
+        public override decimal MCSRHQueryDBOQTY(string BHNO, string CSEQ, string stock)
+        {
+            return MCSRH_DBOQTY;
+        }
     }
+
+    public class CoverQuoteRealize : RealizedProfitAndLoss
+    {
+
+        public CoverQuoteRealize(string connstr) : base(connstr)
+        {
+
+        }
+
+    }
+
+
 }

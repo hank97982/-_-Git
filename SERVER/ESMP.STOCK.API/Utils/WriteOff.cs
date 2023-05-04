@@ -1,5 +1,6 @@
 ﻿using ESMP.STOCK.API.Bean;
 using ESMP.STOCK.API.DTO;
+using System.Security.Cryptography;
 
 namespace ESMP.STOCK.API.Utils
 {
@@ -16,8 +17,10 @@ namespace ESMP.STOCK.API.Utils
          *  List<TCNUDBean> 現股餘額檔
          *  List<TMHIOBean> 當日交易明細
          *  List<TCSIOBean> 當入交易現股匯撥檔
+         *  List<TCNTDBean> 指定當沖
+         *  List<T201Bean>  不當沖
          */
-        public (List<TCNUDBean>, List<HCNTDBean>, List<HCNRHBean>, List<HCMIOBean>) StockWriteOff(List<TCNUDBean> tCNUDs, List<TMHIOBean> tMHIOs, List<TCSIOBean> tCSIOs)
+        public (List<TCNUDBean>, List<HCNTDBean>, List<HCNRHBean>, List<HCMIOBean>) StockWriteOff(List<TCNUDBean> tCNUDs, List<TMHIOBean> tMHIOs, List<TCSIOBean> tCSIOs, List<TCNTDBean> tCNTDs, List<T201Bean> t201s)
         {
             List<HCNRHBean> hCNRHReturn = new List<HCNRHBean>();
             List<HCNTDBean> hCNTDTotalReturn = new List<HCNTDBean>();
@@ -139,8 +142,12 @@ namespace ESMP.STOCK.API.Utils
             //分類股票代號執行沖銷
             foreach (var stockDistinct in hCMIOs.Select(c => c.STOCK).Distinct())
             {
+
+
+
                 //將執行沖銷的股票代碼從總數移除
                 tCNUDtotal.RemoveAll(c => c.STOCK == stockDistinct);
+
                 //取出TCNUD指定股票代碼資料並排序
                 var tCNUDLQ = tCNUDs.Where(c => c.STOCK == stockDistinct).OrderBy(c => c.TDATE).ThenBy(c => c.WTYPE).ThenBy(c => c.DNO).ToList();
                 //HCMIO裡的Qty放置內存LastQTY準被做計算
@@ -154,7 +161,12 @@ namespace ESMP.STOCK.API.Utils
                 hCMIOLQ.ForEach(i => i.COSTRam = Math.Floor(i.PRICE * i.QTY) + i.FEE);
 
 
-                //由於HCMIO資料被傳入前已經經過賭票代碼及客戶編號的過濾，所以直接取第一個資料
+                var tCNTDLQ = tCNTDs.Where(c => c.STOCK == stockDistinct);
+                var t201sLQ = t201s.Where(c => c.STOCK == stockDistinct);
+
+
+
+                //由於HCMIO資料被傳入前已經經過股票代碼及客戶編號的過濾，所以直接取第一個資料
 
                 //客戶現股當沖資格
                 string costomerCNTDType = SingletonQueryProviderMCUMS.queryProvider.MCUMSQueryCNTDTYPE(hCMIOLQ.FirstOrDefault().BHNO, hCMIOLQ.FirstOrDefault().CSEQ);
@@ -163,9 +175,7 @@ namespace ESMP.STOCK.API.Utils
                 string stockCNTDType = SingletonQueryProviderMSTMB.queryProvider.MSTMBQueryCNTDTYPE(hCMIOLQ.FirstOrDefault().STOCK);
 
 
-                //買單dno小於賣單dno
-                List<HCMIOBean> hCMIONOWBuy = hCMIOLQ.Where(x => x.BSTYPE == "B").ToList();
-                List<HCMIOBean> hCMIONOWSale = hCMIOLQ.Where(x => x.BSTYPE == "S").ToList();
+
 
 
                 List<HCMIOBean> hCMIOIgnore = new List<HCMIOBean>();
@@ -179,7 +189,12 @@ namespace ESMP.STOCK.API.Utils
                     continue;
                 }
 
+                //指定不當沖、部分指定當沖的過濾器，並依照當沖流程完成排序
+                (List<HCMIOBean> specifyBuyReturn, List<HCMIOBean> specifySaleReturn, List<HCMIOBean> Ignore, List<HCNTDBean> hCNTD, List<HCMIOBean> specifyReturn) = SpecifyWriteOff(type, hCMIOLQ, tCNTDLQ.ToList(), t201sLQ.ToList());
 
+                //買單dno小於賣單dno
+                List<HCMIOBean> hCMIONOWBuy = specifyReturn.Where(x => x.BSTYPE == "B").ToList();
+                List<HCMIOBean> hCMIONOWSale = specifyReturn.Where(x => x.BSTYPE == "S").ToList();
 
                 //因為單向當沖被忽略掉的賣單(不是買單)
                 List<HCMIOBean> hCMIOSalesIgnore = new List<HCMIOBean>();
@@ -189,11 +204,15 @@ namespace ESMP.STOCK.API.Utils
 
                 //現股當沖完的剩餘賣單跟單向當沖淘汰掉的賣單，都要加起來沖掉TCNUD
                 hCMIOSalesReturn.AddRange(hCMIOSalesIgnore);
+                hCMIOSalesReturn.AddRange(Ignore);
 
+
+                hCMIOSalesReturn.AddRange(specifySaleReturn);
                 //這個就是今日沖銷剩餘的TCNUD
-                tCNUDtotal.AddRange(doWriteOff(type, hCMIOSalesReturn, tCNUDLQ, hCMIOIgnore, hCNRHReturn));
+                tCNUDtotal.AddRange(doWriteOff(type, hCMIOSalesReturn.OrderBy(c => c.DSEQ).ThenBy(c => c.DNO).ToList(), tCNUDLQ, hCMIOIgnore, hCNRHReturn));
                 //現股當沖剩餘買單作為普通買進加入TCNUD裡
                 tCNUDtotal.AddRange(proccessHCMIOBuyToTCNUD(hCMIOBuysReturn));
+                tCNUDtotal.AddRange(proccessHCMIOBuyToTCNUD(specifyBuyReturn));
                 //雙向現股沖還沒有買單對應的賣單，加進去TCNUD
                 tCNUDtotal.AddRange(proccessHCMIOSalesToTCNUD(hCMIOIgnore));
                 //將不能被零股沖銷的賣單保留起來，回傳給對帳單查詢
@@ -201,6 +220,7 @@ namespace ESMP.STOCK.API.Utils
 
                 //重新計算HCNTD交易稅從0.003改成0.0015
                 hCNTDTotalReturn.AddRange(HCNTDCalculate(hCNTDReturn));
+                hCNTDTotalReturn.AddRange(HCNTDCalculate(hCNTD));
 
             }
 
@@ -596,31 +616,6 @@ namespace ESMP.STOCK.API.Utils
         }
 
 
-        //把TMHIO(今日買進)加入現股餘額
-        //private List<TCNUDBean> proccessTMHIOBuy(List<TMHIOBean> tMHIOs)
-        //{
-        //    List<TCNUDBean> tCNUDs = new List<TCNUDBean>();
-        //    foreach (var item in tMHIOs.Where(c => c.BSTYPE == "B"))
-        //    {
-        //        TCNUDBean tCNUD = new TCNUDBean();
-        //        tCNUD.TDATE = item.Tdate;
-        //        tCNUD.BHNO = item.BHNO;
-        //        tCNUD.CSEQ = item.CSEQ;
-        //        tCNUD.STOCK = item.STOCK;
-        //        tCNUD.PRICE = item.PRICE;
-        //        tCNUD.QTY = item.QTY;
-        //        tCNUD.BQTY = item.QTY;
-        //        tCNUD.AMT = Math.Floor(item.PRICE * item.QTY);
-        //        tCNUD.FEE = FeeCalculate(item.QTY, Math.Floor(tCNUD.AMT * 0.001425m));
-        //        tCNUD.COST = tCNUD.AMT + tCNUD.FEE;
-        //        tCNUD.DSEQ = item.DSEQ;
-        //        tCNUD.DNO = item.JRNUM;
-        //        tCNUD.WTYPE = "0";
-        //        tCNUDs.Add(tCNUD);
-        //    }
-        //    return tCNUDs;
-        //}
-
         //把HCMIO(今日買進)加入現股餘額
 
         private List<TCNUDBean> proccessHCMIOBuyToTCNUD(List<HCMIOBean> hCMIOs)
@@ -686,6 +681,56 @@ namespace ESMP.STOCK.API.Utils
             }
 
             return hCNTDReturn;
+        }
+
+        /*
+         * 回傳:
+         *  (List<HCMIOBean>)回傳剩餘買單
+         *  (List<HCMIOBean>)回傳剩餘賣單
+         *  (List<HCMIOBean>)不能被零股沖銷的賣單
+         *  (List<HCNTDBean>)回傳沖銷明細
+         *  (List<HCMIOBean>)剩餘需要做現股當沖的單
+         * 
+         * 傳入:
+         *  List<TCNUDBean> 現股餘額檔
+         *  List<TMHIOBean> 當日交易明細
+         *  List<TCSIOBean> 當入交易現股匯撥檔
+         *  List<TCNTDBean> 指定當沖
+         *  List<T201Bean>  不當沖
+         */
+
+        private (List<HCMIOBean>, List<HCMIOBean>, List<HCMIOBean>, List<HCNTDBean>, List<HCMIOBean>) SpecifyWriteOff(string type, List<HCMIOBean> hCMIOs, List<TCNTDBean> tCNTDs, List<T201Bean> t201s)
+        {
+            List<HCMIOBean> hCMIOBuys = new List<HCMIOBean>();
+            List<HCMIOBean> hCMIOSales = new List<HCMIOBean>();
+            List<HCMIOBean> ignore = new List<HCMIOBean>();
+            List<HCNTDBean> hCNTD = new List<HCNTDBean>();
+
+            foreach (var tC in tCNTDs)
+            {
+                List<HCMIOBean> hCMIOSalesIgnore = new List<HCMIOBean>();
+                List<HCNTDBean> hCNTDReturn = new List<HCNTDBean>();
+
+                if (hCMIOs.Any(x => x.DSEQ == tC.SDSEQ) && hCMIOs.Any(x => x.DSEQ == tC.BDSEQ))
+                {
+                    //doWriteOffNow買單賣單集合中只能是各一筆資料，因為SDSEQ,BDSEQ在資料庫都是主鍵
+                    (List<HCMIOBean> hCMIOBuysReturn, List<HCMIOBean> hCMIOSalesReturn) = doWriteOffNow(type, hCMIOs.Where(x => x.DSEQ == tC.SDSEQ).ToList(), hCMIOs.Where(x => x.DSEQ == tC.BDSEQ).ToList(), hCMIOSalesIgnore, hCNTDReturn);
+                    hCMIOBuys.AddRange(hCMIOBuysReturn);
+                    hCMIOSales.AddRange(hCMIOSalesReturn);
+                    ignore.AddRange(hCMIOSalesIgnore);
+                    hCNTD.AddRange(hCNTDReturn);
+                    hCMIOs.Remove(hCMIOs.First(x => x.DSEQ == tC.SDSEQ));
+                    hCMIOs.Remove(hCMIOs.First(x => x.DSEQ == tC.BDSEQ));
+                }
+            }
+
+            var result = from hC in hCMIOs
+                         join t2 in t201s on new { hC.DSEQ } equals new { t2.DSEQ } into j
+                         from t2Join in j.DefaultIfEmpty()
+                         where t2Join == null
+                         select hC;
+
+            return (hCMIOBuys, hCMIOSales, ignore, hCNTD, result.ToList());
         }
     }
 }
